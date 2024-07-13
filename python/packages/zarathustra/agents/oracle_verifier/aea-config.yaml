@@ -13,7 +13,7 @@ contracts:
 - valory/gnosis_safe_proxy_factory:0.1.0:bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm
 - valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
 customs:
-- eightballer/oracle_verifier_chronicle:0.1.0:bafybeih3v7tszr4jh224a3qdc32zwodz2t6yvmndgccjrj3wg2p2ubxbe4
+- eightballer/oracle_verifier_chronicle:0.1.0:bafybeicj2eb7cw34cd2m4rgbtug262qyycou52pyoe7taw74iul3g4lliu
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
 - eightballer/verification_station_frontend:0.1.0:bafybeif57yc5r23cktzoxkhnbbceb6kjqyre5g3u6cqqdtu5mlzux4e3qe
 default_ledger: ethereum
@@ -86,3 +86,8 @@ models:
       tendermint_max_retries: 5
       tendermint_p2p_url: ${str:localhost:26656}
       tendermint_url: ${str:http://localhost:26657}
+      user_interface:
+        enabled: true
+        custom_component: eightballer/verification_station_frontend
+        http_enabled: true
+        ws_enabled: true

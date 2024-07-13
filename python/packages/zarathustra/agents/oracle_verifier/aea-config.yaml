@@ -86,3 +86,8 @@ models:
       tendermint_max_retries: 5
       tendermint_p2p_url: ${str:localhost:26656}
       tendermint_url: ${str:http://localhost:26657}
+      user_interface:
+        enabled: true
+        custom_component: eightballer/verification_station_frontend
+        http_enabled: true
+        ws_enabled: true

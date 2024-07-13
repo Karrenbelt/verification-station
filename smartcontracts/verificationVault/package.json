@@ -1,0 +1,9 @@
+{
+  "name": "verificationVault",
+  "version": "1.0.0",
+  "description": "Dr. Manhattans Lab",
+  "main": "index.js",
+  "repository": "https://github.com/Karrenbelt/verification-station",
+  "author": "d0ra",
+  "license": "MIT"
+}

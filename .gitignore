@@ -1,3 +1,8 @@
+python/packages/open_aea
+python/packages/valory
+python/packages/eightballer/protocols
+python/packages/eightballer/skills
+python/agent
 .*
 !.gitignore
 !.dockerignore

@@ -154,6 +154,6 @@ skills:
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
 - zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
-- zarathustra/oracle_verification_abci:0.1.0:bafybeignlyxkciceorbsimzow4kxzy4oeredz3leecgobr6bf3yzpqrhhq
+- zarathustra/oracle_verification_abci:0.1.0:bafybeib37mt2npz3tvjbjtervmqg4rtxm7adxunt3ztuoge2qcnyfjakra
 type: skill
 version: 0.1.0

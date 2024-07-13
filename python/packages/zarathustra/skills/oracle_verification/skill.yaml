@@ -16,7 +16,7 @@ fingerprint:
   dialogues.py: bafybeigvsyqode3xla7m2lr4bkt3edkhzhelujwaljqzqbkifw4egp65w4
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
   handlers.py: bafybeigqin67ztmcpj62sbtnehipgaoo4naduhkk52gqkyk4wfe3yfh4na
-  models.py: bafybeih6iwaliaiutwgjzk5p2slu7hoh7yeqcelwjgwp5za6bgwo7pldtm
+  models.py: bafybeibj4qufzeh5rxwdt62ivbghblbta3ndxftr6znkmjyfz5vz6tzs3e
 fingerprint_ignore_patterns: []
 handlers:
   abci:
@@ -43,6 +43,17 @@ handlers:
 is_abstract: false
 license: Apache-2.0
 models:
+  randomness_api:
+    args:
+      api_id: cloudflare
+      headers: {}
+      method: GET
+      parameters: {}
+      response_key: null
+      response_type: dict
+      retries: 5
+      url: https://drand.cloudflare.com/public/latest
+    class_name: RandomnessApi
   abci_dialogues:
     args: {}
     class_name: AbciDialogues
@@ -141,6 +152,6 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- zarathustra/subgraph_query_abci:0.1.0:bafybeid6fugazkmadlpptqeyczv7kgx4ztcjaqsyxv5jf7orywcwxps4ki
+- zarathustra/subgraph_query_abci:0.1.0:bafybeih2w3i2bkfdr7w3oupb42euece3blbrkwwg6o7knvybencuy275vm
 type: skill
 version: 0.1.0

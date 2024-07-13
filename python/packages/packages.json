@@ -22,7 +22,7 @@
         "connection/valory/http_client/0.23.0": "bafybeih5vzo22p2umhqo52nzluaanxx7kejvvpcpdsrdymckkyvmsim6gm",
         "connection/valory/p2p_libp2p_client/0.1.0": "bafybeid3xg5k2ol5adflqloy75ibgljmol6xsvzvezebsg7oudxeeolz7e",
         "skill/valory/abstract_abci/0.1.0": "bafybeihat4giyc4bz6zopvahcj4iw53356pbtwfn7p4d5yflwly2qhahum",
-        "skill/valory/abstract_round_abci/0.1.0": "bafybeic32vmbepavpmoec4at66lzeprmdg52zfue3dhafuqdvtwos2vu3q",
+        "skill/valory/abstract_round_abci/0.1.0": "bafybeih3enhagoql7kzpeyzzu2scpkif6y3ubakpralfnwxcvxexdyvy5i",
         "skill/eightballer/ui_loader_abci/0.1.0": "bafybeihooqaoymkyobuy53i7cktdqvwaiqxzgzqefv6ujikgpdyicmgftu"
     }
 }

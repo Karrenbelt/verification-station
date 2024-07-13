@@ -1,0 +1,7 @@
+current = "1.0.0.dev0"
+
+[git]
+message-template = "Bump version: {current_version} → {new_version}"
+tag-template = "v{new_version}"
+
+[files]

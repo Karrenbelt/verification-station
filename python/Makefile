@@ -21,13 +21,11 @@ format:
 lint:
 	@poetry run ruff check .
 
-
 .PHONY: run
 run:
-	poetry run bash scripts/start_single_agent.sh eightballer/watcher
+	@poetry run ../scripts/run_agent.sh
 
 .PHONY: hashes
 hashes:
 	poetry run autonomy packages lock
 	poetry run autonomy push-all
-

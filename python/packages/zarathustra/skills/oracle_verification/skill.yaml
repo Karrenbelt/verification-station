@@ -11,12 +11,12 @@ dependencies: {}
 description: This is the Oracle Verification Composite ABCI application.
 fingerprint:
   __init__.py: bafybeicaarpbb2urblmwf63in657pwq6x3pt3cgecoxp6hohykpxydntau
-  behaviours.py: bafybeidcpgexiuvo7kj6ryoinza5hf6ztmtzkfljoiauqx4bvy6zhcunc4
-  composition.py: bafybeif4cqy75wm7ndplmeqgt4k6qxjk3hwqpjo3isxeqxeb7g6yiqlq2e
+  behaviours.py: bafybeigsuk4pt4xz4h4d7rrhq336ttogvbm5sepwrzi47z2r2tz2q74sbq
+  composition.py: bafybeibzu7kmsive7tgzqrtrlqkkkl45mt22w776t6war5uthi7xsalywa
   dialogues.py: bafybeigvsyqode3xla7m2lr4bkt3edkhzhelujwaljqzqbkifw4egp65w4
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
   handlers.py: bafybeigqin67ztmcpj62sbtnehipgaoo4naduhkk52gqkyk4wfe3yfh4na
-  models.py: bafybeibj4qufzeh5rxwdt62ivbghblbta3ndxftr6znkmjyfz5vz6tzs3e
+  models.py: bafybeicci7q2dayxls33xgtbpnfnmsozskoeaeolxojmvo4qxgfoz32p3u
 fingerprint_ignore_patterns: []
 handlers:
   abci:
@@ -75,6 +75,11 @@ models:
     class_name: LedgerApiDialogues
   params:
     args:
+      user_interface:
+        enabled: false
+        custom_component: null
+        http_enabled: true
+        ws_enabled: true
       cleanup_history_depth: 1
       cleanup_history_depth_current: null
       drand_public_key: 868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31
@@ -152,7 +157,8 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
 - eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
+- zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
+- zarathustra/oracle_verification_abci:0.1.0:bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u
 type: skill
 version: 0.1.0

@@ -36,6 +36,10 @@ class SharedState(BaseSharedState):
     abci_app_cls = OracleVerificationAbciApp
 
 
+class RandomnessApi(ApiSpecs):
+    """A model for randomness api specifications."""
+
+
 Params = BaseParams
 Requests = BaseRequests
 BenchmarkTool = BaseBenchmarkTool

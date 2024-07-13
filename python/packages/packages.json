@@ -3,12 +3,12 @@
         "custom/eightballer/oracle_observer/0.1.0": "bafybeiaiokz7jzqsrz5y3472pb4lzpxfxjbjvsr4xx2lm62kw3sui7yr2a",
         "custom/eightballer/chronicle_oracle_observer/0.1.0": "bafybeiauceizzmysfh5r4foxvycfpzss2tfo3ctlm73vwzwifqakdscn3e",
         "custom/eightballer/subgraph_verification_station/0.1.0": "bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu",
-        "custom/eightballer/oracle_verifier_chronicle/0.1.0": "bafybeih3v7tszr4jh224a3qdc32zwodz2t6yvmndgccjrj3wg2p2ubxbe4",
+        "custom/eightballer/oracle_verifier_chronicle/0.1.0": "bafybeicj2eb7cw34cd2m4rgbtug262qyycou52pyoe7taw74iul3g4lliu",
         "custom/eightballer/verification_station_frontend/0.1.0": "bafybeif57yc5r23cktzoxkhnbbceb6kjqyre5g3u6cqqdtu5mlzux4e3qe",
         "contract/eightballer/chronicle_price_feed/0.1.0": "bafybeie3gxisdb6jpzlahmetkd5sc5wqt2i4tg5xzm7doojcy2wh3wq5xq",
         "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a",
         "skill/zarathustra/oracle_verification/0.1.0": "bafybeifthmimq2mgays7elqhdzw4ikgf42ez4iveueajt37t4ug2ogjcaa",
-        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeidxqjwbiwuzvho63x3jgfyo7gvfs7qamu7wzv4on2x3c7npkqsf7i"
+        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeiejwar532qa4tb5demxgf4vxritkofzrap4b547twaphj3vggmlni"
     },
     "third_party": {
         "protocol/eightballer/websockets/0.1.0": "bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e",

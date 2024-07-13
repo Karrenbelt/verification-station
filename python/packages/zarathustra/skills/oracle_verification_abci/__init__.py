@@ -16,8 +16,8 @@
     #   limitations under the License.
     #
     # ------------------------------------------------------------------------------
-     
-"""This module contains the implementation of the default skill."""
+
+"""This module contains the implementation of the Oracle Verification ABCi skill."""
 
 from aea.configurations.base import PublicId
 

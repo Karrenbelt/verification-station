@@ -51,10 +51,15 @@ graph TB
     end
 
     subgraph "OracleVerificationAbciApp"
+        CheckServiceDepositsRound --> |NEW_DEPOSIT_vsETH| PrepareRepayTokenRound
+        CheckServiceDepositsRound --> |NEW_DEPOSIT_ETH| PrepareMintTokenRound
+        CheckServiceDepositsRound --> |NO_NEW_DEPOSIT| LoadOracleComponentsRound
         LoadOracleComponentsRound -->|DONE| CollectOracleDataRound
         CollectOracleDataRound -->|DONE| OracleAttestationRound
         OracleAttestationRound -->|VALID| PrepareValidTransactionRound
         OracleAttestationRound -->|INVALID| PrepareSlashingTransactionRound
+        %% RepayLiquidStakingTokenRound --> |TX| FinalizedTransactionPreparationRound  % FinalDegenerateRound
+        %% RepayLiquidStakingTokenRound --> |TX| FinalizedTransactionPreparationRound  % FinalDegenerateRound
         %% PrepareValidTransactionRound --> FinalizedTransactionPreparationRound  % FinalDegenerateRound
         %% PrepareSlashingTransactionRound --> FinalizedTransactionPreparationRound  % FinalDegenerateRound
     end
@@ -69,8 +74,10 @@ graph TB
 
     RegistrationStartUpAbciApp --> SetupRound
     HealthcheckRound -->|DONE| LoadSubgraphComponentsRound
-    DataTransformationRound --> LoadOracleComponentsRound
+    DataTransformationRound --> CheckServiceDepositsRound
     CheckSubgraphsHealthRound -->|MAX_RETRIES| ResetAndPauseAbciApp
+    PrepareMintTokenRound --> TransactionSettlementAbciApp
+    PrepareRepayTokenRound --> TransactionSettlementAbciApp
     PrepareValidTransactionRound --> TransactionSettlementAbciApp
     PrepareSlashingTransactionRound --> TransactionSettlementAbciApp
     TransactionSettlementAbciApp --> ResetAndPauseAbciApp

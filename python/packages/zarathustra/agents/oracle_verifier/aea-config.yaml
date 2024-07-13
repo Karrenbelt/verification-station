@@ -46,8 +46,8 @@ skills:
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
-- zarathustra/oracle_verification_abci:0.1.0:bafybeib37mt2npz3tvjbjtervmqg4rtxm7adxunt3ztuoge2qcnyfjakra
-- zarathustra/oracle_verification:0.1.0:bafybeie3rvtbxamik32bplmcymjgwtslomi5vlptcnv7rq6rxhzruzm5ii
+- zarathustra/oracle_verification_abci:0.1.0:bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u
+- zarathustra/oracle_verification:0.1.0:bafybeibuhsac46rvkmnhkvumdtyh74c4elcmhaivdidw3dusurbs4z6amm
 version: 0.1.0
 default_connection: null
 ---

@@ -1,5 +1,5 @@
 <h1 align="center">
-    <b>verification_station</b>
+    <b>Verification Station</b>
 </h1>
 
 <p align="center">
@@ -13,6 +13,55 @@
 
 
 <!-- ## Getting started -->
+
+### Overview of the Finite State Machine design
+
+```mermaid
+graph TB
+
+    subgraph "RegistrationStartUpAbciApp"
+       RegistrationRound
+    end
+
+    subgraph "UILoaderAbciApp"
+        SetupRound -->|DONE| HealthcheckRound
+        %% HealthcheckRound -->|DONE| DoneRound  % FinalDegenerateRound
+    end
+
+    subgraph "SubgraphQueryAbciApp"
+        LoadSubgraphComponentsRound -->|DONE| CheckSubgraphsHealthRound
+        CheckSubgraphsHealthRound -->|SYNCHRONIZED| CollectSubgraphsDataRound
+        CheckSubgraphsHealthRound -->|RETRY| CheckSubgraphsHealthRound
+        CollectSubgraphsDataRound -->|DONE| DataTransformationRound
+        %% DataTransformationRound --> FinalSubgraphRound  % FinalDegenerateRound
+    end
+
+    subgraph "OracleVerificationAbciApp"
+        LoadOracleComponentsRound -->|DONE| CollectOracleDataRound
+        CollectOracleDataRound -->|DONE| OracleAttestationRound
+        OracleAttestationRound -->|VALID| PrepareValidTransactionRound
+        OracleAttestationRound -->|INVALID| PrepareSlashingTransactionRound
+        %% PrepareValidTransactionRound --> FinalizedTransactionPreparationRound  % FinalDegenerateRound
+        %% PrepareSlashingTransactionRound --> FinalizedTransactionPreparationRound  % FinalDegenerateRound
+    end
+
+    subgraph "TransactionSettlementAbciApp"
+       TransactionSettlementRound
+    end
+
+    subgraph "ResetAndPauseAbciApp"
+       ResetAndPauseRound
+    end
+
+    RegistrationStartUpAbciApp --> SetupRound
+    HealthcheckRound -->|DONE| LoadSubgraphComponentsRound
+    DataTransformationRound --> LoadOracleComponentsRound
+    CheckSubgraphsHealthRound -->|MAX_RETRIES| ResetAndPauseAbciApp
+    PrepareValidTransactionRound --> TransactionSettlementAbciApp
+    PrepareSlashingTransactionRound --> TransactionSettlementAbciApp
+    TransactionSettlementAbciApp --> ResetAndPauseAbciApp
+    ResetAndPauseAbciApp --> LoadSubgraphComponentsRound
+```
 
 
 ## Install from source

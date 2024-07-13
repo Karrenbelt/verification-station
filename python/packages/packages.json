@@ -3,11 +3,12 @@
         "custom/eightballer/oracle_observer/0.1.0": "bafybeiaiokz7jzqsrz5y3472pb4lzpxfxjbjvsr4xx2lm62kw3sui7yr2a",
         "custom/eightballer/chronicle_oracle_observer/0.1.0": "bafybeiauceizzmysfh5r4foxvycfpzss2tfo3ctlm73vwzwifqakdscn3e",
         "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a",
-        "skill/zarathustra/oracle_verification/0.1.0": "bafybeifhu6ljfugb3w7q5p6us2kez3ld3xtxghntf6awwdreu7b6be3cga",
-        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeic2uxrbezyhi4kygigcrvd26dmsd7aywtibj7fkjgtyomcmd6j2jm",
-        "agent/eightballer/watcher/0.1.0": "bafybeicgslsrw4jxluioi5hx46vwkangisuog74u55m4qduy6ddkfgzeau"
+        "skill/zarathustra/oracle_verification/0.1.0": "bafybeifthmimq2mgays7elqhdzw4ikgf42ez4iveueajt37t4ug2ogjcaa",
+        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeig52csenzuj7sjciqqum6l6qu336dupoa2p5zaba7imr2etgfitca"
     },
     "third_party": {
+        "protocol/eightballer/websockets/0.1.0": "bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e",
+        "protocol/eightballer/http/0.1.0": "bafybeibels7dv7ucflaeniwifbisvkegm5vrarrr5ctkcqebg4t7onba6a",
         "protocol/valory/abci/0.1.0": "bafybeiaqmp7kocbfdboksayeqhkbrynvlfzsx4uy4x6nohywnmaig4an7u",
         "protocol/valory/acn/1.1.0": "bafybeidluaoeakae3exseupaea4i3yvvk5vivyt227xshjlffywwxzcxqe",
         "protocol/valory/ledger_api/1.0.0": "bafybeihdk6psr4guxmbcrc26jr2cbgzpd5aljkqvpwo64bvaz7tdti2oni",
@@ -16,8 +17,6 @@
         "protocol/valory/ipfs/0.1.0": "bafybeiftxi2qhreewgsc5wevogi7yc5g6hbcbo4uiuaibauhv3nhfcdtvm",
         "protocol/valory/tendermint/0.1.0": "bafybeig4mi3vmlv5zpbjbfuzcgida6j5f2nhrpedxicmrrfjweqc5r7cra",
         "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi",
-        "protocol/eightballer/websockets/0.1.0": "bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e",
-        "protocol/eightballer/http/0.1.0": "bafybeibels7dv7ucflaeniwifbisvkegm5vrarrr5ctkcqebg4t7onba6a",
         "contract/valory/service_registry/0.1.0": "bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta",
         "contract/valory/gnosis_safe_proxy_factory/0.1.0": "bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm",
         "contract/valory/gnosis_safe/0.1.0": "bafybeidy56dpfmbpevn6c46yluhw7sxqvucmzgceoiuuegm7d6slh2svae",

@@ -40,6 +40,9 @@ from packages.zarathustra.skills.oracle_verification.composition import Composit
 from packages.zarathustra.skills.subgraph_query_abci.behaviours import (
     SubgraphQueryRoundBehaviour,
 )
+from packages.eightballer.skills.ui_loader_abci.behaviours import (
+    ComponentLoadingRoundBehaviour,
+)
 
 
 class OracleVerificationAbciAppConsensusBehaviour(AbstractRoundBehaviour):
@@ -49,6 +52,7 @@ class OracleVerificationAbciAppConsensusBehaviour(AbstractRoundBehaviour):
     abci_app_cls = CompositeAbciApp  # type: ignore
     behaviours: Set[Type[BaseBehaviour]] = {
         *AgentRegistrationRoundBehaviour.behaviours,
+        *ComponentLoadingRoundBehaviour.behaviours,
         *SubgraphQueryRoundBehaviour.behaviours,
         *TransactionSettlementRoundBehaviour.behaviours,
         *ResetPauseABCIConsensusBehaviour.behaviours,

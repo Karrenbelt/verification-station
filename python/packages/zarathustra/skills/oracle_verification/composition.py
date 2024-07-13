@@ -47,8 +47,15 @@ from packages.zarathustra.skills.subgraph_query_abci.rounds import (
     FinalSubgraphQueryRound,
 )
 
+from packages.eightballer.skills.ui_loader_abci.rounds import (
+    DoneRound,
+    ComponentLoadingAbciApp,
+    SetupRound,
+)
+
 abci_app_transition_mapping: AbciAppTransitionMapping = {
-    FinishedRegistrationRound: LoadSubgraphComponentsRound,
+    FinishedRegistrationRound: SetupRound,
+    DoneRound: LoadSubgraphComponentsRound,
     FinalSubgraphQueryRound: RandomnessTransactionSubmissionRound,
     FinishedTransactionSubmissionRound: ResetAndPauseRound,
     FailedRound: ResetAndPauseRound,
@@ -59,6 +66,7 @@ abci_app_transition_mapping: AbciAppTransitionMapping = {
 CompositeAbciApp = chain(
     (
         AgentRegistrationAbciApp,
+        ComponentLoadingAbciApp,
         SubgraphQueryAbciApp,
         TransactionSubmissionAbciApp,
         ResetPauseAbciApp,

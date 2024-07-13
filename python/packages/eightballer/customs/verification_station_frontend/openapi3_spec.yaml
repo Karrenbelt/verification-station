@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: Oracle Observer
+  description: Allows interactions with The Decentralized Oracle Observer Service which uses.
+  version: 0.1.0
+servers:
+  - url: http://0.0.0.0:5555
+paths:
+  /:
+    get:
+      summary: Returns the main HTML page
+      responses:
+        '200':
+          description: HTML response
+          content:
+            text/html:
+              schema:
+                type: string
+  api/agent-info:
+    get:
+      summary: Returns the agent's state and info
+      responses:
+        '200':
+          description: A Json response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service-id:
+                    type: string
+                  safe-address:
+                    type: string
+                  agent-address:
+                    type: string
+                  agent-status:
+                    type: string
+                  observed-status:
+                    type: string
+  api/oracles:
+    get:
+      summary: Returns the list of loaded oracles.
+      responses:
+        '200':
+          description: A Json response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        oracle_id:
+                          type: string
+                        status:
+                          type: string
+                        last_update:
+                          type: string
+                        current_value:
+                          type: string
+  api/txs:
+    get:
+      summary: Returns the list of completed verification txns.
+      responses:
+        '200':
+          description: A Json response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        txn_hash:
+                          type: string
+                        status:
+                          type: string
+                        sender:
+                          type: string

@@ -1,0 +1,12 @@
+name: oracle_verifier_chronicle
+author: eightballer
+version: 0.1.0
+type: custom
+description: Simple HTML frontend to act as a template for the frontend ABCI loader.
+license: Apache-2.0
+aea_version: '>=1.0.0, <2.0.0'
+fingerprint:
+  __init__.py: bafybeiehzaumheu7dkjvrdfbuasf5yyzsj25c4dozr6kyh4iorb5hj6pee
+  main.py: bafybeig5m7y56dyls6jt3oqb5lioxbhffnfmxxk3zrxdyv64shuuxa7yxq
+fingerprint_ignore_patterns: []
+dependencies: {}

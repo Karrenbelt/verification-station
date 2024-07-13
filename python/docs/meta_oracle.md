@@ -6,7 +6,4 @@ Each custom component must implement the following methods:
 
 - `collect_data`: Generate the params call to the Contract Api.
 - `verify_data`: verify the data given the response from the Contract Api.
-- `challenge`: Challenge the data given the response from the Contract Api in case of a dispute.
-
-
-
+- `challenge_data`: Challenge the data given the response from the Contract Api in case of a dispute.

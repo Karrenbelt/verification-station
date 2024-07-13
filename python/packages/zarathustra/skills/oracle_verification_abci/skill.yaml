@@ -3,20 +3,28 @@ author: zarathustra
 behaviours:
   main:
     args: {}
-    class_name: OracleVerificationAbciAppConsensusBehaviour
+    class_name: OracleVerificationRoundBehaviour
 connections: []
 contracts: []
 customs: []
 dependencies: {}
-description: This is the Oracle Verification Composite ABCI application.
+description: The Oracle Verification Abci verifies data published by other oracles.
 fingerprint:
-  __init__.py: bafybeicaarpbb2urblmwf63in657pwq6x3pt3cgecoxp6hohykpxydntau
-  behaviours.py: bafybeigsuk4pt4xz4h4d7rrhq336ttogvbm5sepwrzi47z2r2tz2q74sbq
-  composition.py: bafybeibzu7kmsive7tgzqrtrlqkkkl45mt22w776t6war5uthi7xsalywa
-  dialogues.py: bafybeigvsyqode3xla7m2lr4bkt3edkhzhelujwaljqzqbkifw4egp65w4
-  fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
-  handlers.py: bafybeigqin67ztmcpj62sbtnehipgaoo4naduhkk52gqkyk4wfe3yfh4na
-  models.py: bafybeicci7q2dayxls33xgtbpnfnmsozskoeaeolxojmvo4qxgfoz32p3u
+  __init__.py: bafybeihc5korowuftadjm73ng5srrpfmambjdecd6k7sjvbsnhjk7rpoxq
+  behaviours.py: bafybeid3q6lhxvtmi7bdkvid2emdpmhwlariendrfskpi3zpnkcu6ilese
+  dialogues.py: bafybeicmr3wtszu4dn7twj4vncjz3niqckf47edbcubfvntzb2edox5jpy
+  fsm_specification.yaml: bafybeidsewpuketlmf2zic6ktujjg6i7lz5zw5weshk6d3wgbmtu7m4wua
+  handlers.py: bafybeihyp4dmt34itm7iigcwxvcj4us6lfi3memezc552rajbig6c5pmqm
+  models.py: bafybeidx3nth42t25tecbqffn4pvgadynxm67c5lbyz27fummgzewjqm3m
+  payloads.py: bafybeicjwcf5u6zijkxfuse5kxxx6l2rfuid4ln7oqk4c2jkaieaitbh7m
+  rounds.py: bafybeigzphkaazrf6tmbyfdt5z3cv5ahpfqegybqtao3daxia2vvrn7al4
+  tests/__init__.py: bafybeifigp64li3j3yidpan5arc27etm3jytadjsckjaidrem57hst73ry
+  tests/test_behaviours.py: bafybeigb7dlczctrn2a2clvjwuittob5kx2jgrnxv6ogydiyjbobju2bvq
+  tests/test_dialogues.py: bafybeic5yqwcgsqengyvhbv7jyiopxiomsrpidc4es3cwgbcwi6e3keupu
+  tests/test_handlers.py: bafybeic3ywduesxnuklgopl5jlroxhizx5qiokca6wg6qornz4uvqe6vem
+  tests/test_models.py: bafybeibacza7pfsrltkfuqdnjpvluzmaou3zomquudhjsxwuij7vlew7ay
+  tests/test_payloads.py: bafybeigerjvtg44pdkz2lzysx4tuxdpj2o44z6omvt6glgxeizdokfrvdu
+  tests/test_rounds.py: bafybeie57i2xn5a2tfyq3eyc7kdl7z25shjbfjpwx2hey5pesiyboccvyq
 fingerprint_ignore_patterns: []
 handlers:
   abci:
@@ -40,7 +48,7 @@ handlers:
   tendermint:
     args: {}
     class_name: TendermintHandler
-is_abstract: false
+is_abstract: true
 license: Apache-2.0
 models:
   randomness_api:
@@ -75,11 +83,6 @@ models:
     class_name: LedgerApiDialogues
   params:
     args:
-      user_interface:
-        enabled: false
-        custom_component: null
-        http_enabled: true
-        ws_enabled: true
       cleanup_history_depth: 1
       cleanup_history_depth_current: null
       drand_public_key: 868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31
@@ -117,7 +120,7 @@ models:
       retry_timeout: 3
       round_timeout_seconds: 30.0
       serious_slash_unit_amount: 8000000000000000
-      service_id: oracle_verification
+      service_id: oracle_verification_abci
       service_registry_address: null
       setup:
         all_participants:
@@ -150,15 +153,9 @@ models:
   tendermint_dialogues:
     args: {}
     class_name: TendermintDialogues
-name: oracle_verification
+name: oracle_verification_abci
 protocols: []
 skills:
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
-- valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
-- valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
-- valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
-- zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
-- zarathustra/oracle_verification_abci:0.1.0:bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u
 type: skill
 version: 0.1.0

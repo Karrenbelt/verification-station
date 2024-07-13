@@ -10,14 +10,14 @@ customs: []
 dependencies: {}
 description: The Oracle Verification Abci verifies data published by other oracles.
 fingerprint:
-  __init__.py: bafybeigruslhybfi5ka2wbato5otbujt2hqe7cb2tz6xkotrwziwlpfcam
-  behaviours.py: bafybeicuuzgymy7glsedd5x4fpahf5afhd4gkboxkrdst5d2w2rxy74nce
-  dialogues.py: bafybeibhr3zxp7tflbbhk46dz6522l3psntbn2ds66y5lrp7qwerik4ntm
-  handlers.py: bafybeiehm2irxj77orekltqiyee2fvuxf4ivcr24yfwt5v5fi44fx64mom
-  models.py: bafybeig6dfj5dtes4j6rdgrho3wixz6elwyyigql7yf2ggitirawkspqha
-  oracle_verifier.yaml: bafybeidsewpuketlmf2zic6ktujjg6i7lz5zw5weshk6d3wgbmtu7m4wua
-  payloads.py: bafybeibf3qqcm6tlcg2v7lq7ty74ibnpssxrky6cthdxo2np7rnvwpsw2y
-  rounds.py: bafybeiabwpfjc5ujmvk26uyfiye3uxgwc55d5fi4xevchyg4x3fdv35nsy
+  __init__.py: bafybeidoomlc7tggg63dycd6o5xrargesjkecn7mrhinyuwykchbz3jgga
+  behaviours.py: bafybeid3q6lhxvtmi7bdkvid2emdpmhwlariendrfskpi3zpnkcu6ilese
+  dialogues.py: bafybeicmr3wtszu4dn7twj4vncjz3niqckf47edbcubfvntzb2edox5jpy
+  fsm_specification.yaml: bafybeidsewpuketlmf2zic6ktujjg6i7lz5zw5weshk6d3wgbmtu7m4wua
+  handlers.py: bafybeihyp4dmt34itm7iigcwxvcj4us6lfi3memezc552rajbig6c5pmqm
+  models.py: bafybeidln4l74um5kkknsoxlwsggb7qrvbtiadccps4learpd3mkqiyigm
+  payloads.py: bafybeicjwcf5u6zijkxfuse5kxxx6l2rfuid4ln7oqk4c2jkaieaitbh7m
+  rounds.py: bafybeigzphkaazrf6tmbyfdt5z3cv5ahpfqegybqtao3daxia2vvrn7al4
   tests/__init__.py: bafybeifigp64li3j3yidpan5arc27etm3jytadjsckjaidrem57hst73ry
   tests/test_behaviours.py: bafybeigb7dlczctrn2a2clvjwuittob5kx2jgrnxv6ogydiyjbobju2bvq
   tests/test_dialogues.py: bafybeic5yqwcgsqengyvhbv7jyiopxiomsrpidc4es3cwgbcwi6e3keupu

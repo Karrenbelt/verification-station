@@ -11,12 +11,12 @@ dependencies: {}
 description: This is the Oracle Verification Composite ABCI application.
 fingerprint:
   __init__.py: bafybeicaarpbb2urblmwf63in657pwq6x3pt3cgecoxp6hohykpxydntau
-  behaviours.py: bafybeidcpgexiuvo7kj6ryoinza5hf6ztmtzkfljoiauqx4bvy6zhcunc4
-  composition.py: bafybeif4cqy75wm7ndplmeqgt4k6qxjk3hwqpjo3isxeqxeb7g6yiqlq2e
+  behaviours.py: bafybeigsuk4pt4xz4h4d7rrhq336ttogvbm5sepwrzi47z2r2tz2q74sbq
+  composition.py: bafybeibzu7kmsive7tgzqrtrlqkkkl45mt22w776t6war5uthi7xsalywa
   dialogues.py: bafybeigvsyqode3xla7m2lr4bkt3edkhzhelujwaljqzqbkifw4egp65w4
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
   handlers.py: bafybeigqin67ztmcpj62sbtnehipgaoo4naduhkk52gqkyk4wfe3yfh4na
-  models.py: bafybeibj4qufzeh5rxwdt62ivbghblbta3ndxftr6znkmjyfz5vz6tzs3e
+  models.py: bafybeibpbbjr672tbvtzpvpk24lylfkmmmdiedzi6fv3cyju7iisanzxnu
 fingerprint_ignore_patterns: []
 handlers:
   abci:
@@ -154,6 +154,6 @@ skills:
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
 - zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
-- zarathustra/oracle_verification_abci:0.1.0:bafybeigf7h3ofahcnefpp3ixbmqzfnivdb4lbkeraqttfcrn36zpioa45m
+- zarathustra/oracle_verification_abci:0.1.0:bafybeignlyxkciceorbsimzow4kxzy4oeredz3leecgobr6bf3yzpqrhhq
 type: skill
 version: 0.1.0

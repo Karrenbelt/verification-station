@@ -42,7 +42,7 @@ protocols:
 required_ledgers:
 - ethereum
 skills:
-- eightballer/ui_loader_abci:0.1.0:bafybeicqexf6t2f64zzoxnbgrzh2i2dmmrz6maswkyvbxmejvsqdohbixu
+- eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
 - valory/abstract_abci:0.1.0:bafybeif4uvml6c3ypq6sk3udgzssyjnxepojdcu4igmwqmo6bdvave5l5i
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
@@ -50,7 +50,7 @@ skills:
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
 - zarathustra/oracle_verification_abci:0.1.0:bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u
-- zarathustra/oracle_verification:0.1.0:bafybeidrojgvm3viavst5hcuizxsbpod5372wv3nnwi3rb75f6eq2lrlbm
+- zarathustra/oracle_verification:0.1.0:bafybeibljf6cwdakyaqzbe3brenjjyokkyetonf27q4cxftevapt4dtdre
 version: 0.1.0
 default_connection: null
 ---

@@ -29,54 +29,54 @@ from packages.valory.skills.abstract_round_abci.base import BaseTxPayload
 class CheckServiceDepositsPayload(BaseTxPayload):
     """Represent a transaction payload for the CheckServiceDepositsRound."""
 
-    content = Any
+    content: Any
 
 
 @dataclass(frozen=True)
 class CollectOracleDataPayload(BaseTxPayload):
     """Represent a transaction payload for the CollectOracleDataRound."""
 
-    content = Any
+    content: Any
 
 
 @dataclass(frozen=True)
 class LoadOracleComponentsPayload(BaseTxPayload):
     """Represent a transaction payload for the LoadOracleComponentsRound."""
 
-    content = Any
+    content: Any
 
 
 @dataclass(frozen=True)
 class OracleAttestationPayload(BaseTxPayload):
     """Represent a transaction payload for the OracleAttestationRound."""
 
-    content = Any
+    content: Any
 
 
 @dataclass(frozen=True)
 class PrepareMintTokenPayload(BaseTxPayload):
     """Represent a transaction payload for the PrepareMintTokenRound."""
 
-    content = Any
+    content: Any
 
 
 @dataclass(frozen=True)
 class PrepareRepayTokenPayload(BaseTxPayload):
     """Represent a transaction payload for the PrepareRepayTokenRound."""
 
-    content = Any
+    content: Any
 
 
 @dataclass(frozen=True)
 class PrepareSlashingTransactionPayload(BaseTxPayload):
     """Represent a transaction payload for the PrepareSlashingTransactionRound."""
 
-    content = Any
+    content: Any
 
 
 @dataclass(frozen=True)
 class PrepareValidTransactionPayload(BaseTxPayload):
     """Represent a transaction payload for the PrepareValidTransactionRound."""
 
-    content = Any
+    content: Any
 

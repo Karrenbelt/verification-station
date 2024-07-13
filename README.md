@@ -94,3 +94,9 @@ Explore the project's version history and changes in [CHANGELOG.md](CHANGELOG.md
 
 ## License
 This project is licensed under the [Apache2.0 license](LICENSE).
+
+## Documents
+Read the full documentation of the project on our [Gitbook](https://sentinel-7.gitbook.io/watchers) 
+
+## Deck 
+Link to our Pitchdeck for the Eth Global Hackaton 07/2024 [Pitchdeck](https://docs.google.com/presentation/d/1Ky_-xIcaxrwOF5vf9qH14P0C5zTRnaz_pBBtip-Vr9A/edit?usp=sharing)

@@ -3,8 +3,8 @@
         "custom/eightballer/oracle_observer/0.1.0": "bafybeiaiokz7jzqsrz5y3472pb4lzpxfxjbjvsr4xx2lm62kw3sui7yr2a",
         "custom/eightballer/chronicle_oracle_observer/0.1.0": "bafybeiauceizzmysfh5r4foxvycfpzss2tfo3ctlm73vwzwifqakdscn3e",
         "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a",
-        "skill/zarathustra/oracle_verification/0.1.0": "bafybeifhu6ljfugb3w7q5p6us2kez3ld3xtxghntf6awwdreu7b6be3cga",
-        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeihjmepb2mqgim3hxe2yjnjp6zqv7isqt7npuyrbcpelm3bmkanfdm"
+        "skill/zarathustra/oracle_verification/0.1.0": "bafybeigsrshtmlgzzou5y4z67vmnkk5hykljrmss2lm7rqaayb43ovzjni",
+        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeicvnxpedrhkinhyc3jhunwtolflq2erfaz6yw7ljvyxijotgkuwte"
     },
     "third_party": {
         "protocol/eightballer/websockets/0.1.0": "bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e",

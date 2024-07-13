@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ------------------------------------------------------------------------------
 #
 #   Copyright 2024 eightballer
@@ -16,8 +17,8 @@
 #
 # ------------------------------------------------------------------------------
 
-"""This module contains a custom package."""
+"""This module contains the support resources for the scaffold contract."""
 
-from . import (
-    main as main,
-)
+from aea.configurations.base import PublicId
+
+PUBLIC_ID = PublicId.from_str('eightballer/chronicle_price_feed:0.1.0')

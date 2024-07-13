@@ -14,6 +14,12 @@
 
 <!-- ## Getting started -->
 
+## Problem Statement
+Current oracle systems assume the presence of "Watchers" who monitor and verify the accuracy and integrity of the data provided. These watchers are the other validators of the oracle network. Most of the time, these systems offer robust trustlessness guarantees. However, there are occasions when some security gets compromised in favor of greater efficiency bringing real-time data on-chain and reducing gas-cost. This raises a critical concern:
+
+     "Who watches the Watchers?"
+
+
 ### Overview of the Finite State Machine design
 
 ```mermaid

@@ -3,20 +3,20 @@ author: zarathustra
 behaviours:
   main:
     args: {}
-    class_name: SubgraphQueryRoundBehaviour
+    class_name: OracleVerificationAbciAppConsensusBehaviour
 connections: []
 contracts: []
 customs: []
 dependencies: {}
-description: The scaffold skill is a scaffold for your own skill implementation.
+description: This is the Oracle Verification Composite ABCI application.
 fingerprint:
   __init__.py: bafybeicaarpbb2urblmwf63in657pwq6x3pt3cgecoxp6hohykpxydntau
   behaviours.py: bafybeiby343rh7gexwckaf3uuoxnkaphg6cx7ucpt5heasuia4pl4cjmam
   composition.py: bafybeih2owne6cowro4zvij76kplnxjnpfucne77of6hkgebeu2uhu7xam
   dialogues.py: bafybeigvsyqode3xla7m2lr4bkt3edkhzhelujwaljqzqbkifw4egp65w4
+  fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
   handlers.py: bafybeigqin67ztmcpj62sbtnehipgaoo4naduhkk52gqkyk4wfe3yfh4na
   models.py: bafybeih6iwaliaiutwgjzk5p2slu7hoh7yeqcelwjgwp5za6bgwo7pldtm
-  oracle_verification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
 fingerprint_ignore_patterns: []
 handlers:
   abci:
@@ -141,6 +141,6 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- zarathustra/subgraph_query_abci:0.1.0:bafybeidi42l43xo4lnj3wr4c6onfiea2hqsyuiskztd5rtwr4gfkhmouse
+- zarathustra/subgraph_query_abci:0.1.0:bafybeid6fugazkmadlpptqeyczv7kgx4ztcjaqsyxv5jf7orywcwxps4ki
 type: skill
 version: 0.1.0

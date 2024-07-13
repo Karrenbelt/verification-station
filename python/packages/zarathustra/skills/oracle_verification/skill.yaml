@@ -11,7 +11,7 @@ dependencies: {}
 description: This is the Oracle Verification Composite ABCI application.
 fingerprint:
   __init__.py: bafybeicaarpbb2urblmwf63in657pwq6x3pt3cgecoxp6hohykpxydntau
-  behaviours.py: bafybeiby343rh7gexwckaf3uuoxnkaphg6cx7ucpt5heasuia4pl4cjmam
+  behaviours.py: bafybeidcpgexiuvo7kj6ryoinza5hf6ztmtzkfljoiauqx4bvy6zhcunc4
   composition.py: bafybeif4cqy75wm7ndplmeqgt4k6qxjk3hwqpjo3isxeqxeb7g6yiqlq2e
   dialogues.py: bafybeigvsyqode3xla7m2lr4bkt3edkhzhelujwaljqzqbkifw4egp65w4
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky

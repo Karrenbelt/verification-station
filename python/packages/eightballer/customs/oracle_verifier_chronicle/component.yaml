@@ -6,18 +6,7 @@ description: Simple HTML frontend to act as a template for the frontend ABCI loa
 license: Apache-2.0
 aea_version: '>=1.0.0, <2.0.0'
 fingerprint:
-  __init__.py: bafybeibol5xde7gxrbvqqj7ms4xf4xorvdvp323rcrcrw7oo6fsljgww3i
-  behaviours.py: bafybeiabicwfxgmrcy73tzgcdjnq55pfzixrtai44xf5afb2dtof6fnpt4
-  build/index.html: bafybeigyjfv75r7fnd7mw63vbidusohzopzyz47c5nmc3tiak5yh22gbfi
-  handlers.py: bafybeibk22xqyta5pkn2mwo63fbni6xwmq42y6bcwonk5eyttpkrwrdxli
-  openapi3_spec.yaml: bafybeia7cbezrsxul2vroj6yww4yjzb5zro3dmetoehsgwmu2s5qnngwum
+  __init__.py: bafybeiehzaumheu7dkjvrdfbuasf5yyzsj25c4dozr6kyh4iorb5hj6pee
+  main.py: bafybeidwjlnsxrwk5kjhrv6nowc64g4izz4zuvr3rbqbcqcchxz6jff3aq
 fingerprint_ignore_patterns: []
 dependencies: {}
-api_spec: open_api3_spec.yaml
-frontend_dir: build
-behaviours:
-- class_name: LogReadingBehaviour
-  args: {}
-handlers:
-- class_name: PingPongHandler
-  args: {}

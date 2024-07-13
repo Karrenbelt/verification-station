@@ -16,18 +16,21 @@ def test_oracle_loader_collect_data(oracle):
     """
     Test the oracle_loader module.
     """
-    assert oracle.collect_data() is not None
+    w3 = oracle_verifier_chronicle.w3
+    assert oracle.collect_data(w3.eth.block_number) is not None
 
 @pytest.mark.parametrize("oracle", ORACLES)
-def test_oracle_loader_verify_data(oracle):
+def test_oracle_loader_verify_data_valid(oracle):
     """
     Test the oracle_loader module.
     """
-    assert oracle.verify_data() is not None
+    logs = oracle.collect_data(6296669, 6296671)
+    assert oracle.verify_data(logs) is not None
 
 @pytest.mark.parametrize("oracle", ORACLES)
 def test_oracle_loader_challenge_data(oracle):
     """
     Test the oracle_loader module.
     """
-    assert oracle.challenge_data() is not None
+    with pytest.raises(Exception):
+        oracle.challenge_data('schnorr_data')

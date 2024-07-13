@@ -2,7 +2,7 @@ name: verification_station_frontend
 author: eightballer
 version: 0.1.0
 type: custom
-description: Simple HTML frontend to act as a template for the frontend ABCI loader.
+description: A frontend for the Verification Station.
 license: Apache-2.0
 aea_version: '>=1.0.0, <2.0.0'
 fingerprint:

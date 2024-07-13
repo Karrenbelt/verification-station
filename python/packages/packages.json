@@ -7,8 +7,8 @@
         "custom/eightballer/verification_station_frontend/0.1.0": "bafybeif57yc5r23cktzoxkhnbbceb6kjqyre5g3u6cqqdtu5mlzux4e3qe",
         "contract/eightballer/chronicle_price_feed/0.1.0": "bafybeie3gxisdb6jpzlahmetkd5sc5wqt2i4tg5xzm7doojcy2wh3wq5xq",
         "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a",
-        "skill/zarathustra/oracle_verification/0.1.0": "bafybeifthmimq2mgays7elqhdzw4ikgf42ez4iveueajt37t4ug2ogjcaa",
-        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeieci5mhpox2eispguroyhbpdzqaev7np72srsyp2bcjp334z3wd4i"
+        "skill/zarathustra/oracle_verification/0.1.0": "bafybeidmjh6e6lhvarbw56ovpt3qn55a4gsz7avcjb55efqm3j6tzbzwp4",
+        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeidowmvgnqgadkivqgbpx2t4kgjbdbbcxnfpyad5pm7rveshadehf4"
     },
     "third_party": {
         "protocol/eightballer/websockets/0.1.0": "bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e",

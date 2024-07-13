@@ -20,3 +20,12 @@ format:
 .PHONY: lint
 lint:
 	@poetry run ruff check .
+
+.PHONY: run
+run:
+	@poetry run ../scripts/run_agent.sh
+
+.PHONY: hashes
+hashes:
+	poetry run autonomy packages lock
+	poetry run autonomy push-all

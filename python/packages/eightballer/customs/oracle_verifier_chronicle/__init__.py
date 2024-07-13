@@ -19,6 +19,5 @@
 """This module contains a custom package."""
 
 from . import (
-    handlers as handlers,
-    behaviours as behaviours,
+    main as main,
 )

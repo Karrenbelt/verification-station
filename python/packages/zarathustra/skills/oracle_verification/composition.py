@@ -18,7 +18,7 @@
 #
 # ------------------------------------------------------------------------------
 
-"""This module contains the SubgraphQuery ABCI application."""
+"""This module contains the OracleVerification ABCI application."""
 
 from packages.valory.skills.abstract_round_abci.abci_app_chain import (
     AbciAppTransitionMapping,
@@ -41,22 +41,27 @@ from packages.valory.skills.transaction_settlement_abci.rounds import (
     RandomnessTransactionSubmissionRound,
     TransactionSubmissionAbciApp,
 )
-from packages.zarathustra.skills.subgraph_query_abci.rounds import (
-    LoadSubgraphComponentsRound,
-    SubgraphQueryAbciApp,
-    FinalSubgraphQueryRound,
-)
-
 from packages.eightballer.skills.ui_loader_abci.rounds import (
     DoneRound,
     ComponentLoadingAbciApp,
     SetupRound,
 )
+from packages.zarathustra.skills.subgraph_query_abci.rounds import (
+    LoadSubgraphComponentsRound,
+    SubgraphQueryAbciApp,
+    FinalSubgraphQueryRound,
+)
+from packages.zarathustra.skills.oracle_verification_abci.rounds import (
+    CheckServiceDepositsRound,
+    OracleVerificationAbciApp,
+    FinalizedTransactionPreparationRound,
+)
 
 abci_app_transition_mapping: AbciAppTransitionMapping = {
     FinishedRegistrationRound: SetupRound,
     DoneRound: LoadSubgraphComponentsRound,
-    FinalSubgraphQueryRound: RandomnessTransactionSubmissionRound,
+    FinalSubgraphQueryRound: CheckServiceDepositsRound,
+    FinalizedTransactionPreparationRound: RandomnessTransactionSubmissionRound,
     FinishedTransactionSubmissionRound: ResetAndPauseRound,
     FailedRound: ResetAndPauseRound,
     FinishedResetAndPauseRound: LoadSubgraphComponentsRound,
@@ -68,6 +73,7 @@ CompositeAbciApp = chain(
         AgentRegistrationAbciApp,
         ComponentLoadingAbciApp,
         SubgraphQueryAbciApp,
+        OracleVerificationAbciApp,
         TransactionSubmissionAbciApp,
         ResetPauseAbciApp,
     ),

@@ -18,7 +18,7 @@
 #
 # ------------------------------------------------------------------------------
 
-"""This package contains the SubgraphQuery composite behaviour."""
+"""This package contains the OracleVerification composite behaviour."""
 
 from typing import Set, Type
 
@@ -37,16 +37,19 @@ from packages.valory.skills.transaction_settlement_abci.behaviours import (
     TransactionSettlementRoundBehaviour,
 )
 from packages.zarathustra.skills.oracle_verification.composition import CompositeAbciApp
+from packages.eightballer.skills.ui_loader_abci.behaviours import (
+    ComponentLoadingRoundBehaviour,
+)
 from packages.zarathustra.skills.subgraph_query_abci.behaviours import (
     SubgraphQueryRoundBehaviour,
 )
-from packages.eightballer.skills.ui_loader_abci.behaviours import (
-    ComponentLoadingRoundBehaviour,
+from packages.zarathustra.skills.oracle_verification_abci.behaviours import (
+    OracleVerificationRoundBehaviour,
 )
 
 
 class OracleVerificationAbciAppConsensusBehaviour(AbstractRoundBehaviour):
-    """This behaviour manages the consensus stages for the SubgraphQuery."""
+    """This behaviour manages the consensus stages for the OracleVerification."""
 
     initial_behaviour_cls = RegistrationStartupBehaviour
     abci_app_cls = CompositeAbciApp  # type: ignore
@@ -54,6 +57,7 @@ class OracleVerificationAbciAppConsensusBehaviour(AbstractRoundBehaviour):
         *AgentRegistrationRoundBehaviour.behaviours,
         *ComponentLoadingRoundBehaviour.behaviours,
         *SubgraphQueryRoundBehaviour.behaviours,
+        *OracleVerificationRoundBehaviour.behaviours,
         *TransactionSettlementRoundBehaviour.behaviours,
         *ResetPauseABCIConsensusBehaviour.behaviours,
     }

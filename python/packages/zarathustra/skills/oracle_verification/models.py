@@ -28,7 +28,7 @@ from packages.valory.skills.abstract_round_abci.models import Requests as BaseRe
 from packages.valory.skills.abstract_round_abci.models import (
     SharedState as BaseSharedState,
 )
-from packages.zarathustra.skills.subgraph_query_abci.models import RandomnessApi as BaseRandomnessApi
+from packages.zarathustra.skills.oracle_verification_abci.models import RandomnessApi as BaseRandomnessApi
 from packages.zarathustra.skills.oracle_verification.composition import CompositeAbciApp
 
 

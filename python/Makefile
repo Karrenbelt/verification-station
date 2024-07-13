@@ -29,3 +29,5 @@ run:
 hashes:
 	poetry run autonomy packages lock
 	poetry run autonomy push-all
+	git add packages
+	git commit -m 'hashes'

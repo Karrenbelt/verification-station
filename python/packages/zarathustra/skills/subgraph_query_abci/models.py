@@ -19,7 +19,7 @@
 
 """This module contains the shared state for the abci skill of SubgraphQueryAbciApp."""
 
-from packages.valory.skills.abstract_round_abci.models import BaseParams
+from packages.valory.skills.abstract_round_abci.models import ApiSpecs, BaseParams
 from packages.valory.skills.abstract_round_abci.models import (
     BenchmarkTool as BaseBenchmarkTool,
 )
@@ -35,6 +35,9 @@ class SharedState(BaseSharedState):
 
     abci_app_cls = SubgraphQueryAbciApp
 
+
+class RandomnessApi(ApiSpecs):
+    """A model for randomness api specifications."""
 
 Params = BaseParams
 Requests = BaseRequests

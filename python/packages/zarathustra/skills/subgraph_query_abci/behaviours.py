@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------------------------
 #
-#   Copyright 2024 Valory AG
+#   Copyright 2024 zarathustra
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = CheckSubgraphsHealthPayload(sender=sender, content=...)
+            payload = CheckSubgraphsHealthPayload(sender=sender, content="dummy_content")
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
@@ -90,7 +90,7 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = CollectSubgraphsDataPayload(sender=sender, content=...)
+            payload = CollectSubgraphsDataPayload(sender=sender, content="dummy_content")
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
@@ -110,7 +110,7 @@ class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = DataTransformationPayload(sender=sender, content=...)
+            payload = DataTransformationPayload(sender=sender, content="dummy_content")
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
@@ -130,7 +130,7 @@ class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = LoadSubgraphComponentsPayload(sender=sender, content=...)
+            payload = LoadSubgraphComponentsPayload(sender=sender, content="dummy_content")
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)

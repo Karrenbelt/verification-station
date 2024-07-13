@@ -62,6 +62,26 @@ from packages.valory.skills.abstract_round_abci.dialogues import (
     TendermintDialogues as BaseTendermintDialogues,
 )
 
+from packages.eightballer.skills.ui_loader_abci.dialogues import (
+    UserInterfaceHttpDialogue as BaseUserInterfaceHttpDialogue,
+)
+from packages.eightballer.skills.ui_loader_abci.dialogues import (
+    UserInterfaceHttpDialogues as BaseUserInterfaceHttpDialogues,
+)
+from packages.eightballer.skills.ui_loader_abci.dialogues import (
+    UserInterfaceWebSocketDialogue as BaseUserInterfaceWebSocketDialogue,
+)
+from packages.eightballer.skills.ui_loader_abci.dialogues import (
+    UserInterfaceWebSocketDialogues as BaseUserInterfaceWebSocketDialogues,
+)
+
+
+
+UserInterfaceHttpDialogue = BaseUserInterfaceHttpDialogue
+UserInterfaceHttpDialogues = BaseUserInterfaceHttpDialogues
+
+UserInterfaceWsDialogue = BaseUserInterfaceWebSocketDialogue
+UserInterfaceWsDialogues = BaseUserInterfaceWebSocketDialogues
 
 AbciDialogue = BaseAbciDialogue
 AbciDialogues = BaseAbciDialogues

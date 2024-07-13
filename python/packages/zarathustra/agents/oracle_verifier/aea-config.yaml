@@ -25,8 +25,27 @@ fingerprint: {}
 fingerprint_ignore_patterns: []
 license: Apache-2.0
 logging_config:
-  disable_existing_loggers: false
   version: 1
+  disable_existing_loggers: false
+  formatters:
+    standard:
+      format: '[%(asctime)s] [%(levelname)s] %(message)s'
+  handlers:
+    logfile:
+      class: logging.FileHandler
+      formatter: standard
+      filename: ${LOG_FILE:str:log.txt}
+      level: ${LOG_LEVEL:str:INFO}
+    console:
+      class: logging.StreamHandler
+      formatter: standard
+      stream: ext://sys.stdout
+  loggers:
+    aea:
+      handlers:
+      - logfile
+      - console
+      propagate: true
 private_key_paths: {}
 protocols:
 - eightballer/http:0.1.0:bafybeibels7dv7ucflaeniwifbisvkegm5vrarrr5ctkcqebg4t7onba6a
@@ -50,7 +69,7 @@ skills:
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
 - zarathustra/oracle_verification_abci:0.1.0:bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u
-- zarathustra/oracle_verification:0.1.0:bafybeiel3ufwe5226idtraoz6rhj3ztu5cotvl5gb3n7rlq46liwha3zry
+- zarathustra/oracle_verification:0.1.0:bafybeifbrpw47enebf7uxvlv6xxxdinfp6bwpl6u6nrxbkemqrptotvjh4
 version: 0.1.0
 default_connection: null
 ---

@@ -35,6 +35,7 @@ from packages.valory.skills.registration_abci.models import Params as Registrati
 from packages.valory.skills.transaction_settlement_abci.models import TransactionParams as TransactionSettlementParams
 from packages.valory.skills.reset_pause_abci.models import Params as ResetAndPauseParams
 from packages.eightballer.skills.ui_loader_abci.models import UserInterfaceLoaderParams as UILoaderParams 
+from packages.eightballer.skills.ui_loader_abci.models import UserInterfaceClientStrategy
 from packages.zarathustra.skills.subgraph_query_abci.models import Params as SubgraphQueryParams
 from packages.zarathustra.skills.oracle_verification_abci.models import Params as OracleVerificationParams
 
@@ -57,3 +58,4 @@ class Params(
 Requests = BaseRequests
 BenchmarkTool = BaseBenchmarkTool
 RandomnessApi = BaseRandomnessApi
+UiClientStrategy = UserInterfaceClientStrategy

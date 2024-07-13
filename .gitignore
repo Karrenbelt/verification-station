@@ -1,3 +1,6 @@
+python/packages/open_aea
+python/packages/valory
+python/agent
 .*
 !.gitignore
 !.dockerignore

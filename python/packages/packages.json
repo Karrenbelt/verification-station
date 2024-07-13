@@ -1,0 +1,8 @@
+{
+    "dev": {
+        "agent/eightballer/watcher/0.1.0": "bafybeigmda3hji4hry7jff4aexsdqb2x6ixer5iykk5vqxchorjqjjhv54"
+    },
+    "third_party": {
+        "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi"
+    }
+}

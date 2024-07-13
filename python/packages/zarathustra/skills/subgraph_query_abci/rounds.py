@@ -38,6 +38,7 @@ from packages.zarathustra.skills.subgraph_query_abci.payloads import (
     DataTransformationPayload,
     LoadSubgraphComponentsPayload,
 )
+from packages.valory.skills.abstract_round_abci.base import CollectionRound
 
 
 class Event(Enum):
@@ -57,108 +58,57 @@ class SynchronizedData(BaseSynchronizedData):
     """
 
 
-class CheckSubgraphsHealthRound(AbstractRound):
+class CheckSubgraphsHealthRound(CollectionRound):
     """CheckSubgraphsHealthRound"""
 
     payload_class = CheckSubgraphsHealthPayload
     payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
 
-    # TODO: replace AbstractRound with one of CollectDifferentUntilAllRound,
-    # CollectSameUntilAllRound, CollectSameUntilThresholdRound,
-    # CollectDifferentUntilThresholdRound, OnlyKeeperSendsRound, VotingRound,
-    # from packages/valory/skills/abstract_round_abci/base.py
-    # or implement the methods
-
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
-
-    def check_payload(self, payload: CheckSubgraphsHealthPayload) -> None:
-        """Check payload."""
-        raise NotImplementedError
-
-    def process_payload(self, payload: CheckSubgraphsHealthPayload) -> None:
-        """Process payload."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.SYNCHRONIZED
 
 
-class CollectSubgraphsDataRound(AbstractRound):
+class CollectSubgraphsDataRound(CollectionRound):
     """CollectSubgraphsDataRound"""
 
     payload_class = CollectSubgraphsDataPayload
     payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
 
-    # TODO: replace AbstractRound with one of CollectDifferentUntilAllRound,
-    # CollectSameUntilAllRound, CollectSameUntilThresholdRound,
-    # CollectDifferentUntilThresholdRound, OnlyKeeperSendsRound, VotingRound,
-    # from packages/valory/skills/abstract_round_abci/base.py
-    # or implement the methods
-
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
-
-    def check_payload(self, payload: CollectSubgraphsDataPayload) -> None:
-        """Check payload."""
-        raise NotImplementedError
-
-    def process_payload(self, payload: CollectSubgraphsDataPayload) -> None:
-        """Process payload."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
-class DataTransformationRound(AbstractRound):
+class DataTransformationRound(CollectionRound):
     """DataTransformationRound"""
 
     payload_class = DataTransformationPayload
     payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
 
-    # TODO: replace AbstractRound with one of CollectDifferentUntilAllRound,
-    # CollectSameUntilAllRound, CollectSameUntilThresholdRound,
-    # CollectDifferentUntilThresholdRound, OnlyKeeperSendsRound, VotingRound,
-    # from packages/valory/skills/abstract_round_abci/base.py
-    # or implement the methods
-
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
-
-    def check_payload(self, payload: DataTransformationPayload) -> None:
-        """Check payload."""
-        raise NotImplementedError
-
-    def process_payload(self, payload: DataTransformationPayload) -> None:
-        """Process payload."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
-class LoadSubgraphComponentsRound(AbstractRound):
+
+class LoadSubgraphComponentsRound(CollectionRound):
     """LoadSubgraphComponentsRound"""
 
     payload_class = LoadSubgraphComponentsPayload
     payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
 
-    # TODO: replace AbstractRound with one of CollectDifferentUntilAllRound,
-    # CollectSameUntilAllRound, CollectSameUntilThresholdRound,
-    # CollectDifferentUntilThresholdRound, OnlyKeeperSendsRound, VotingRound,
-    # from packages/valory/skills/abstract_round_abci/base.py
-    # or implement the methods
-
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
-
-    def check_payload(self, payload: LoadSubgraphComponentsPayload) -> None:
-        """Check payload."""
-        raise NotImplementedError
-
-    def process_payload(self, payload: LoadSubgraphComponentsPayload) -> None:
-        """Process payload."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
 class FailedToSynchronizeRound(DegenerateRound):

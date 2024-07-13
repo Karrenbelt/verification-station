@@ -19,6 +19,7 @@
 
 """This module contains the transaction payloads of the SubgraphQueryAbciApp."""
 
+from typing import Any
 from dataclasses import dataclass
 
 from packages.valory.skills.abstract_round_abci.base import BaseTxPayload
@@ -28,26 +29,26 @@ from packages.valory.skills.abstract_round_abci.base import BaseTxPayload
 class CheckSubgraphsHealthPayload(BaseTxPayload):
     """Represent a transaction payload for the CheckSubgraphsHealthRound."""
 
-    # TODO: define your attributes
+    content: Any
 
 
 @dataclass(frozen=True)
 class CollectSubgraphsDataPayload(BaseTxPayload):
     """Represent a transaction payload for the CollectSubgraphsDataRound."""
 
-    # TODO: define your attributes
+    content: Any
 
 
 @dataclass(frozen=True)
 class DataTransformationPayload(BaseTxPayload):
     """Represent a transaction payload for the DataTransformationRound."""
 
-    # TODO: define your attributes
+    content: Any
 
 
 @dataclass(frozen=True)
 class LoadSubgraphComponentsPayload(BaseTxPayload):
     """Represent a transaction payload for the LoadSubgraphComponentsRound."""
 
-    # TODO: define your attributes
+    content: Any
 

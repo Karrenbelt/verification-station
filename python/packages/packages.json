@@ -1,8 +1,8 @@
 {
     "dev": {
-        "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeid6fugazkmadlpptqeyczv7kgx4ztcjaqsyxv5jf7orywcwxps4ki",
-        "skill/zarathustra/oracle_verification/0.1.0": "bafybeifmgt27d5jl5fzoi6nooqt4duuzeh7hlykkn55adcmhayz6nd7m3m",
-        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeig3j7o2js7tcauqzdl42hhv77bbqjp2ftmk2bv3v6fwzg4wg5zioq"
+        "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a",
+        "skill/zarathustra/oracle_verification/0.1.0": "bafybeifhu6ljfugb3w7q5p6us2kez3ld3xtxghntf6awwdreu7b6be3cga",
+        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeic2uxrbezyhi4kygigcrvd26dmsd7aywtibj7fkjgtyomcmd6j2jm"
     },
     "third_party": {
         "protocol/valory/abci/0.1.0": "bafybeiaqmp7kocbfdboksayeqhkbrynvlfzsx4uy4x6nohywnmaig4an7u",

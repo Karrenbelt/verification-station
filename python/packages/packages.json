@@ -1,6 +1,9 @@
 {
     "dev": {
         "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a",
+        "custom/eightballer/oracle_observer/0.1.0": "bafybeiaiokz7jzqsrz5y3472pb4lzpxfxjbjvsr4xx2lm62kw3sui7yr2a",
+        "custom/eightballer/chronicle_oracle_observer/0.1.0": "bafybeiauceizzmysfh5r4foxvycfpzss2tfo3ctlm73vwzwifqakdscn3e",
+        "agent/eightballer/watcher/0.1.0": "bafybeiezgpbqvjifrw6xxdj7kyvdxgk4wtdeoth3nc4w6lg2b7zc77ue6e"
         "skill/zarathustra/oracle_verification/0.1.0": "bafybeifhu6ljfugb3w7q5p6us2kez3ld3xtxghntf6awwdreu7b6be3cga",
         "agent/zarathustra/oracle_verifier/0.1.0": "bafybeic2uxrbezyhi4kygigcrvd26dmsd7aywtibj7fkjgtyomcmd6j2jm"
     },

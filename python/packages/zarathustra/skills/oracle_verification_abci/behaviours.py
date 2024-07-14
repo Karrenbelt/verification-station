@@ -25,7 +25,7 @@ import hashlib
 import json
 from decimal import Decimal
 from time import sleep
-from typing import Dict, Generator, Set, Tuple, Type, cast
+from typing import Dict, Generator, Optional, Set, Tuple, Type, cast
 
 from packages.valory.contracts.gnosis_safe.contract import GnosisSafeContract
 

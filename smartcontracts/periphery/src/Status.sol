@@ -1,10 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Status {
-    event VERIFIED(bytes32 txHash);
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
-    function triggerSuccess(bytes32 _txHash) public {
-        emit VERIFIED(_txHash);
+contract Status is Ownable{
+    event Verified(bytes32 txHash);
+
+    constructor(address _owner) Ownable(_owner) {}
+
+    function triggerVerified(bytes32 _txHash) public onlyOwner{
+        emit Verified(_txHash);
     }
 }

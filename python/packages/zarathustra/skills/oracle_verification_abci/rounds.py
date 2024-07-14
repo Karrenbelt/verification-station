@@ -136,7 +136,7 @@ class CollectOracleDataRound(CollectSameUntilThresholdRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-\        if not self.threshold_reached:
+        if not self.threshold_reached:
             return None
         state = self.synchronized_data.update(
             synchronized_data_class=self.synchronized_data_class,

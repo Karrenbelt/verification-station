@@ -49,17 +49,6 @@ handlers:
 is_abstract: false
 license: Apache-2.0
 models:
-  randomness_api:
-    args:
-      api_id: cloudflare
-      headers: {}
-      method: GET
-      parameters: {}
-      response_key: null
-      response_type: dict
-      retries: 5
-      url: https://drand.cloudflare.com/public/latest
-    class_name: RandomnessApi
   abci_dialogues:
     args: {}
     class_name: AbciDialogues
@@ -79,25 +68,8 @@ models:
   ledger_api_dialogues:
     args: {}
     class_name: LedgerApiDialogues
-  user_interface_http_dialogues:
-    args: {}
-    class_name: UserInterfaceHttpDialogues
-  user_interface_ws_dialogues:
-    args: {}
-    class_name: UserInterfaceWsDialogues
-  user_interface_client_strategy:
-    args: {}
-    class_name: UserInterfaceClientStrategy
   params:
     args:
-      user_interface:
-        enabled: false
-        custom_component: null
-        http_enabled: true
-        ws_enabled: true
-      oracle_config:
-      - eightballer/oracle_verifier_chronicle
-      - eightballer/oracle_verifier_pyth
       cleanup_history_depth: 1
       cleanup_history_depth_current: null
       drand_public_key: 868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31
@@ -127,6 +99,9 @@ models:
       max_attempts: 10
       max_healthcheck: 120
       on_chain_service_id: null
+      oracle_config:
+      - eightballer/oracle_verifier_chronicle
+      - eightballer/oracle_verifier_pyth
       request_retry_delay: 1.0
       request_timeout: 10.0
       reset_pause_duration: 10
@@ -154,8 +129,24 @@ models:
       tx_timeout: 10.0
       use_slashing: false
       use_termination: false
+      user_interface:
+        enabled: false
+        custom_component: null
+        http_enabled: true
+        ws_enabled: true
       validate_timeout: 1205
     class_name: Params
+  randomness_api:
+    args:
+      api_id: cloudflare
+      headers: {}
+      method: GET
+      parameters: {}
+      response_key: null
+      response_type: dict
+      retries: 5
+      url: https://drand.cloudflare.com/public/latest
+    class_name: RandomnessApi
   requests:
     args: {}
     class_name: Requests
@@ -168,15 +159,24 @@ models:
   tendermint_dialogues:
     args: {}
     class_name: TendermintDialogues
+  user_interface_client_strategy:
+    args: {}
+    class_name: UserInterfaceClientStrategy
+  user_interface_http_dialogues:
+    args: {}
+    class_name: UserInterfaceHttpDialogues
+  user_interface_ws_dialogues:
+    args: {}
+    class_name: UserInterfaceWsDialogues
 name: oracle_verification
 protocols: []
 skills:
+- eightballer/ui_loader_abci:0.1.0:bafybeie7lrwzi7dxnmfr63bl4kggcaa2w3wymjiaxi2xxd5dro5qdtanva
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- eightballer/ui_loader_abci:0.1.0:bafybeie7lrwzi7dxnmfr63bl4kggcaa2w3wymjiaxi2xxd5dro5qdtanva
-- zarathustra/subgraph_query_abci:0.1.0:bafybeiemogzk7r2gbi4xitqxf5jbldw5dxvft6mnmhmgdj3lefbsqhbqn4
-- zarathustra/oracle_verification_abci:0.1.0:bafybeickvqlpbohvclcwihr5qdishnklpdcsteocsp5naedqnp7cihnp4e
+- zarathustra/oracle_verification_abci:0.1.0:bafybeifkv3j5go2g7w4dijqwx55hgh5em6tnmbcnzacr23u46333ttmdue
+- zarathustra/subgraph_query_abci:0.1.0:bafybeiaovc65ata3fgmxdxu3arekhe6r2a6fpda2lc5qb4mqzocjeso4k4
 type: skill
 version: 0.1.0

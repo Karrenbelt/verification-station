@@ -87,10 +87,12 @@
             document.getElementById('agent-status').innerText = data['agent-status'];
         });
 
-    fetch('http://localhost:5555/api/oracles')
+    fetch('http://localhost:5555/api/prices')
         .then(response => response.json())
         .then(data => {
             data.forEach(oracle => {
+                console.log(data);
+                console.log(data[oracle])
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${oracle['oracle_id']}</td>

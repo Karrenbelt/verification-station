@@ -8,7 +8,7 @@ aea_version: '>=1.0.0, <2.0.0'
 fingerprint:
   __init__.py: bafybeibol5xde7gxrbvqqj7ms4xf4xorvdvp323rcrcrw7oo6fsljgww3i
   behaviours.py: bafybeiabicwfxgmrcy73tzgcdjnq55pfzixrtai44xf5afb2dtof6fnpt4
-  build/index.html: bafybeicnejkzemxbku3c2mu3dehockafr3c7yhmizva3qps5ufeqr4uesi
+  build/index.html: bafybeid2o2cjqppproxd7ikqq63wuqe5xnlqufu2gchmjnfvt32ikix2nu
   handlers.py: bafybeibk22xqyta5pkn2mwo63fbni6xwmq42y6bcwonk5eyttpkrwrdxli
   openapi3_spec.yaml: bafybeid6rlpevy23k3syc7hxuo5wgp53odugtjm3l77mdeomt2kevifehe
 fingerprint_ignore_patterns: []

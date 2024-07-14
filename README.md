@@ -86,6 +86,12 @@ Clone the repository:
 git clone git@github.com:Karrenbelt/verification_station.git
 ```
 
+## Deployed Contracts
+
+vsToken - https://sepolia.etherscan.io/address/0xDb98aC0aaAE7576331B4b73C5F0BDeF6e9674Ccf
+vsVault - https://sepolia.etherscan.io/address/0x225171943a0Dd2f33dc35c4D14F7B5abB5aFBE93 && https://repo.sourcify.dev/contracts/full_match/11155111/0x225171943a0Dd2f33dc35c4D14F7B5abB5aFBE93/
+
+
 ## Contributing
 Learn how to contribute to the project by following the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
 

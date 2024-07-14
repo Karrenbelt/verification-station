@@ -12,15 +12,16 @@ connections:
 - valory/ledger:0.19.0:bafybeig7woeog4srdby75hpjkmx4rhpkzncbf4h2pm5r6varsp26pf2uhu
 - valory/p2p_libp2p_client:0.1.0:bafybeid3xg5k2ol5adflqloy75ibgljmol6xsvzvezebsg7oudxeeolz7e
 contracts:
+- eightballer/chronicle_price_feed:0.1.0:bafybeifilaz3nz74eld7gstyywr6ojmldcvb3v43gnzdg3pqnee64glq3u
 - valory/gnosis_safe:0.1.0:bafybeidy56dpfmbpevn6c46yluhw7sxqvucmzgceoiuuegm7d6slh2svae
 - valory/gnosis_safe_proxy_factory:0.1.0:bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm
 - valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
-- eightballer/chronicle_price_feed:0.1.0:bafybeifilaz3nz74eld7gstyywr6ojmldcvb3v43gnzdg3pqnee64glq3u
 customs:
 - eightballer/oracle_verifier_chronicle:0.1.0:bafybeifnelxpuksp3fgc3s6b46afvjufwymkzb2fvavzxaktbbw242bcqq
 - eightballer/oracle_verifier_pyth:0.1.0:bafybeiduapf3iqnvlvliwggzk2l4aqorbhbvsbpyjuugqizwq6yhcdfwoi
+- eightballer/oracle_verifier_flare:0.1.0:bafybeigsriu5w42a5dk66ebdw6v6loutebbcwe6s5wwqbuapdzctpr55ke
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
-- eightballer/verification_station_frontend:0.1.0:bafybeifalmvczsfzmps7mpbfdpgb4ylukumwytkzmrsdck5r34wrjpcfcu
+- eightballer/verification_station_frontend:0.1.0:bafybeide6ftnl2gwvcbp2ranc2tdvyuibzgqwn6wuweirq67jppj3hv3z4
 default_ledger: ethereum
 default_routing: {}
 dependencies:
@@ -72,9 +73,9 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- zarathustra/subgraph_query_abci:0.1.0:bafybeid6j7sqzbx5qj3c6r76zdoepm6i5w7b27tf6tl6uoz5f7ci3bkemu
-- zarathustra/oracle_verification_abci:0.1.0:bafybeickvqlpbohvclcwihr5qdishnklpdcsteocsp5naedqnp7cihnp4e
-- zarathustra/oracle_verification:0.1.0:bafybeib5bzppo36qx3g4g7veqpxlnkwgaq4ggyijsjpdbw2nb3qml7xiky
+- zarathustra/oracle_verification:0.1.0:bafybeiauwezas3oem7wilkehajox6hy6mmzfqrbia3pnlhwhokgegkjwzy
+- zarathustra/oracle_verification_abci:0.1.0:bafybeifkv3j5go2g7w4dijqwx55hgh5em6tnmbcnzacr23u46333ttmdue
+- zarathustra/subgraph_query_abci:0.1.0:bafybeieewb3j7ve46rmh6dj2xy2pckstqybdw53xoxbcadtvpfvi45zrba
 version: 0.1.0
 default_connection: null
 ---
@@ -119,6 +120,7 @@ models:
       oracle_config:
       - eightballer/oracle_verifier_chronicle
       - eightballer/oracle_verifier_pyth
+      - eightballer/oracle_verifier_flare
 ---
 public_id: eightballer/http_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
 type: connection

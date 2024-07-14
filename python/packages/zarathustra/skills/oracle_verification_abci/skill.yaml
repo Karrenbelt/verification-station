@@ -52,17 +52,6 @@ handlers:
 is_abstract: true
 license: Apache-2.0
 models:
-  randomness_api:
-    args:
-      api_id: cloudflare
-      headers: {}
-      method: GET
-      parameters: {}
-      response_key: null
-      response_type: dict
-      retries: 5
-      url: https://drand.cloudflare.com/public/latest
-    class_name: RandomnessApi
   abci_dialogues:
     args: {}
     class_name: AbciDialogues
@@ -84,9 +73,6 @@ models:
     class_name: LedgerApiDialogues
   params:
     args:
-      oracle_config:
-      - eightballer/oracle_verifier_chronicle
-      - eightballer/oracle_verifier_pyth
       cleanup_history_depth: 1
       cleanup_history_depth_current: null
       drand_public_key: 868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31
@@ -116,6 +102,9 @@ models:
       max_attempts: 10
       max_healthcheck: 120
       on_chain_service_id: null
+      oracle_config:
+      - eightballer/oracle_verifier_chronicle
+      - eightballer/oracle_verifier_pyth
       request_retry_delay: 1.0
       request_timeout: 10.0
       reset_pause_duration: 10
@@ -146,6 +135,17 @@ models:
       use_termination: false
       validate_timeout: 1205
     class_name: Params
+  randomness_api:
+    args:
+      api_id: cloudflare
+      headers: {}
+      method: GET
+      parameters: {}
+      response_key: null
+      response_type: dict
+      retries: 5
+      url: https://drand.cloudflare.com/public/latest
+    class_name: RandomnessApi
   requests:
     args: {}
     class_name: Requests
@@ -162,7 +162,7 @@ name: oracle_verification_abci
 protocols:
 - valory/contract_api:1.0.0:bafybeidgu7o5llh26xp3u3ebq3yluull5lupiyeu6iooi2xyymdrgnzq5i
 skills:
-- valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
+- valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 type: skill
 version: 0.1.0

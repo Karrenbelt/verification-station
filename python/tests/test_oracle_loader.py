@@ -4,12 +4,14 @@ The test_oracle_loader module contains the tests for the oracle_loader module.
 
 from packages.eightballer.customs.oracle_verifier_chronicle import main as oracle_verifier_chronicle
 from packages.eightballer.customs.oracle_verifier_pyth import main as oracle_verifier_pyth
+from packages.eightballer.customs.oracle_verifier_flare import main as oracle_verifier_flare
 import pytest
 
 
 ORACLES = [
     oracle_verifier_pyth,
-    oracle_verifier_chronicle
+    oracle_verifier_chronicle,
+    oracle_verifier_flare
 ]
 
 

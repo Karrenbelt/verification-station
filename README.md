@@ -20,7 +20,20 @@ Current oracle systems assume the presence of "Watchers" who monitor and verify 
      "Who watches the Watchers?"
 
 ## How Verification Station addresses these issues:
-Verification Station addresses these challenges by providing an independent, chain-agnostic service that autonomously monitors and slashes misbehaving oracles. Here's how it works:
+
+"Don't Trust, Verify"
+
+Verification Station offers a solution grounded in the principle of "Don't Trust, Verify." This approach empowers users to take control of their data verification process rather than relying solely on oracle network validators.
+
+1. **Individually-operated Autonomous Agent**:
+Verification Station provides an autonomous agent that users can run and customize to verify the oracle data they depend on. This allows users to independently validate the data without having to place their trust entirely in the oracle service operators. The validation process occurs off-chain, consuming only computation power and electricity, thus maintaining efficiency and reducing costs. Furthermore, this autonomous agent can be operated in a fully privacy-preserving manner, since all verification is conducted off-chain.
+
+2. **Decentralized Multi-Agent Verification Service**:
+Beyond individual use, the autonomous agent can operate as part of a collective multi-agent service. This service can be permissionlessly joined by any interested party within the decentralized ecosystem. The findings of this service are published on-chain for complete transparency. By operating as a decentralized multi-agent service, it acts as a common good, contributing to the overall trust and integrity of the oracle network for the benefit of the entire ecosystem.
+
+## Operational Overview
+
+Here's how it works:
 - **Autonomous Watcher**: Deploy a network of nodes that continuously monitor the validity of oracle data across blockchains, thereby strengthening the Web3 ecosystem's security by autonomously verifying and slashing misbehaving oracles.
 - **Chain-Agnostic Operation**: Ensure the service operates across multiple blockchain networks, providing a versatile solution for the entire Web3 ecosystem.
 - **Transparent and Permissionless**: Enable anyone to participate by deploying their own watcher node or contributing to the community fund, ensuring broad participation and decentralization.
@@ -84,13 +97,70 @@ graph TB
     ResetAndPauseAbciApp --> LoadSubgraphComponentsRound
 ```
 
+## Requirements
+
+- Git
+- [Poetry](https://github.com/python-poetry/poetry)
+- [Docker](https://github.com/docker)
+- Protocol buffers v24.3
+    ```shell
+    wget https://github.com/protocolbuffers/protobuf/releases/download/v24.3/protoc-24.3-linux-x86_64.zip && unzip protoc-24.3-linux-x86_64.zip -d protoc && sudo mv protoc/bin/protoc /usr/local/bin/protoc
+    ```
+- [Tendermint](https://docs.tendermint.com/v0.34/introduction/install.html) `==0.34.19`
 
 ## Install from source
 
 Clone the repository:
 
 ```shell
-git clone git@github.com:Karrenbelt/verification_station.git
+git clone git@github.com:Karrenbelt/verification-station.git
+cd verification-station && make
+```
+
+Initialize the `autonomy` cli tool and set the remote IPFS node
+
+```shell
+autonomy init --reset --author $(whoami) --remote --ipfs --ipfs-node "/dns/registry.autonolas.tech/tcp/443/https"
+```
+
+then synchronize the third party application components.
+
+```shell
+autonomy packages sync
+```
+
+NOTE: you might try again in case you experience a timeout.
+
+
+## 1. Run Tendermint
+
+Either containerized
+```shell
+docker pull tendermint/tendermint:v0.34.19
+```
+
+or, alternatively, run the node locally
+```shell
+wget https://github.com/tendermint/tendermint/releases/download/v0.34.19/tendermint_0.34.19_linux_amd64.tar.gz
+tar -xf tendermint_0.34.19_linux_amd64.tar.gz
+sudo mv tendermint /usr/local/bin/tendermint
+```
+
+change the permissions
+```shell
+GROUP=$(id -gn)
+sudo chown -R $(whoami):$GROUP /home/$(whoami)/tendermint_data
+```
+
+Run the Tendermint node:
+```shell
+../scripts/run_tendermint.sh
+```
+
+## 2. Run the agent
+
+```shell
+../scripts/start_single_agent.sh zarathustra/oracle_verifier
 ```
 
 ## Contributing

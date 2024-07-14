@@ -1,0 +1,32 @@
+name: websocket_server
+author: eightballer
+version: 0.1.0
+type: connection
+description: The scaffold connection provides a scaffold for a connection to be implemented
+  by the developer.
+license: Apache-2.0
+aea_version: '>=1.0.0, <2.0.0'
+fingerprint:
+  __init__.py: bafybeibebl36eaaewytw3b75m6k6drk5bldooxf4lhcbcfi4nmyuiwrcny
+  connection.py: bafybeid7ga2alwtfngvqx2g27sl7w6iauxe4obcw7wd6f4pytn4t6ijcu4
+  readme.md: bafybeihg5yfzgqvg5ngy7r2o5tfeqnelx2ffxw4po5hmheqjfhumpmxpoq
+  tests/__init__.py: bafybeiewlnh2eycgprywqi54fy766qorufe4qpjip4son4zvebwtut3p2m
+  tests/test_ws_server.py: bafybeicxdz7k6sn5u4k44oyhzz4ewqghpnd6q5jqyrgutqj5dwqtvjbz64
+fingerprint_ignore_patterns: []
+connections:
+- eightballer/http_server:0.1.0:bafybeib27byea6hwpt2fh2tt4t7jbn34r56hc654r365vipbktecfh4qsy
+protocols:
+- eightballer/http:0.1.0:bafybeibels7dv7ucflaeniwifbisvkegm5vrarrr5ctkcqebg4t7onba6a
+- eightballer/websockets:0.1.0:bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e
+class_name: WebSocketServerConnection
+config:
+  host: 0.0.0.0
+  port: 8080
+  target_skill_id: eightballer/websocket_server:0.1.0
+excluded_protocols: []
+restricted_to_protocols: []
+dependencies:
+  python-socketio:
+    version: '>=5.9.0'
+is_abstract: false
+cert_requests: []

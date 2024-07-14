@@ -3,6 +3,9 @@ agent_name: oracle_verifier
 author: zarathustra
 connection_private_key_paths: {}
 connections:
+- eightballer/http_client:0.1.0:bafybeid4cwamevng2ufyflcrerm6xyp5rjby2lbo2ulybqlik44g3aslni
+- eightballer/http_server:0.1.0:bafybeib27byea6hwpt2fh2tt4t7jbn34r56hc654r365vipbktecfh4qsy
+- eightballer/websocket_server:0.1.0:bafybeigucvvivngrruzgmwn4cvepvgb7pxuh7alycfppgb7a6bmjxyf23q
 - valory/abci:0.1.0:bafybeig3x4xypkuhcdcd7d4z5tixhowtrsp2ktdm47z75ul4r36ojcqb64
 - valory/http_client:0.23.0:bafybeihi772xgzpqeipp3fhmvpct4y6e6tpjp4sogwqrnf3wqspgeilg4u
 - valory/ipfs:0.1.0:bafybeihf2sojt6yod2oyr4w7zokn42cobgdpxg2egoshlflwpzxkowaeem
@@ -111,3 +114,17 @@ models:
         custom_component: eightballer/verification_station_frontend
         http_enabled: true
         ws_enabled: true
+---
+public_id: eightballer/http_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
+type: connection
+config:
+  host: 0.0.0.0
+  port: 5555
+  target_skill_id: zarathustra/oracle_verification:0.1.0
+---
+public_id: eightballer/websocket_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
+type: connection
+config:
+  host: 0.0.0.0
+  port: 5556
+  target_skill_id: zarathustra/oracle_verification:0.1.0

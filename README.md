@@ -27,6 +27,8 @@ Verification Station addresses these challenges by providing an independent, cha
 - **Economic Incentives**: Reward participants for detecting and verifying misbehavior by slashing offending oracles and distributing rewards to the community fund.
 - **Public Auditing and Dashboard**: Provide a public dashboard displaying real-time status and activity of all watcher nodes, ensuring transparency and trustworthiness.
 
+## Demo
+Video Demo -  https://drive.google.com/drive/folders/1RDeZcC8Dq2deGe981xkjPhwFS2su9d9d?usp=drive_link
 
 ### Overview of the Finite State Machine design
 

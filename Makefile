@@ -5,7 +5,7 @@ CLEAN_PATTERNS := $(shell awk '/^# Clean$$/{f=1; next} /^# End Clean$$/{f=0} f' 
 default:
 	@$(MAKE) -s clean
 	@$(MAKE) -s -C python
-	@$(MAKE) -s hooks
+	@$(MAKE) -s scripts
 	cd $$ROOT_DIR
 
 .PHONY: clean
@@ -14,7 +14,5 @@ clean:
 		find . -name "$(pattern)" -exec rm -rf {} +; \
 	)
 
-.PHONY: hooks
-hooks:
-	@cp scripts/hooks/* .git/hooks/
-	@chmod +x .git/hooks/*
+.PHONY: scripts
+	@chmod +x scripts/*

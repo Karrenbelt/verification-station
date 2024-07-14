@@ -1,6 +1,7 @@
 .PHONY: default
 default:
 	@$(MAKE) -s new_env
+	@$(MAKE) -s scripts
 
 .PHONY: new_env
 new_env:
@@ -75,3 +76,6 @@ clean-test:
 	find . -name 'log.txt' -exec rm -fr {} +
 	find . -name 'log.*.txt' -exec rm -fr {} +
 
+
+.PHONY: scripts
+	@chmod +x scripts/*

@@ -1,4 +1,4 @@
-
+#! /bin/bash
 set -e 
 
 # fetch the agent from the local package registry
@@ -14,7 +14,7 @@ cd agent
 aea -s generate-key ethereum && aea -s add-key ethereum
 
 # install any agent deps
-# aea install
+aea install
 
 # issue certificates for agent peer-to-peer communications
 aea -s issue-certificates

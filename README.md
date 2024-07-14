@@ -51,10 +51,15 @@ graph TB
     end
 
     subgraph "OracleVerificationAbciApp"
+        CheckServiceDepositsRound --> |NEW_DEPOSIT_vsETH| PrepareRepayTokenRound
+        CheckServiceDepositsRound --> |NEW_DEPOSIT_ETH| PrepareMintTokenRound
+        CheckServiceDepositsRound --> |NO_NEW_DEPOSIT| LoadOracleComponentsRound
         LoadOracleComponentsRound -->|DONE| CollectOracleDataRound
         CollectOracleDataRound -->|DONE| OracleAttestationRound
         OracleAttestationRound -->|VALID| PrepareValidTransactionRound
         OracleAttestationRound -->|INVALID| PrepareSlashingTransactionRound
+        %% RepayLiquidStakingTokenRound --> |TX| FinalizedTransactionPreparationRound  % FinalDegenerateRound
+        %% RepayLiquidStakingTokenRound --> |TX| FinalizedTransactionPreparationRound  % FinalDegenerateRound
         %% PrepareValidTransactionRound --> FinalizedTransactionPreparationRound  % FinalDegenerateRound
         %% PrepareSlashingTransactionRound --> FinalizedTransactionPreparationRound  % FinalDegenerateRound
     end
@@ -69,8 +74,10 @@ graph TB
 
     RegistrationStartUpAbciApp --> SetupRound
     HealthcheckRound -->|DONE| LoadSubgraphComponentsRound
-    DataTransformationRound --> LoadOracleComponentsRound
+    DataTransformationRound --> CheckServiceDepositsRound
     CheckSubgraphsHealthRound -->|MAX_RETRIES| ResetAndPauseAbciApp
+    PrepareMintTokenRound --> TransactionSettlementAbciApp
+    PrepareRepayTokenRound --> TransactionSettlementAbciApp
     PrepareValidTransactionRound --> TransactionSettlementAbciApp
     PrepareSlashingTransactionRound --> TransactionSettlementAbciApp
     TransactionSettlementAbciApp --> ResetAndPauseAbciApp
@@ -91,6 +98,12 @@ Learn how to contribute to the project by following the guidelines in [CONTRIBUT
 
 ## Changelog
 Explore the project's version history and changes in [CHANGELOG.md](CHANGELOG.md).
+
+## Documents
+Read the full documentation of the project on our [Gitbook](https://sentinel-7.gitbook.io/watchers) 
+
+## Deck 
+Link to our Pitchdeck for the Eth Global Hackaton 07/2024 [Pitchdeck](https://docs.google.com/presentation/d/1Ky_-xIcaxrwOF5vf9qH14P0C5zTRnaz_pBBtip-Vr9A/edit?usp=sharing)
 
 ## License
 This project is licensed under the [Apache2.0 license](LICENSE).

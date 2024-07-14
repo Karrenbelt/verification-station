@@ -3,6 +3,8 @@ python/packages/valory
 python/packages/eightballer/protocols
 python/packages/eightballer/skills
 python/agent
+python/oracle_verifier
+python/packages/eightballer/connections
 .*
 !.gitignore
 !.dockerignore

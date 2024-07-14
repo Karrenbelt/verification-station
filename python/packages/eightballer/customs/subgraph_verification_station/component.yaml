@@ -1,0 +1,23 @@
+name: subgraph_verification_station
+author: eightballer
+version: 0.1.0
+type: custom
+description: Simple HTML frontend to act as a template for the frontend ABCI loader.
+license: Apache-2.0
+aea_version: '>=1.0.0, <2.0.0'
+fingerprint:
+  __init__.py: bafybeibol5xde7gxrbvqqj7ms4xf4xorvdvp323rcrcrw7oo6fsljgww3i
+  behaviours.py: bafybeiabicwfxgmrcy73tzgcdjnq55pfzixrtai44xf5afb2dtof6fnpt4
+  build/index.html: bafybeigyjfv75r7fnd7mw63vbidusohzopzyz47c5nmc3tiak5yh22gbfi
+  handlers.py: bafybeibk22xqyta5pkn2mwo63fbni6xwmq42y6bcwonk5eyttpkrwrdxli
+  openapi3_spec.yaml: bafybeia7cbezrsxul2vroj6yww4yjzb5zro3dmetoehsgwmu2s5qnngwum
+fingerprint_ignore_patterns: []
+dependencies: {}
+api_spec: open_api3_spec.yaml
+frontend_dir: build
+behaviours:
+- class_name: LogReadingBehaviour
+  args: {}
+handlers:
+- class_name: PingPongHandler
+  args: {}

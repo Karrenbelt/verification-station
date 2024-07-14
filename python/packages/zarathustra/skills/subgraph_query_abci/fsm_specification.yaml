@@ -1,0 +1,26 @@
+alphabet_in:
+- DONE
+- SYNCHRONIZED
+- RETRY
+- MAX_RETRIES
+start_states:
+- LoadSubgraphComponentsRound
+default_start_state: LoadSubgraphComponentsRound
+final_states:
+- FinalSubgraphQueryRound
+- FailedToSynchronizeRound
+label: SubgraphQueryAbciApp
+states:
+- LoadSubgraphComponentsRound
+- CheckSubgraphsHealthRound
+- CollectSubgraphsDataRound
+- DataTransformationRound
+- FinalSubgraphQueryRound
+- FailedToSynchronizeRound
+transition_func:
+  (LoadSubgraphComponentsRound, DONE): CheckSubgraphsHealthRound
+  (CheckSubgraphsHealthRound, SYNCHRONIZED): CollectSubgraphsDataRound
+  (CheckSubgraphsHealthRound, RETRY): CheckSubgraphsHealthRound
+  (CheckSubgraphsHealthRound, MAX_RETRIES): FailedToSynchronizeRound
+  (CollectSubgraphsDataRound, DONE): DataTransformationRound
+  (DataTransformationRound, DONE): FinalSubgraphQueryRound

@@ -1,0 +1,17 @@
+name: chronicle_price_feed
+author: eightballer
+version: 0.1.0
+type: contract
+description: The scaffold contract scaffolds a contract to be implemented by the developer.
+license: Apache-2.0
+aea_version: '>=1.0.0, <2.0.0'
+fingerprint:
+  __init__.py: bafybeigw247etm64tucycw6ne5wucnb6nhh2kox2uuxibesuykqofvjefa
+  build/chronicle_price_feed.json: bafybeigewhfwkpgskp6jcgwmljrvrcofisrz25t47a5obypcllbfzmytpm
+  contract.py: bafybeib6l4su6j6qbacglzrhpsjg57qshnl6nocgu7ccyfolsitl75gh2m
+fingerprint_ignore_patterns: []
+class_name: ChroniclePriceFeed
+contract_interface_paths:
+  ethereum: build/chronicle_price_feed.json
+dependencies: {}
+contracts: []

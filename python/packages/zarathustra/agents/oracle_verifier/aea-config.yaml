@@ -1,0 +1,130 @@
+aea_version: '>=1.53.0, <2.0.0'
+agent_name: oracle_verifier
+author: zarathustra
+connection_private_key_paths: {}
+connections:
+- eightballer/http_client:0.1.0:bafybeid4cwamevng2ufyflcrerm6xyp5rjby2lbo2ulybqlik44g3aslni
+- eightballer/http_server:0.1.0:bafybeib27byea6hwpt2fh2tt4t7jbn34r56hc654r365vipbktecfh4qsy
+- eightballer/websocket_server:0.1.0:bafybeigucvvivngrruzgmwn4cvepvgb7pxuh7alycfppgb7a6bmjxyf23q
+- valory/abci:0.1.0:bafybeig3x4xypkuhcdcd7d4z5tixhowtrsp2ktdm47z75ul4r36ojcqb64
+- valory/http_client:0.23.0:bafybeihi772xgzpqeipp3fhmvpct4y6e6tpjp4sogwqrnf3wqspgeilg4u
+- valory/ipfs:0.1.0:bafybeihf2sojt6yod2oyr4w7zokn42cobgdpxg2egoshlflwpzxkowaeem
+- valory/ledger:0.19.0:bafybeig7woeog4srdby75hpjkmx4rhpkzncbf4h2pm5r6varsp26pf2uhu
+- valory/p2p_libp2p_client:0.1.0:bafybeid3xg5k2ol5adflqloy75ibgljmol6xsvzvezebsg7oudxeeolz7e
+contracts:
+- valory/gnosis_safe:0.1.0:bafybeidy56dpfmbpevn6c46yluhw7sxqvucmzgceoiuuegm7d6slh2svae
+- valory/gnosis_safe_proxy_factory:0.1.0:bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm
+- valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
+customs:
+- eightballer/oracle_verifier_chronicle:0.1.0:bafybeic47gz43icmpl3t6tfe5xnptba7cmkz5gtljjm7pelxfed46iqrh4
+- eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
+- eightballer/verification_station_frontend:0.1.0:bafybeiar5jxtec4v57fa4m44cvb4arr5ijamlpcbjp7fhya5zhmojk3wva
+default_ledger: ethereum
+default_routing: {}
+dependencies:
+  open-aea-ledger-ethereum: {}
+description: ''
+fingerprint: {}
+fingerprint_ignore_patterns: []
+license: Apache-2.0
+logging_config:
+  version: 1
+  disable_existing_loggers: false
+  formatters:
+    standard:
+      format: '[%(asctime)s] [%(levelname)s] %(message)s'
+  handlers:
+    logfile:
+      class: logging.FileHandler
+      formatter: standard
+      filename: ${LOG_FILE:str:log.txt}
+      level: ${LOG_LEVEL:str:INFO}
+    console:
+      class: logging.StreamHandler
+      formatter: standard
+      stream: ext://sys.stdout
+  loggers:
+    aea:
+      handlers:
+      - logfile
+      - console
+      propagate: true
+private_key_paths: {}
+protocols:
+- eightballer/http:0.1.0:bafybeibels7dv7ucflaeniwifbisvkegm5vrarrr5ctkcqebg4t7onba6a
+- eightballer/websockets:0.1.0:bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e
+- open_aea/signing:1.0.0:bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi
+- valory/abci:0.1.0:bafybeiaqmp7kocbfdboksayeqhkbrynvlfzsx4uy4x6nohywnmaig4an7u
+- valory/acn:1.1.0:bafybeidluaoeakae3exseupaea4i3yvvk5vivyt227xshjlffywwxzcxqe
+- valory/contract_api:1.0.0:bafybeidgu7o5llh26xp3u3ebq3yluull5lupiyeu6iooi2xyymdrgnzq5i
+- valory/http:1.0.0:bafybeifugzl63kfdmwrxwphrnrhj7bn6iruxieme3a4ntzejf6kmtuwmae
+- valory/ipfs:0.1.0:bafybeiftxi2qhreewgsc5wevogi7yc5g6hbcbo4uiuaibauhv3nhfcdtvm
+- valory/ledger_api:1.0.0:bafybeihdk6psr4guxmbcrc26jr2cbgzpd5aljkqvpwo64bvaz7tdti2oni
+- valory/tendermint:0.1.0:bafybeig4mi3vmlv5zpbjbfuzcgida6j5f2nhrpedxicmrrfjweqc5r7cra
+required_ledgers:
+- ethereum
+skills:
+- eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
+- valory/abstract_abci:0.1.0:bafybeif4uvml6c3ypq6sk3udgzssyjnxepojdcu4igmwqmo6bdvave5l5i
+- valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
+- valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
+- valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
+- valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
+- zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
+- zarathustra/oracle_verification_abci:0.1.0:bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u
+- zarathustra/oracle_verification:0.1.0:bafybeig2pqdyzc5tuhn477xxhkiosakdlc5bpdanguy6cd6egrecxwlg5m
+version: 0.1.0
+default_connection: null
+---
+public_id: valory/abci:0.1.0
+type: connection
+config:
+  host: ${str:localhost}
+  port: ${int:26658}
+  target_skill_id: zarathustra/oracle_verification:0.1.0
+  use_tendermint: ${bool:false}
+---
+public_id: valory/p2p_libp2p_client:0.1.0
+type: connection
+cert_requests:
+- identifier: acn
+  ledger_id: ethereum
+  message_format: '{public_key}'
+  not_after: '2024-01-01'
+  not_before: '2023-01-01'
+  public_key: ${str:02d3a830c9d6ea1ae91936951430dee11f4662f33118b02190693be835359a9d77}
+  save_path: .certs/acn_cosmos_9005.txt
+config:
+  nodes:
+  - public_key: ${str:02d3a830c9d6ea1ae91936951430dee11f4662f33118b02190693be835359a9d77}
+    uri: ${str:acn.staging.autonolas.tech:9005}
+---
+public_id: zarathustra/oracle_verification:0.1.0
+type: skill
+models:
+  params:
+    args:
+      sleep_time: 1
+      tendermint_com_url: ${str:http://localhost:8080}
+      tendermint_max_retries: 5
+      tendermint_p2p_url: ${str:localhost:26656}
+      tendermint_url: ${str:http://localhost:26657}
+      user_interface:
+        enabled: true
+        custom_component: eightballer/verification_station_frontend
+        http_enabled: true
+        ws_enabled: true
+---
+public_id: eightballer/http_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
+type: connection
+config:
+  host: 0.0.0.0
+  port: 5555
+  target_skill_id: zarathustra/oracle_verification:0.1.0
+---
+public_id: eightballer/websocket_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
+type: connection
+config:
+  host: 0.0.0.0
+  port: 5556
+  target_skill_id: zarathustra/oracle_verification:0.1.0

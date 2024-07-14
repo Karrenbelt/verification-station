@@ -73,7 +73,7 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- zarathustra/oracle_verification:0.1.0:bafybeiauwezas3oem7wilkehajox6hy6mmzfqrbia3pnlhwhokgegkjwzy
+- zarathustra/oracle_verification:0.1.0:bafybeifmbm34ip6ibn2dcuxhum7avbedwgvtvv2lwl76sewdc5iihbjqxe
 - zarathustra/oracle_verification_abci:0.1.0:bafybeifkv3j5go2g7w4dijqwx55hgh5em6tnmbcnzacr23u46333ttmdue
 - zarathustra/subgraph_query_abci:0.1.0:bafybeieewb3j7ve46rmh6dj2xy2pckstqybdw53xoxbcadtvpfvi45zrba
 version: 0.1.0

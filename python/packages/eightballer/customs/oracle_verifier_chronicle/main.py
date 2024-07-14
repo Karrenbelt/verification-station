@@ -1,4 +1,5 @@
 
+import json
 import os
 from typing import cast
 from pathlib import Path
@@ -7,31 +8,50 @@ from aea.skills.base import Behaviour
 # we use web3 to make some calls to the Ethereum node.
 from web3 import Web3
 
-w3 = Web3(Web3.HTTPProvider("http://https://rpc.ankr.com/eth_sepolia"))
+w3 = Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth_sepolia"))
 
 
-def collect_data(web3=w3, address='0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603' ) -> None:
+def collect_data(since_block_number, to_block_number='latest', web3=w3, address='0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603') -> None:
     """
     Collect data from the oracle verifier chronicle.
     """
-    # get the contract ABI
-    contract_abi = Path("packages/eightballer/customs/oracle_verifier_chronicle/abi.json").read_text()
+    contract_abi = Path("packages/eightballer/contracts/chronicle_price_feed/build/chronicle_price_feed.json").read_text()
     contract_address = address
-    contract = web3.eth.contract(address=contract_address, abi=contract_abi)
-    # get the data from the contract
-    data = contract.functions.get_data().call()
-    return data
+    contract = web3.eth.contract(address=contract_address, abi=json.loads(contract_abi)['abi'])
+    logs = contract.events.OpPoked().get_logs(fromBlock=since_block_number, toBlock=to_block_number)
+    return logs
 
-
-def verify_data() -> None:
+def verify_data(logs, web3=w3, address='0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603') -> None:
     """
     Verify data from the oracle verifier chronicle.
     """
-    raise NotImplementedError("This function is not implemented yet.")
+    logs = cast(list, logs)
+    contract_abi = json.loads(Path("packages/eightballer/contracts/chronicle_price_feed/build/chronicle_price_feed.json").read_text())['abi']
+    contract_address = address
+    contract = web3.eth.contract(address=contract_address, abi=contract_abi)
+    if not logs:
+        return True # there are no logs to verify
+    for log in logs:
+        transaction_hash = log['transactionHash']
+        tx_receipt = web3.eth.get_transaction_receipt(transaction_hash)
+        rich_logs = contract.events.OpPoked().process_receipt(tx_receipt)  # type: ignore
+        schnorr_data =  rich_logs[0]['args']['schnorrData']
+        try:
+            tx = contract.functions.opChallenge(schnorrData=schnorr_data)
+            return True
+        except web3.exceptions.ContractCustomError as e:
+            return False
+    return False
 
-def challenge_data() -> None:
+def challenge_data(schnorr_data, web3=w3, address='0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603') -> None:
     """
     Challenge data from the oracle verifier chronicle.
     """
-
-    raise NotImplementedError("This function is not implemented yet.")
+    contract_abi = json.loads(Path("packages/eightballer/contracts/chronicle_price_feed/build/chronicle_price_feed.json").read_text())['abi']
+    contract_address = '0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603'
+    contract = w3.eth.contract(address=contract_address, abi=contract_abi)
+    tx = contract.functions.opChallenge(schnorrData=schnorr_data)
+    pk = open('ethereum_private_key.txt').read()
+    signed_tx = w3.eth.account.sign_transaction(tx, private_key=pk)
+    tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+    return tx_hash

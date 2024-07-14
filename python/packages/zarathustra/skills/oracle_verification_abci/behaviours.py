@@ -20,10 +20,12 @@
 """This package contains round behaviours of OracleVerificationAbciApp."""
 
 from abc import ABC
+import copy
+import hashlib
 import json
 from decimal import Decimal
 from time import sleep
-from typing import Generator, Set, Type, cast
+from typing import Dict, Generator, Set, Tuple, Type, cast
 
 from packages.valory.contracts.gnosis_safe.contract import GnosisSafeContract
 
@@ -31,12 +33,14 @@ from packages.valory.contracts.gnosis_safe.contract import GnosisSafeContract
 # from packages.eightballer.contracts.oracle_attestation.contract import (
 #     AttestationContract,
 # )
+from packages.valory.protocols.contract_api.message import ContractApiMessage
 from packages.valory.skills.abstract_round_abci.base import AbstractRound
 from packages.valory.skills.abstract_round_abci.behaviours import (
     AbstractRoundBehaviour,
     BaseBehaviour,
 )
 
+from packages.valory.skills.transaction_settlement_abci.payload_tools import hash_payload_to_hex
 from packages.zarathustra.skills.oracle_verification_abci.models import Params
 from packages.zarathustra.skills.oracle_verification_abci.rounds import (
     SynchronizedData,
@@ -149,7 +153,7 @@ class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
         self.set_done()
 
 
-    def _load_oracle_components(self) -> None:
+    def _load_oracle_components(self) -> None: # type: ignore
         """Load oracle components."""
         self.context.logger.info("Loading oracle components...")
         self.context.shared_state['oracles'] = self.params.oracle_config

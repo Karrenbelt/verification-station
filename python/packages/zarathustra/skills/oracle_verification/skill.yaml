@@ -146,6 +146,10 @@ models:
       slash_cooldown_hours: 3
       slash_threshold_amount: 10000000000000000
       sleep_time: 1
+      subgraph_query: '{"query": "{ factories(first: 5) { id poolCount txCount totalVolumeUSD
+        } bundles(first: 5) { id ethPriceUSD } }", "operationName": "Subgraphs", "variables":
+        {}}'
+      subgraph_url: https://gateway-arbitrum.network.thegraph.com/api/b902c6e046ff899f012ee69338a3f581/subgraphs/id/HUZDsRpEVP2AvzDCyzDHtdc64dyDxx8FQjzsmqSg4H3B
       tendermint_check_sleep_delay: 3
       tendermint_com_url: http://localhost:8080
       tendermint_max_retries: 5
@@ -175,8 +179,8 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- eightballer/ui_loader_abci:0.1.0:bafybeie7lrwzi7dxnmfr63bl4kggcaa2w3wymjiaxi2xxd5dro5qdtanva
-- zarathustra/subgraph_query_abci:0.1.0:bafybeiemogzk7r2gbi4xitqxf5jbldw5dxvft6mnmhmgdj3lefbsqhbqn4
+- eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
+- zarathustra/subgraph_query_abci:0.1.0:bafybeid6j7sqzbx5qj3c6r76zdoepm6i5w7b27tf6tl6uoz5f7ci3bkemu
 - zarathustra/oracle_verification_abci:0.1.0:bafybeickvqlpbohvclcwihr5qdishnklpdcsteocsp5naedqnp7cihnp4e
 type: skill
 version: 0.1.0

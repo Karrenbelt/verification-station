@@ -17,7 +17,7 @@ aea -s fetch zarathustra/oracle_verifier --local
 cd oracle_verifier
 
 # Install agent dependencies
-aea -s install
+# aea -s install
 
 # Create a key for the agent
 aea -s generate-key ethereum && aea -s add-key ethereum

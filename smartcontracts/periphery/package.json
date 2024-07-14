@@ -1,0 +1,13 @@
+{
+  "name": "contracts-periphery",
+  "version": "1.0.0",
+  "description": "**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**",
+  "scripts": {
+    "createAbi": "forge build --extra-output-files abi"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@flarenetwork/flare-periphery-contracts": "^0.1.12",
+    "@openzeppelin/contracts": "^5.0.2"
+  }
+}

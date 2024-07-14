@@ -155,9 +155,14 @@ class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
 
     def _load_oracle_components(self) -> None: # type: ignore
         """Load oracle components."""
-        breakpoint()
         self.context.logger.info("Loading oracle components...")
         self.context.shared_state['oracles'] = self.params.oracle_config
+
+        # We have a list of the oracle addresses, we want to load the oracle components
+        # for each oracle address.
+        for oracle in self.params.oracle_config:
+            self.context.logger.info(f"Loading oracle components for {oracle}")
+            # Load the oracle components for the oracle address
         yield 
 
 

@@ -47,10 +47,6 @@ class Params(BaseParams):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the parameters' object."""
         # this is a mapping from a prediction market spec's attribute to the creators we want to take into account
-        breakpoint()
-        super().__init__(*args, **kwargs)
-        self.oracle_config = kwargs.get("oracle_config")
-
 
 
 

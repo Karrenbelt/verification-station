@@ -51,9 +51,14 @@ class Params(
     # ResetAndPauseParams,
     UILoaderParams,
     # SubgraphQueryParams,
-    OracleVerificationParams,
 ):
     """Oracle Verification Params"""
+
+    def __init__(self, *args, **kwargs):
+        self.oracle_config = kwargs.get("oracle_config")
+        super().__init__(*args, **kwargs)
+
+
 
 Requests = BaseRequests
 BenchmarkTool = BaseBenchmarkTool

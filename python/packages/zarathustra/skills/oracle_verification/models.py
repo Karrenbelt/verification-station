@@ -51,7 +51,7 @@ class Params(
     # ResetAndPauseParams,
     UILoaderParams,
     # SubgraphQueryParams,
-    # OracleVerificationParams,
+    OracleVerificationParams,
 ):
     """Oracle Verification Params"""
 

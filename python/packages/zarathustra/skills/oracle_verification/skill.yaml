@@ -16,7 +16,7 @@ fingerprint:
   dialogues.py: bafybeifwmmpebhrc63hrcgokfuu3tazlxxnov3x7pmkxafcnley4pd47ou
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
   handlers.py: bafybeigsdqu2dsrnif5hqpin4u4bvauvfl6g2mlgibo6n5fukjrgokay64
-  models.py: bafybeic5yevtou6h4xnxg6lmf4e246lkvg42en3mbpj2gclkx4qmmzrvhy
+  models.py: bafybeidywezc3fx7f3lfdd37z3h3mquoxn6sc4u6rbnansdkxhe4p2tzae
 fingerprint_ignore_patterns: []
 handlers:
   abci:
@@ -172,8 +172,8 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- eightballer/ui_loader_abci:0.1.0:bafybeid3shq64lo4mw5tnpmua6o6fdeoleprkm32bg6ahd4dod7a3ugily
+- eightballer/ui_loader_abci:0.1.0:bafybeifl46sj2djvvlrd2rve2xabmq43coxdvzsxy4iv3xfntq7c5y2p6e
 - zarathustra/subgraph_query_abci:0.1.0:bafybeiavst54hxytgjzji5rzhyogtugblypjjxfozajmx5hs6tm536qxoe
-- zarathustra/oracle_verification_abci:0.1.0:bafybeidigzjt5lubsubbu32luhfr6rk4usnqttxyddecpkuuwu33z4vz2q
+- zarathustra/oracle_verification_abci:0.1.0:bafybeicovw4y2ft7hwzfpi7auzgvgi2vj4k5bo6c555ktbvq2fakbavy2i
 type: skill
 version: 0.1.0

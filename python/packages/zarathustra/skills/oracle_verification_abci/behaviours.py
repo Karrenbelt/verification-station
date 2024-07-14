@@ -128,6 +128,12 @@ class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
         self.set_done()
 
 
+    def _load_oracle_components(self) -> None:
+        """Load oracle components."""
+        self.context.logger.info("Loading oracle components...")
+        self.context.shared_state['oracles'] = self.params.oracles
+
+
 class OracleAttestationBehaviour(OracleVerificationBaseBehaviour):
     """OracleAttestationBehaviour"""
 

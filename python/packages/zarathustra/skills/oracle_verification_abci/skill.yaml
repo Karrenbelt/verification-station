@@ -11,11 +11,11 @@ dependencies: {}
 description: The Oracle Verification Abci verifies data published by other oracles.
 fingerprint:
   __init__.py: bafybeihc5korowuftadjm73ng5srrpfmambjdecd6k7sjvbsnhjk7rpoxq
-  behaviours.py: bafybeibzv3fzzkfyuepd7z4uzu4ii477uumjwsbomza36oqpv6tijtue2i
+  behaviours.py: bafybeienej3ywio5pwq7dh3c6u2jvv4ijy74risjuldfysmrx3gaftlb3y
   dialogues.py: bafybeicmr3wtszu4dn7twj4vncjz3niqckf47edbcubfvntzb2edox5jpy
   fsm_specification.yaml: bafybeidsewpuketlmf2zic6ktujjg6i7lz5zw5weshk6d3wgbmtu7m4wua
   handlers.py: bafybeihyp4dmt34itm7iigcwxvcj4us6lfi3memezc552rajbig6c5pmqm
-  models.py: bafybeidx3nth42t25tecbqffn4pvgadynxm67c5lbyz27fummgzewjqm3m
+  models.py: bafybeibdbh5lvmb54uybju6wgbesxk44lbaj2khpctjyhzewptzob4ruyi
   payloads.py: bafybeidnotzg3nv2wd2rpiyrpdc2izvodvulhauwbnoepu2flslna4xhy4
   rounds.py: bafybeigzphkaazrf6tmbyfdt5z3cv5ahpfqegybqtao3daxia2vvrn7al4
   tests/__init__.py: bafybeifigp64li3j3yidpan5arc27etm3jytadjsckjaidrem57hst73ry

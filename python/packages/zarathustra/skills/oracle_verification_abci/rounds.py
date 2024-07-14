@@ -21,7 +21,7 @@
 
 from collections import Counter
 from enum import Enum
-from typing import Dict, FrozenSet, List, Optional, Set, Tuple, cast
+from typing import Any, Dict, FrozenSet, List, Optional, Set, Tuple, Type, cast
 
 
 from packages.valory.skills.abstract_round_abci.base import (
@@ -33,6 +33,7 @@ from packages.valory.skills.abstract_round_abci.base import (
     AppState,
     BaseTxPayload,
     BaseSynchronizedData,
+    CollectionRound,
     DegenerateRound,
     EventToTimeout,
     DeserializedCollection,

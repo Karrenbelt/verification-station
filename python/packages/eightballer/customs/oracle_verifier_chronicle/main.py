@@ -15,22 +15,17 @@ def collect_data(since_block_number, to_block_number='latest', web3=w3, address=
     """
     Collect data from the oracle verifier chronicle.
     """
-    # get the contract ABI
     contract_abi = Path("packages/eightballer/contracts/chronicle_price_feed/build/chronicle_price_feed.json").read_text()
     contract_address = address
     contract = web3.eth.contract(address=contract_address, abi=json.loads(contract_abi)['abi'])
     logs = contract.events.OpPoked().get_logs(fromBlock=since_block_number, toBlock=to_block_number)
     return logs
 
-
-
-
 def verify_data(logs, web3=w3, address='0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603') -> None:
     """
     Verify data from the oracle verifier chronicle.
     """
     logs = cast(list, logs)
-    # get the contract ABI
     contract_abi = json.loads(Path("packages/eightballer/contracts/chronicle_price_feed/build/chronicle_price_feed.json").read_text())['abi']
     contract_address = address
     contract = web3.eth.contract(address=contract_address, abi=contract_abi)
@@ -52,9 +47,6 @@ def challenge_data(schnorr_data, web3=w3, address='0xdd6D76262Fd7BdDe428dcfCd943
     """
     Challenge data from the oracle verifier chronicle.
     """
-    # We execute the challenge_data function
-
-    # get the contract ABI
     contract_abi = json.loads(Path("packages/eightballer/contracts/chronicle_price_feed/build/chronicle_price_feed.json").read_text())['abi']
     contract_address = '0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603'
     contract = w3.eth.contract(address=contract_address, abi=contract_abi)
@@ -63,7 +55,3 @@ def challenge_data(schnorr_data, web3=w3, address='0xdd6D76262Fd7BdDe428dcfCd943
     signed_tx = w3.eth.account.sign_transaction(tx, private_key=pk)
     tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
     return tx_hash
-
-        
-
-

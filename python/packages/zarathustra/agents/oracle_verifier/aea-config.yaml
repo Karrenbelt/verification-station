@@ -13,7 +13,7 @@ contracts:
 - valory/gnosis_safe_proxy_factory:0.1.0:bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm
 - valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
 customs:
-- eightballer/oracle_verifier_chronicle:0.1.0:bafybeigq56voviugn3rhyhxoqzxoyvpfaoyglotdruhypwh6gzk6nfdumi
+- eightballer/oracle_verifier_chronicle:0.1.0:bafybeic47gz43icmpl3t6tfe5xnptba7cmkz5gtljjm7pelxfed46iqrh4
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
 - eightballer/verification_station_frontend:0.1.0:bafybeiar5jxtec4v57fa4m44cvb4arr5ijamlpcbjp7fhya5zhmojk3wva
 default_ledger: ethereum

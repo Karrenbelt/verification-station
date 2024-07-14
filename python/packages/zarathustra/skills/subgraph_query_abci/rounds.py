@@ -107,7 +107,6 @@ class LoadSubgraphComponentsRound(CollectionRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        return
         synchronized_data = self.synchronized_data
         return synchronized_data, Event.DONE
 

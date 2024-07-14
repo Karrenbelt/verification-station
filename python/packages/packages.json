@@ -10,7 +10,7 @@
         "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeiemogzk7r2gbi4xitqxf5jbldw5dxvft6mnmhmgdj3lefbsqhbqn4",
         "skill/zarathustra/oracle_verification/0.1.0": "bafybeidkuhxnqax4dkoaad6n7r3bsamnhttp2pi67a5f6ngmapoqvoznmy",
         "skill/zarathustra/oracle_verification_abci/0.1.0": "bafybeifoh7see6wtxlelkqrudedlikdy5mhz4ojt6a5sthitbdxar5utnu",
-        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeiefcluh4uoimo2tkjnorio6kxny56ts5flkhkr2rw2qqkurfk2gga"
+        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeievfwdmarefuwkiq2c3gc6c2d6by2vcsk3nsbercilj23qehkx6zy"
     },
     "third_party": {
         "protocol/eightballer/websockets/0.1.0": "bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e",

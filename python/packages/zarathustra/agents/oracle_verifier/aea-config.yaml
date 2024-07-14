@@ -17,7 +17,7 @@ contracts:
 - valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
 - eightballer/chronicle_price_feed:0.1.0:bafybeifilaz3nz74eld7gstyywr6ojmldcvb3v43gnzdg3pqnee64glq3u
 customs:
-- eightballer/oracle_verifier_chronicle:0.1.0:bafybeidgkzw6dr7ixx7ni5eu46trr4v3uqiq64bwmd6mbtsutvegx43y5y
+- eightballer/oracle_verifier_chronicle:0.1.0:bafybeihh24rvjh4p42r52gnv6tqdfldy73pj3zjjzm73tr4hjhbtsdmaeq
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
 - eightballer/verification_station_frontend:0.1.0:bafybeigw76tcys5awrglihvmvjmd537o4cx62i5p3vucag5ndzt2gisydi
 default_ledger: ethereum

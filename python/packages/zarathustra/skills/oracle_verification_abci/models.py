@@ -47,8 +47,7 @@ class Params(BaseParams):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize the parameters' object."""
         # this is a mapping from a prediction market spec's attribute to the creators we want to take into account
-        oracle_config = kwargs.get("oracle_config")
-        self.context.shared_state['oracles'] = oracle_config
+        self.oracle_config = kwargs.get("oracle_config")
         super().__init__(*args, **kwargs)
 
 

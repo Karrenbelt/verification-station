@@ -5,7 +5,8 @@ behaviours:
     args: {}
     class_name: OracleVerificationRoundBehaviour
 connections: []
-contracts: []
+contracts:
+- valory/gnosis_safe:0.1.0:bafybeidy56dpfmbpevn6c46yluhw7sxqvucmzgceoiuuegm7d6slh2svae
 customs: []
 dependencies: {}
 description: The Oracle Verification Abci verifies data published by other oracles.

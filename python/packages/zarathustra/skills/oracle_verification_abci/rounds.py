@@ -19,17 +19,24 @@
 
 """This package contains the rounds of OracleVerificationAbciApp."""
 
+from collections import Counter
 from enum import Enum
-from typing import Dict, FrozenSet, List, Optional, Set, Tuple
+from typing import Dict, FrozenSet, List, Optional, Set, Tuple, cast
+
 
 from packages.valory.skills.abstract_round_abci.base import (
     AbciApp,
+    ABCIAppException,
     AbciAppTransitionFunction,
+    ABCIAppInternalError,
     AbstractRound,
     AppState,
+    BaseTxPayload,
     BaseSynchronizedData,
     DegenerateRound,
     EventToTimeout,
+    DeserializedCollection,
+    get_name,
 )
 
 from packages.zarathustra.skills.oracle_verification_abci.payloads import (
@@ -42,7 +49,11 @@ from packages.zarathustra.skills.oracle_verification_abci.payloads import (
     PrepareSlashingTransactionPayload,
     PrepareValidTransactionPayload,
 )
-from packages.valory.skills.abstract_round_abci.base import CollectionRound, VotingRound
+from packages.valory.skills.abstract_round_abci.base import CollectSameUntilThresholdRound, VotingRound
+
+from packages.valory.skills.transaction_settlement_abci.payload_tools import (
+    hash_payload_to_hex,
+)
 
 
 class Event(Enum):
@@ -63,100 +74,224 @@ class SynchronizedData(BaseSynchronizedData):
     This data is replicated by the tendermint application.
     """
 
+    @property
+    def most_voted_tx_hash(self) -> float:
+        """Get the most_voted_tx_hash."""
+        return cast(float, self.db.get_strict("most_voted_tx_hash"))
 
-class CheckServiceDepositsRound(CollectionRound):
+    def _get_deserialized(self, key: str) -> DeserializedCollection:
+        """Strictly get a collection and return it deserialized."""
+        serialized = self.db.get_strict(key)
+        deserialized = CollectionRound.deserialize_collection(serialized)
+        return cast(DeserializedCollection, deserialized)
+
+    @property
+    def participant_to_signatures(self) -> Dict[str, Optional[str]]:
+        """Get the `participant_to_signatures`."""
+        participant_to_payload = self._get_deserialized("participant_to_signatures")
+        return {
+            agent_address: payload.signature
+            for agent_address, payload in participant_to_payload.items()
+        }
+
+    @property
+    def most_voted_tx_hash(self) -> float:
+        """Get the most_voted_tx_hash."""
+        return cast(float, self.db.get_strict("most_voted_tx_hash"))
+
+    @property
+    def signature(self) -> str:
+        """Get the current agent's signature."""
+        return str(self.db.get("signature", {}))
+
+    @property
+    def data_json(self) -> str:
+        """Get the data json."""
+        return str(self.db.get("data_json", ""))
+
+
+class CheckServiceDepositsRound(CollectSameUntilThresholdRound):
     """CheckServiceDepositsRound"""
 
     payload_class = CheckServiceDepositsPayload
-    payload_attribute = ""  # TODO: update
+    payload_attribute = "content"
     synchronized_data_class = SynchronizedData
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        if not self.threshold_reached:
+            return None
+        state = self.synchronized_data.update(
+            synchronized_data_class=self.synchronized_data_class,
+            **{self.payload_attribute: self.most_voted_payload}
+        )
+        return state, Event.NO_NEW_DEPOSIT
 
 
-class CollectOracleDataRound(CollectionRound):
+class CollectOracleDataRound(CollectSameUntilThresholdRound):
     """CollectOracleDataRound"""
 
     payload_class = CollectOracleDataPayload
-    payload_attribute = ""  # TODO: update
+    payload_attribute = "content"
     synchronized_data_class = SynchronizedData
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        if not self.threshold_reached:
+            return None
+        state = self.synchronized_data.update(
+            synchronized_data_class=self.synchronized_data_class,
+            **{self.payload_attribute: self.most_voted_payload}
+        )
+        return state, Event.DONE
 
 
-class LoadOracleComponentsRound(CollectionRound):
+class LoadOracleComponentsRound(CollectSameUntilThresholdRound):
     """LoadOracleComponentsRound"""
 
     payload_class = LoadOracleComponentsPayload
-    payload_attribute = ""  # TODO: update
+    payload_attribute = "content"
     synchronized_data_class = SynchronizedData
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        if not self.threshold_reached:
+            return None
+        state = self.synchronized_data.update(
+            synchronized_data_class=self.synchronized_data_class,
+            **{self.payload_attribute: self.most_voted_payload}
+        )
+        return state, Event.DONE
 
 
-class OracleAttestationRound(CollectionRound):
+class OracleAttestationRound(CollectSameUntilThresholdRound):
     """OracleAttestationRound"""
 
     payload_class = OracleAttestationPayload
-    payload_attribute = ""  # TODO: update
+    payload_attribute = "content"
     synchronized_data_class = SynchronizedData
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        if not self.threshold_reached:
+            return None
+        state = self.synchronized_data.update(
+            synchronized_data_class=self.synchronized_data_class,
+            **{self.payload_attribute: self.most_voted_payload}
+        )
+        return state, Event.VALID
 
-class PrepareMintTokenRound(VotingRound):
+
+class PrepareMintTokenRound(CollectSameUntilThresholdRound):
     """PrepareMintTokenRound"""
 
     payload_class = PrepareMintTokenPayload
-    payload_attribute = ""  # TODO: update
+    payload_attribute = "content"
     synchronized_data_class = SynchronizedData
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        if not self.threshold_reached:
+            return None
+        state = self.synchronized_data.update(
+            synchronized_data_class=self.synchronized_data_class,
+            **{self.payload_attribute: self.most_voted_payload}
+        )
+        return state, Event.DONE
 
 
-class PrepareRepayTokenRound(VotingRound):
+class PrepareRepayTokenRound(CollectSameUntilThresholdRound):
     """PrepareRepayTokenRound"""
 
     payload_class = PrepareRepayTokenPayload
-    payload_attribute = ""  # TODO: update
+    payload_attribute = "content"
     synchronized_data_class = SynchronizedData
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        if not self.threshold_reached:
+            return None
+        state = self.synchronized_data.update(
+            synchronized_data_class=self.synchronized_data_class,
+            **{self.payload_attribute: self.most_voted_payload}
+        )
+        return state, Event.DONE
 
 
-class PrepareSlashingTransactionRound(VotingRound):
+class PrepareSlashingTransactionRound(CollectSameUntilThresholdRound):
     """PrepareSlashingTransactionRound"""
 
     payload_class = PrepareSlashingTransactionPayload
-    payload_attribute = ""  # TODO: update
+    payload_attribute = "content"
     synchronized_data_class = SynchronizedData
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        if not self.threshold_reached:
+            return None
+        state = self.synchronized_data.update(
+            synchronized_data_class=self.synchronized_data_class,
+            **{self.payload_attribute: self.most_voted_payload}
+        )
+        return state, Event.DONE
 
 
-class PrepareValidTransactionRound(VotingRound):
+class PrepareValidTransactionRound(CollectSameUntilThresholdRound):
     """PrepareValidTransactionRound"""
 
     payload_class = PrepareValidTransactionPayload
-    payload_attribute = ""  # TODO: update
+    payload_attribute = "content"
     synchronized_data_class = SynchronizedData
 
-    def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
-        """Process the end of the block."""
-        raise NotImplementedError
+    collection_key = get_name(SynchronizedData.participant_to_signatures)
+    selection_key = (
+        get_name(SynchronizedData.signature),
+        get_name(SynchronizedData.data_json),
+        get_name(SynchronizedData.most_voted_tx_hash),
+    )
+
+    @property
+    def payload_values_count(self) -> Counter:
+        """Get count of payload values."""
+        return Counter(map(lambda p: (p.values[2],), self.payloads))
+
+    @property
+    def most_voted_payload_values(
+        self,
+    ) -> Tuple[Any, ...]:
+        """Get the most voted payload values."""
+        _, max_votes = self.payload_values_count.most_common()[0]
+        if max_votes < self.synchronized_data.consensus_threshold:
+            raise ABCIAppInternalError("not enough votes")
+
+        all_payload_values_count = Counter(map(lambda p: p.values, self.payloads))
+        most_voted_payload_values, _ = all_payload_values_count.most_common()[0]
+        return most_voted_payload_values
+
+    def check_majority_possible(
+        self,
+        votes_by_participant: Dict[str, BaseTxPayload],
+        nb_participants: int,
+        exception_cls: Type[ABCIAppException] = ABCIAppException,
+    ) -> None:
+        """
+        Overrides the check to only account for the tx hash which should be the same.
+
+        The rest attributes have to be different.
+
+        :param votes_by_participant: a mapping from a participant to its vote
+        :param nb_participants: the total number of participants
+        :param exception_cls: the class of the exception to raise in case the check fails
+        """
+        votes_by_participant = {
+            participant: PrepareValidTransactionPayload(
+                payload.sender, tx_hash=payload.content["tx_hash"]
+            )
+            for participant, payload in votes_by_participant.items()
+        }
+        super().check_majority_possible(
+            votes_by_participant, nb_participants, exception_cls
+        )
 
 
 class FinalizedTransactionPreparationRound(DegenerateRound):

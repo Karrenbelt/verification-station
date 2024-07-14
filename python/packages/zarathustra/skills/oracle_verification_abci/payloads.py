@@ -19,7 +19,7 @@
 
 """This module contains the transaction payloads of the OracleVerificationAbciApp."""
 
-from typing import Any
+from typing import Any, Optional
 from dataclasses import dataclass
 
 from packages.valory.skills.abstract_round_abci.base import BaseTxPayload
@@ -78,5 +78,7 @@ class PrepareSlashingTransactionPayload(BaseTxPayload):
 class PrepareValidTransactionPayload(BaseTxPayload):
     """Represent a transaction payload for the PrepareValidTransactionRound."""
 
-    content: Any
+    signature: Optional[str]
+    data_json: Optional[str]
+    tx_hash: Optional[str]
 

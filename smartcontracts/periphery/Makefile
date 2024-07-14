@@ -30,4 +30,4 @@ endif
 # 	Specify the address to grant the owner role to by setting the OWNER environment variable.
 # 	Example: make deployStatus ARGS="..." OWNER="0x1234..."
 deployStatus:
-	@forge script script/DeployStatus.s.sol:Deploy $(FOUNDRY_NETWORK_ARGS)
+	@forge script script/DeployStatus.s.sol:Deploy $(FOUNDRY_NETWORK_ARGS) $(BROADCAST)

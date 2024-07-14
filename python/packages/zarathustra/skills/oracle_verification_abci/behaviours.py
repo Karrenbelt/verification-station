@@ -159,7 +159,7 @@ class CollectOracleDataBehaviour(OracleVerificationBaseBehaviour):
             if 'prices' not in self.context.shared_state:
                 self.context.shared_state['prices'] = {}
             self.context.shared_state['prices'][oracle] = data
-            self.context.logger.info(f"Collected data from {oracle}")
+            self.context.logger.info(f"Collected data: {data} from {oracle}")
         yield
 
 class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
@@ -303,6 +303,7 @@ class PrepareValidTransactionBehaviour(OracleVerificationBaseBehaviour):
         """
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
+            return
             signature = data_json = None
             payload_string = yield from self._get_safe_tx_hash()
             service_data = self.get_service_data()
@@ -314,6 +315,7 @@ class PrepareValidTransactionBehaviour(OracleVerificationBaseBehaviour):
                 data_json=data_json,
                 payload_string=payload_string,
             )
+
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)

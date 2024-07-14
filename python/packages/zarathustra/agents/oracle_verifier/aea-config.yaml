@@ -17,7 +17,7 @@ contracts:
 - valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
 - eightballer/chronicle_price_feed:0.1.0:bafybeifilaz3nz74eld7gstyywr6ojmldcvb3v43gnzdg3pqnee64glq3u
 customs:
-- eightballer/oracle_verifier_chronicle:0.1.0:bafybeifdc5jdyckbaqc53psnmfprglf6pcl4lqgajw3ogo3ook3oyve42a
+- eightballer/oracle_verifier_chronicle:0.1.0:bafybeifnelxpuksp3fgc3s6b46afvjufwymkzb2fvavzxaktbbw242bcqq
 - eightballer/oracle_verifier_pyth:0.1.0:bafybeiduapf3iqnvlvliwggzk2l4aqorbhbvsbpyjuugqizwq6yhcdfwoi
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
 - eightballer/verification_station_frontend:0.1.0:bafybeigqiu66xm6oape2lqs3w4zhzzwhce7czhsetaqr7zo5g43n5bfem4
@@ -66,15 +66,15 @@ protocols:
 required_ledgers:
 - ethereum
 skills:
-- eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
+- eightballer/ui_loader_abci:0.1.0:bafybeid65pcj5jrk3k4m2e4hxifyy6ticwxb4gg3b6aapxq6naxxlbobl4
 - valory/abstract_abci:0.1.0:bafybeif4uvml6c3ypq6sk3udgzssyjnxepojdcu4igmwqmo6bdvave5l5i
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - zarathustra/subgraph_query_abci:0.1.0:bafybeiemogzk7r2gbi4xitqxf5jbldw5dxvft6mnmhmgdj3lefbsqhbqn4
-- zarathustra/oracle_verification_abci:0.1.0:bafybeifoh7see6wtxlelkqrudedlikdy5mhz4ojt6a5sthitbdxar5utnu
-- zarathustra/oracle_verification:0.1.0:bafybeibeb3evsvf2ym6ogrsvefg7ymhajnh26saiqwztccpiqx7oo5ljne
+- zarathustra/oracle_verification_abci:0.1.0:bafybeiag3ymhmmkmoghmjcigznsv56qpnvhk46c2qu6yfufdvdqwyed5cy
+- zarathustra/oracle_verification:0.1.0:bafybeigddoqjzmu7tiumnpeox3qa6oevqgelgyrmt4glpjjecmax2dmw7q
 version: 0.1.0
 default_connection: null
 ---

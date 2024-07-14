@@ -33,6 +33,46 @@
             <td id="agent-address"></td>
             <td id="agent-status"></td>
         </tr>
+
+
+    </table>
+    <!-- 
+        Table for the simlpe json from the api call. 
+    [
+        {
+          "oracle_id": 1,
+          "status": "active",
+          "last_update": "2021-09-29T14:00:00Z",
+          "current_value": 1233
+        },
+        {
+          "oracle_id": 2,
+          "status": "active",
+          "last_update": "2021-09-29T14:00:00Z",
+          "current_value": 1233
+        }
+    ]
+    -->
+    <!-- Note, this is an array so we need to loop through the array. -->
+    <table style="border: 1px solid black; border-collapse: collapse; width: 100%; text-align: left;">
+        <tr>
+            <th>Oracle ID</th>
+            <th>Status</th>
+            <th>Last Update</th>
+            <th>Current Value</th>
+        </tr>
+        <tr>
+            <td id="oracle-id"></td>
+            <td id="oracle-status"></td>
+            <td id="oracle-last-update"></td>
+            <td id="oracle-current-value"></td>
+        </tr>
+    </table>
+
+
+
+
+
 </body>
 </html>
 
@@ -46,4 +86,20 @@
             document.getElementById('agent-address').innerText = data['agent-address'];
             document.getElementById('agent-status').innerText = data['agent-status'];
         });
+
+    fetch('http://localhost:5555/api/oracles')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(oracle => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${oracle['oracle_id']}</td>
+                    <td>${oracle['status']}</td>
+                    <td>${oracle['last_update']}</td>
+                    <td>${oracle['current_value']}</td>
+                `;
+                document.querySelector('table:last-of-type').appendChild(row);
+            });
+        });
+
 </script>

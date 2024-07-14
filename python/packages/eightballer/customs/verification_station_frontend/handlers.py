@@ -14,6 +14,8 @@ class PingPongHandler(Handler):
 
     def handle(self, msg):
         """Handle the data."""
+
+        breakpoint()
         response = f"Pong @ {got_message}: {msg.data}"
         return response
 

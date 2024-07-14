@@ -73,7 +73,8 @@ class CheckServiceDepositsRound(CollectionRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
 class CollectOracleDataRound(CollectionRound):
@@ -85,7 +86,8 @@ class CollectOracleDataRound(CollectionRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
 class LoadOracleComponentsRound(CollectionRound):
@@ -97,7 +99,8 @@ class LoadOracleComponentsRound(CollectionRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
 class OracleAttestationRound(CollectionRound):
@@ -109,7 +112,8 @@ class OracleAttestationRound(CollectionRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 class PrepareMintTokenRound(VotingRound):
     """PrepareMintTokenRound"""
@@ -120,7 +124,8 @@ class PrepareMintTokenRound(VotingRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
 class PrepareRepayTokenRound(VotingRound):
@@ -132,7 +137,8 @@ class PrepareRepayTokenRound(VotingRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
 class PrepareSlashingTransactionRound(VotingRound):
@@ -144,7 +150,8 @@ class PrepareSlashingTransactionRound(VotingRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
 class PrepareValidTransactionRound(VotingRound):
@@ -156,7 +163,8 @@ class PrepareValidTransactionRound(VotingRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        raise NotImplementedError
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
 class FinalizedTransactionPreparationRound(DegenerateRound):

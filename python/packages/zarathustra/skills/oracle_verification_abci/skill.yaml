@@ -12,11 +12,11 @@ dependencies: {}
 description: The Oracle Verification Abci verifies data published by other oracles.
 fingerprint:
   __init__.py: bafybeihc5korowuftadjm73ng5srrpfmambjdecd6k7sjvbsnhjk7rpoxq
-  behaviours.py: bafybeicd36i3ph7l5gpsm5pwekyiigwe3e4f7s44bo5zbwimw5xl6xudu4
+  behaviours.py: bafybeibynzgc3nbcs3wtfkphge2flheu2ziu7xvkonphsc7c6yozrnvnfm
   dialogues.py: bafybeicmr3wtszu4dn7twj4vncjz3niqckf47edbcubfvntzb2edox5jpy
   fsm_specification.yaml: bafybeidsewpuketlmf2zic6ktujjg6i7lz5zw5weshk6d3wgbmtu7m4wua
   handlers.py: bafybeihyp4dmt34itm7iigcwxvcj4us6lfi3memezc552rajbig6c5pmqm
-  models.py: bafybeidfoaq62rabba6pr226qbcohy5e5vf3piw5ysjz6aopak36zzf744
+  models.py: bafybeibwdpkaoyih2qrn6yfkp2xizj6lk7oxu7siqujyjuclyu4xn23enm
   payloads.py: bafybeihqc3blphxve5vv4b57b3se66rp24j42az6iex2g4l3wgnmeivlji
   rounds.py: bafybeifob7pjkd6aipp3m7cfcqqaf6ooez2d6aiarlupvhtt2i6luuvtk4
   tests/__init__.py: bafybeifigp64li3j3yidpan5arc27etm3jytadjsckjaidrem57hst73ry
@@ -85,7 +85,7 @@ models:
   params:
     args:
       oracle_config:
-      - eightballer/oracle_verifier_chronicle:0.1.0
+      - eightballer/oracle_verifier_chronicle
       cleanup_history_depth: 1
       cleanup_history_depth_current: null
       drand_public_key: 868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31

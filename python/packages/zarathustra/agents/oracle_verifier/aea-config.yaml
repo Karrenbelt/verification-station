@@ -15,8 +15,9 @@ contracts:
 - valory/gnosis_safe:0.1.0:bafybeidy56dpfmbpevn6c46yluhw7sxqvucmzgceoiuuegm7d6slh2svae
 - valory/gnosis_safe_proxy_factory:0.1.0:bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm
 - valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
+- eightballer/chronicle_price_feed:0.1.0:bafybeie3gxisdb6jpzlahmetkd5sc5wqt2i4tg5xzm7doojcy2wh3wq5xq
 customs:
-- eightballer/oracle_verifier_chronicle:0.1.0:bafybeic47gz43icmpl3t6tfe5xnptba7cmkz5gtljjm7pelxfed46iqrh4
+- eightballer/oracle_verifier_chronicle:0.1.0:bafybeidgkzw6dr7ixx7ni5eu46trr4v3uqiq64bwmd6mbtsutvegx43y5y
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
 - eightballer/verification_station_frontend:0.1.0:bafybeigw76tcys5awrglihvmvjmd537o4cx62i5p3vucag5ndzt2gisydi
 default_ledger: ethereum
@@ -71,8 +72,8 @@ skills:
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - zarathustra/subgraph_query_abci:0.1.0:bafybeiemogzk7r2gbi4xitqxf5jbldw5dxvft6mnmhmgdj3lefbsqhbqn4
-- zarathustra/oracle_verification_abci:0.1.0:bafybeichaujh5opd2zyiyp6syowybuqkwaufup4mblortxg4plph6xu7v4
-- zarathustra/oracle_verification:0.1.0:bafybeigrjf6kwp2vgajt6t2wq3yr75t5iwjab3adh4jsfawtmwugokiwia
+- zarathustra/oracle_verification_abci:0.1.0:bafybeic4jeeljljsckdigvxnjclchjc45s5zkboqahhsy2eascwfdefdky
+- zarathustra/oracle_verification:0.1.0:bafybeiah3mmm6y3pp7ro36dcoh64ibn5ulxg7yrtwlrbf2or4q4vwpoody
 version: 0.1.0
 default_connection: null
 ---

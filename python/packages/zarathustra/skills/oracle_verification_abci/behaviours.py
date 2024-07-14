@@ -22,10 +22,15 @@
 from abc import ABC
 import copy
 import hashlib
+import importlib
 import json
 from decimal import Decimal
+from pathlib import Path
+import sys
 from time import sleep
 from typing import Dict, Generator, Optional, Set, Tuple, Type, cast
+
+import yaml
 
 from packages.valory.contracts.gnosis_safe.contract import GnosisSafeContract
 
@@ -76,7 +81,17 @@ def to_int(most_voted_estimate: float, decimals: int) -> int:
     int_value = int(most_voted_estimate_decimal * (10**decimals))
     return int_value
 
+def custom_ui_component(component_name) -> bool:
+    """Check laod of custom UI component."""
+    author, component_name = component_name.split("/")
+    directory = Path("vendor") / author / "customs" / component_name 
+    config = yaml.safe_load((directory / "component.yaml").read_text())
+    return author, component_name, directory, config
 
+def dynamic_import(component_name, module_name):
+    module = importlib.import_module(component_name)
+    sub_module = getattr(module, module_name)
+    return sub_module
 
 class OracleVerificationBaseBehaviour(BaseBehaviour, ABC):
     """Base behaviour for the oracle_verification_abci skill."""
@@ -125,12 +140,23 @@ class CollectOracleDataBehaviour(OracleVerificationBaseBehaviour):
             sender = self.context.agent_address
             payload = CollectOracleDataPayload(sender=sender, content="dummy_content")
 
+            yield from self._collect_oracle_data()
+
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
         self.set_done()
 
+    def _collect_oracle_data(self) -> None: # type: ignore
+        """Collect oracle data."""
+        self.context.logger.info("Collecting oracle data...")
+        for oracle in self.params.oracle_config:
+            self.context.logger.info(f"Collecting data from {oracle}")
+            author, component_name, directory, config = custom_ui_component(oracle)
+            module = dynamic_import(component_name, "main")
+            breakpoint()
+            self.context.logger.info(f"Collected data from {oracle}")
 
 class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
     """LoadOracleComponentsBehaviour"""
@@ -163,6 +189,15 @@ class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
         for oracle in self.params.oracle_config:
             self.context.logger.info(f"Loading oracle components for {oracle}")
             # Load the oracle components for the oracle address
+            author, component_name, directory, config = custom_ui_component(oracle)
+            self.context.logger.info(f"Loaded oracle components for {oracle}")
+            sys.path += [str(Path(__file__).resolve().parent
+                                .parent
+                                .parent
+                                .parent
+                                .parent
+            / directory.parent)]
+            self.context.logger.info(f"Added {directory} to the path.")
         yield 
 
 

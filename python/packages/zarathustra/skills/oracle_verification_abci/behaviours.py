@@ -155,6 +155,7 @@ class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
 
     def _load_oracle_components(self) -> None: # type: ignore
         """Load oracle components."""
+        breakpoint()
         self.context.logger.info("Loading oracle components...")
         self.context.shared_state['oracles'] = self.params.oracle_config
         yield 

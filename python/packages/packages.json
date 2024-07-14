@@ -3,13 +3,14 @@
         "custom/eightballer/oracle_observer/0.1.0": "bafybeiaiokz7jzqsrz5y3472pb4lzpxfxjbjvsr4xx2lm62kw3sui7yr2a",
         "custom/eightballer/chronicle_oracle_observer/0.1.0": "bafybeiauceizzmysfh5r4foxvycfpzss2tfo3ctlm73vwzwifqakdscn3e",
         "custom/eightballer/subgraph_verification_station/0.1.0": "bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu",
-        "custom/eightballer/oracle_verifier_chronicle/0.1.0": "bafybeihh24rvjh4p42r52gnv6tqdfldy73pj3zjjzm73tr4hjhbtsdmaeq",
-        "custom/eightballer/verification_station_frontend/0.1.0": "bafybeigw76tcys5awrglihvmvjmd537o4cx62i5p3vucag5ndzt2gisydi",
+        "custom/eightballer/oracle_verifier_chronicle/0.1.0": "bafybeifdc5jdyckbaqc53psnmfprglf6pcl4lqgajw3ogo3ook3oyve42a",
+        "custom/eightballer/verification_station_frontend/0.1.0": "bafybeigqiu66xm6oape2lqs3w4zhzzwhce7czhsetaqr7zo5g43n5bfem4",
+        "custom/eightballer/oracle_verifier_pyth/0.1.0": "bafybeiduapf3iqnvlvliwggzk2l4aqorbhbvsbpyjuugqizwq6yhcdfwoi",
         "contract/eightballer/chronicle_price_feed/0.1.0": "bafybeifilaz3nz74eld7gstyywr6ojmldcvb3v43gnzdg3pqnee64glq3u",
         "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeiemogzk7r2gbi4xitqxf5jbldw5dxvft6mnmhmgdj3lefbsqhbqn4",
-        "skill/zarathustra/oracle_verification/0.1.0": "bafybeihiw5vqss7serdfkkqhtjx54bnqotonaidvxdwi67rm7lcz4zviu4",
-        "skill/zarathustra/oracle_verification_abci/0.1.0": "bafybeidqjlupvut66xqkdpab7bpubsiqshtcsk2fe5uelfcsze5h3bgk7q",
-        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeidv7pp7g54cxoi5w6dlayczqx5q5p5mxynjjuybxfbrwenyxxo5ue"
+        "skill/zarathustra/oracle_verification/0.1.0": "bafybeidkuhxnqax4dkoaad6n7r3bsamnhttp2pi67a5f6ngmapoqvoznmy",
+        "skill/zarathustra/oracle_verification_abci/0.1.0": "bafybeifoh7see6wtxlelkqrudedlikdy5mhz4ojt6a5sthitbdxar5utnu",
+        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeiefcluh4uoimo2tkjnorio6kxny56ts5flkhkr2rw2qqkurfk2gga"
     },
     "third_party": {
         "protocol/eightballer/websockets/0.1.0": "bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e",

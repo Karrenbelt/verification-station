@@ -10,9 +10,13 @@ from web3 import Web3
 
 w3 = Web3(Web3.HTTPProvider("https://rpc.ankr.com/eth_sepolia"))
 
-ABI_PATH = Path("vendor/eightballer/contracts/chronicle_price_feed/build/chronicle_price_feed.json")
+# 
+if Path("vendor").exists():
+    ABI_PATH = Path("vendor/eightballer/contracts/chronicle_price_feed/build/chronicle_price_feed.json")
+else:
+    ABI_PATH = Path("packages/eightballer/contracts/chronicle_price_feed/build/chronicle_price_feed.json")
 
-def collect_data(since_block_number, to_block_number='latest', web3=w3, address='0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603') -> None:
+def collect_data(since_block_number='latest', to_block_number='latest', web3=w3, address='0xdd6D76262Fd7BdDe428dcfCd94386EbAe0151603') -> None:
     """
     Collect data from the oracle verifier chronicle.
     """

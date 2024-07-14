@@ -5,19 +5,20 @@ behaviours:
     args: {}
     class_name: OracleVerificationRoundBehaviour
 connections: []
-contracts: []
+contracts:
+- valory/gnosis_safe:0.1.0:bafybeidy56dpfmbpevn6c46yluhw7sxqvucmzgceoiuuegm7d6slh2svae
 customs: []
 dependencies: {}
 description: The Oracle Verification Abci verifies data published by other oracles.
 fingerprint:
   __init__.py: bafybeihc5korowuftadjm73ng5srrpfmambjdecd6k7sjvbsnhjk7rpoxq
-  behaviours.py: bafybeid3q6lhxvtmi7bdkvid2emdpmhwlariendrfskpi3zpnkcu6ilese
+  behaviours.py: bafybeibz5eizwv23qzsygofynbqj32awougvkyw5qlf5g2e4hqzvu2qb4y
   dialogues.py: bafybeicmr3wtszu4dn7twj4vncjz3niqckf47edbcubfvntzb2edox5jpy
   fsm_specification.yaml: bafybeidsewpuketlmf2zic6ktujjg6i7lz5zw5weshk6d3wgbmtu7m4wua
   handlers.py: bafybeihyp4dmt34itm7iigcwxvcj4us6lfi3memezc552rajbig6c5pmqm
-  models.py: bafybeidx3nth42t25tecbqffn4pvgadynxm67c5lbyz27fummgzewjqm3m
-  payloads.py: bafybeicjwcf5u6zijkxfuse5kxxx6l2rfuid4ln7oqk4c2jkaieaitbh7m
-  rounds.py: bafybeigzphkaazrf6tmbyfdt5z3cv5ahpfqegybqtao3daxia2vvrn7al4
+  models.py: bafybeibwdpkaoyih2qrn6yfkp2xizj6lk7oxu7siqujyjuclyu4xn23enm
+  payloads.py: bafybeihqc3blphxve5vv4b57b3se66rp24j42az6iex2g4l3wgnmeivlji
+  rounds.py: bafybeib6a4poeykpotxu6lr4lbgjh4esvvmetgovu2tdotj2lyostpn3d4
   tests/__init__.py: bafybeifigp64li3j3yidpan5arc27etm3jytadjsckjaidrem57hst73ry
   tests/test_behaviours.py: bafybeigb7dlczctrn2a2clvjwuittob5kx2jgrnxv6ogydiyjbobju2bvq
   tests/test_dialogues.py: bafybeic5yqwcgsqengyvhbv7jyiopxiomsrpidc4es3cwgbcwi6e3keupu
@@ -51,17 +52,6 @@ handlers:
 is_abstract: true
 license: Apache-2.0
 models:
-  randomness_api:
-    args:
-      api_id: cloudflare
-      headers: {}
-      method: GET
-      parameters: {}
-      response_key: null
-      response_type: dict
-      retries: 5
-      url: https://drand.cloudflare.com/public/latest
-    class_name: RandomnessApi
   abci_dialogues:
     args: {}
     class_name: AbciDialogues
@@ -112,6 +102,9 @@ models:
       max_attempts: 10
       max_healthcheck: 120
       on_chain_service_id: null
+      oracle_config:
+      - eightballer/oracle_verifier_chronicle
+      - eightballer/oracle_verifier_pyth
       request_retry_delay: 1.0
       request_timeout: 10.0
       reset_pause_duration: 10
@@ -126,6 +119,7 @@ models:
         all_participants:
         - '0x0000000000000000000000000000000000000000'
         consensus_threshold: null
+        target_contract_address: '0x0000000000000000000000000000000000000000'
         safe_contract_address: '0x0000000000000000000000000000000000000000'
       share_tm_config_on_startup: false
       slash_cooldown_hours: 3
@@ -141,6 +135,17 @@ models:
       use_termination: false
       validate_timeout: 1205
     class_name: Params
+  randomness_api:
+    args:
+      api_id: cloudflare
+      headers: {}
+      method: GET
+      parameters: {}
+      response_key: null
+      response_type: dict
+      retries: 5
+      url: https://drand.cloudflare.com/public/latest
+    class_name: RandomnessApi
   requests:
     args: {}
     class_name: Requests
@@ -154,8 +159,10 @@ models:
     args: {}
     class_name: TendermintDialogues
 name: oracle_verification_abci
-protocols: []
+protocols:
+- valory/contract_api:1.0.0:bafybeidgu7o5llh26xp3u3ebq3yluull5lupiyeu6iooi2xyymdrgnzq5i
 skills:
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
+- valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 type: skill
 version: 0.1.0

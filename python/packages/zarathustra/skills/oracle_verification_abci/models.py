@@ -19,6 +19,7 @@
 
 """This module contains the shared state for the abci skill of OracleVerificationAbciApp."""
 
+from typing import Any
 from packages.valory.skills.abstract_round_abci.models import ApiSpecs, BaseParams
 from packages.valory.skills.abstract_round_abci.models import (
     BenchmarkTool as BaseBenchmarkTool,
@@ -38,6 +39,15 @@ class SharedState(BaseSharedState):
 
 class RandomnessApi(ApiSpecs):
     """A model for randomness api specifications."""
+
+
+class Params(BaseParams):
+    """Keep the current params of the skill."""
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the parameters' object."""
+        # this is a mapping from a prediction market spec's attribute to the creators we want to take into account
+
 
 
 Params = BaseParams

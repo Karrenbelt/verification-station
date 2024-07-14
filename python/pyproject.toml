@@ -26,6 +26,7 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11,<3.13"
+ccxt = "^4.3.61"
 
 
 [tool.poetry.group.autonomy.dependencies]

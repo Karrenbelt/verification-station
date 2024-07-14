@@ -1,12 +1,12 @@
-name: oracle_verifier_chronicle
+name: oracle_verifier_flare
 author: eightballer
 version: 0.1.0
 type: custom
-description: Component for the Oracle Verifier Chronicle.
+description: Component for the Oracle Verifier Flare.
 license: Apache-2.0
 aea_version: '>=1.0.0, <2.0.0'
 fingerprint:
   __init__.py: bafybeiehzaumheu7dkjvrdfbuasf5yyzsj25c4dozr6kyh4iorb5hj6pee
-  main.py: bafybeibc3wke7s6u3ltxnlruhfgi6e6sp7oonvibmgcwq4ly34ek73zho4
+  main.py: bafybeihspgmve4aicwqs5njv5s25qzkwv22bqzh3kvnl5vhn2vhrycbpzu
 fingerprint_ignore_patterns: []
 dependencies: {}

@@ -3,14 +3,15 @@
         "custom/eightballer/oracle_observer/0.1.0": "bafybeiaiokz7jzqsrz5y3472pb4lzpxfxjbjvsr4xx2lm62kw3sui7yr2a",
         "custom/eightballer/chronicle_oracle_observer/0.1.0": "bafybeiauceizzmysfh5r4foxvycfpzss2tfo3ctlm73vwzwifqakdscn3e",
         "custom/eightballer/subgraph_verification_station/0.1.0": "bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu",
-        "custom/eightballer/oracle_verifier_chronicle/0.1.0": "bafybeic47gz43icmpl3t6tfe5xnptba7cmkz5gtljjm7pelxfed46iqrh4",
-        "custom/eightballer/verification_station_frontend/0.1.0": "bafybeiar5jxtec4v57fa4m44cvb4arr5ijamlpcbjp7fhya5zhmojk3wva",
-        "contract/eightballer/chronicle_price_feed/0.1.0": "bafybeie3gxisdb6jpzlahmetkd5sc5wqt2i4tg5xzm7doojcy2wh3wq5xq",
-        "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a",
-        "skill/zarathustra/oracle_verification/0.1.0": "bafybeig2pqdyzc5tuhn477xxhkiosakdlc5bpdanguy6cd6egrecxwlg5m",
-        "skill/zarathustra/oracle_verification_abci/0.1.0": "bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u",
-        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeiebiiv3hxlnsevbxfh35qeap5ysuwceki2cqbqyqnjyijn4exyxm4",
-        "agent/eightballer/tmp/0.1.0": "bafybeibbu3blxatq5frv72wi5onmcamzsaibinuh34e5rdefo4qysmdf4e"
+        "custom/eightballer/oracle_verifier_chronicle/0.1.0": "bafybeifnelxpuksp3fgc3s6b46afvjufwymkzb2fvavzxaktbbw242bcqq",
+        "custom/eightballer/verification_station_frontend/0.1.0": "bafybeide6ftnl2gwvcbp2ranc2tdvyuibzgqwn6wuweirq67jppj3hv3z4",
+        "custom/eightballer/oracle_verifier_pyth/0.1.0": "bafybeiduapf3iqnvlvliwggzk2l4aqorbhbvsbpyjuugqizwq6yhcdfwoi",
+        "custom/eightballer/oracle_verifier_flare/0.1.0": "bafybeigsriu5w42a5dk66ebdw6v6loutebbcwe6s5wwqbuapdzctpr55ke",
+        "contract/eightballer/chronicle_price_feed/0.1.0": "bafybeifilaz3nz74eld7gstyywr6ojmldcvb3v43gnzdg3pqnee64glq3u",
+        "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeiaovc65ata3fgmxdxu3arekhe6r2a6fpda2lc5qb4mqzocjeso4k4",
+        "skill/zarathustra/oracle_verification/0.1.0": "bafybeiboqh6s7by7pgruox2nmwni7aiewg7cq3akrxyg7mjyznuonwqvwy",
+        "skill/zarathustra/oracle_verification_abci/0.1.0": "bafybeifkv3j5go2g7w4dijqwx55hgh5em6tnmbcnzacr23u46333ttmdue",
+        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeieadf3cbiertmwciklgwrgshkandfav6jfc6zx4lmkdv4ei73d5su"
     },
     "third_party": {
         "protocol/eightballer/websockets/0.1.0": "bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e",
@@ -23,6 +24,8 @@
         "protocol/valory/ipfs/0.1.0": "bafybeiftxi2qhreewgsc5wevogi7yc5g6hbcbo4uiuaibauhv3nhfcdtvm",
         "protocol/valory/tendermint/0.1.0": "bafybeig4mi3vmlv5zpbjbfuzcgida6j5f2nhrpedxicmrrfjweqc5r7cra",
         "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi",
+        "protocol/valory/contract_api/0.1.0": "bafybeidgu7o5llh26xp3u3ebq3yluull5lupiyeu6iooi2xyymdrgnzq5i",
+        "protocol/valory/ledger_api/0.1.0": "bafybeihdk6psr4guxmbcrc26jr2cbgzpd5aljkqvpwo64bvaz7tdti2oni",
         "contract/valory/service_registry/0.1.0": "bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta",
         "contract/valory/gnosis_safe_proxy_factory/0.1.0": "bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm",
         "contract/valory/gnosis_safe/0.1.0": "bafybeidy56dpfmbpevn6c46yluhw7sxqvucmzgceoiuuegm7d6slh2svae",
@@ -39,6 +42,6 @@
         "skill/valory/registration_abci/0.1.0": "bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu",
         "skill/valory/reset_pause_abci/0.1.0": "bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq",
         "skill/valory/transaction_settlement_abci/0.1.0": "bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne",
-        "skill/eightballer/ui_loader_abci/0.1.0": "bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry"
+        "skill/eightballer/ui_loader_abci/0.1.0": "bafybeie7lrwzi7dxnmfr63bl4kggcaa2w3wymjiaxi2xxd5dro5qdtanva"
     }
 }

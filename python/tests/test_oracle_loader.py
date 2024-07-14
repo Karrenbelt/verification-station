@@ -3,11 +3,15 @@ The test_oracle_loader module contains the tests for the oracle_loader module.
 """
 
 from packages.eightballer.customs.oracle_verifier_chronicle import main as oracle_verifier_chronicle
+from packages.eightballer.customs.oracle_verifier_pyth import main as oracle_verifier_pyth
+from packages.eightballer.customs.oracle_verifier_flare import main as oracle_verifier_flare
 import pytest
 
 
 ORACLES = [
-    oracle_verifier_chronicle
+    oracle_verifier_pyth,
+    oracle_verifier_chronicle,
+    oracle_verifier_flare
 ]
 
 
@@ -16,8 +20,7 @@ def test_oracle_loader_collect_data(oracle):
     """
     Test the oracle_loader module.
     """
-    w3 = oracle_verifier_chronicle.w3
-    assert oracle.collect_data(w3.eth.block_number) is not None
+    assert oracle.collect_data() is not None
 
 @pytest.mark.parametrize("oracle", ORACLES)
 def test_oracle_loader_verify_data_valid(oracle):

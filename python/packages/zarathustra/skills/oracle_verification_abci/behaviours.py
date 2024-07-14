@@ -160,6 +160,7 @@ class CollectOracleDataBehaviour(OracleVerificationBaseBehaviour):
                 self.context.shared_state['prices'] = {}
             self.context.shared_state['prices'][oracle] = data
             self.context.logger.info(f"Collected data from {oracle}")
+        yield
 
 class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
     """LoadOracleComponentsBehaviour"""

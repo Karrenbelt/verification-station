@@ -40,6 +40,12 @@ handlers:
   tendermint:
     args: {}
     class_name: TendermintHandler
+  user_interface_http:
+    args: {}
+    class_name: UserInterfaceHttpHandler
+  user_interface_ws:
+    args: {}
+    class_name: UserInterfaceWsHandler
 is_abstract: false
 license: Apache-2.0
 models:

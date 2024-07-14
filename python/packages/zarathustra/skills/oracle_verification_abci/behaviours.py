@@ -20,6 +20,7 @@
 """This package contains round behaviours of OracleVerificationAbciApp."""
 
 from abc import ABC
+from time import sleep
 from typing import Generator, Set, Type, cast
 
 from packages.valory.skills.abstract_round_abci.base import AbstractRound

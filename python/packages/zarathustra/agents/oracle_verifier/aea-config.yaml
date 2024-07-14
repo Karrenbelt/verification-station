@@ -18,7 +18,7 @@ contracts:
 customs:
 - eightballer/oracle_verifier_chronicle:0.1.0:bafybeic47gz43icmpl3t6tfe5xnptba7cmkz5gtljjm7pelxfed46iqrh4
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
-- eightballer/verification_station_frontend:0.1.0:bafybeiar5jxtec4v57fa4m44cvb4arr5ijamlpcbjp7fhya5zhmojk3wva
+- eightballer/verification_station_frontend:0.1.0:bafybeigw76tcys5awrglihvmvjmd537o4cx62i5p3vucag5ndzt2gisydi
 default_ledger: ethereum
 default_routing: {}
 dependencies:
@@ -64,15 +64,15 @@ protocols:
 required_ledgers:
 - ethereum
 skills:
-- eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
+- eightballer/ui_loader_abci:0.1.0:bafybeid3shq64lo4mw5tnpmua6o6fdeoleprkm32bg6ahd4dod7a3ugily
 - valory/abstract_abci:0.1.0:bafybeif4uvml6c3ypq6sk3udgzssyjnxepojdcu4igmwqmo6bdvave5l5i
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
-- zarathustra/oracle_verification_abci:0.1.0:bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u
-- zarathustra/oracle_verification:0.1.0:bafybeig2pqdyzc5tuhn477xxhkiosakdlc5bpdanguy6cd6egrecxwlg5m
+- zarathustra/subgraph_query_abci:0.1.0:bafybeiavst54hxytgjzji5rzhyogtugblypjjxfozajmx5hs6tm536qxoe
+- zarathustra/oracle_verification_abci:0.1.0:bafybeidigzjt5lubsubbu32luhfr6rk4usnqttxyddecpkuuwu33z4vz2q
+- zarathustra/oracle_verification:0.1.0:bafybeia7vbwbocsqdrfj7bgrxxjr2ljhff4v4pmkx25ugqr4hplmqvrfoe
 version: 0.1.0
 default_connection: null
 ---

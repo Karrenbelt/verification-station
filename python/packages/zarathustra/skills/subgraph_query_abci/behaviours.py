@@ -96,7 +96,7 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-        self.set_done()
+        # self.set_done()
 
 
 class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):
@@ -116,7 +116,7 @@ class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-        self.set_done()
+        # self.set_done()
 
 
 class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
@@ -136,7 +136,7 @@ class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-        self.set_done()
+        # self.set_done()
 
 
 class SubgraphQueryRoundBehaviour(AbstractRoundBehaviour):

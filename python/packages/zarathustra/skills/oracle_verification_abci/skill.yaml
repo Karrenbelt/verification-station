@@ -158,7 +158,9 @@ models:
     args: {}
     class_name: TendermintDialogues
 name: oracle_verification_abci
-protocols: []
+protocols:
+- valory/contract_api:0.1.0:bafybeidgu7o5llh26xp3u3ebq3yluull5lupiyeu6iooi2xyymdrgnzq5i
+- valory/ledger_api:0.1.0
 skills:
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey

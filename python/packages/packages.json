@@ -7,9 +7,9 @@
         "custom/eightballer/verification_station_frontend/0.1.0": "bafybeigw76tcys5awrglihvmvjmd537o4cx62i5p3vucag5ndzt2gisydi",
         "contract/eightballer/chronicle_price_feed/0.1.0": "bafybeie3gxisdb6jpzlahmetkd5sc5wqt2i4tg5xzm7doojcy2wh3wq5xq",
         "skill/zarathustra/subgraph_query_abci/0.1.0": "bafybeiemogzk7r2gbi4xitqxf5jbldw5dxvft6mnmhmgdj3lefbsqhbqn4",
-        "skill/zarathustra/oracle_verification/0.1.0": "bafybeihja64pzfepxwk5i3cbm3okygobvw3dlyfbm7tdn7s3yljrekpwwu",
-        "skill/zarathustra/oracle_verification_abci/0.1.0": "bafybeig74mfbyuetnkdisviecul3enrpiqtdirojx2nuytdb25q2h6wmqa",
-        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeib2gx7d3uhmdjjnfg6uem3pwkcmueopiwwdgo2ici3ak6jli2edke"
+        "skill/zarathustra/oracle_verification/0.1.0": "bafybeic2pe3udadrqvuv5yywduuickinqqpbbh4lojtcpo6ig6dku6byny",
+        "skill/zarathustra/oracle_verification_abci/0.1.0": "bafybeiedrvllm3ewb72ghp4k33ghc5self2lgfaidf6i2zfuip64demcnq",
+        "agent/zarathustra/oracle_verifier/0.1.0": "bafybeiaeydiq5pa4emg67awjy6op55nigc5admjizmeq3jwnl5wk4qaivi"
     },
     "third_party": {
         "protocol/eightballer/websockets/0.1.0": "bafybeigegu5iypibbhpxlvgyv7tfbof6jd7ufbmsxbe4l47wbdu3hop67e",
@@ -22,6 +22,7 @@
         "protocol/valory/ipfs/0.1.0": "bafybeiftxi2qhreewgsc5wevogi7yc5g6hbcbo4uiuaibauhv3nhfcdtvm",
         "protocol/valory/tendermint/0.1.0": "bafybeig4mi3vmlv5zpbjbfuzcgida6j5f2nhrpedxicmrrfjweqc5r7cra",
         "protocol/open_aea/signing/1.0.0": "bafybeihv62fim3wl2bayavfcg3u5e5cxu3b7brtu4cn5xoxd6lqwachasi",
+        "protocol/valory/contract_api/0.1.0": "bafybeidgu7o5llh26xp3u3ebq3yluull5lupiyeu6iooi2xyymdrgnzq5i",
         "contract/valory/service_registry/0.1.0": "bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta",
         "contract/valory/gnosis_safe_proxy_factory/0.1.0": "bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm",
         "contract/valory/gnosis_safe/0.1.0": "bafybeidy56dpfmbpevn6c46yluhw7sxqvucmzgceoiuuegm7d6slh2svae",

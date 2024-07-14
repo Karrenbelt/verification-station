@@ -8,9 +8,26 @@ contract vsVault is ERC4626Fees  {
     address payable public vaultOwner;
     uint256 public entryFeeBasisPoints;
 
-    constructor(IERC20 _asset, uint256 _basisPoints) ERC4626(_asset) ERC20("Verification Station ETH", "vsETH"){
+    //! Hardcoded operator address
+    address constant operatorAddress = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
+
+    modifier onlyNOperator() {
+        require(msg.sender == operatorAddress, "Caller is not the Node Operator");
+        _;
+    }
+
+
+    event NodeShares(
+        uint256 nShares
+    );
+
+    uint256 public nodeShares;
+
+    // constructor(IERC20 _asset, uint256 _basisPoints) ERC4626(_asset) ERC20("Verification Station ETH", "vsETH"){
+    constructor(address _asset, uint256 _basisPoints) ERC4626(IERC20(_asset)) ERC20("Verification Station ETH", "vsETH"){
         vaultOwner = payable(msg.sender);
         entryFeeBasisPoints = _basisPoints;
+        nodeShares = 0; 
     }
 
     /** @dev See {IERC4626-deposit}. */
@@ -18,6 +35,7 @@ contract vsVault is ERC4626Fees  {
         require(assets <= maxDeposit(receiver), "ERC4626: deposit more than max");
 
         uint256 shares = previewDeposit(assets);
+        nodeShares += calculateXPercent(shares);
         _deposit(_msgSender(), receiver, assets, shares);
         afterDeposit(assets, shares);
 
@@ -44,6 +62,7 @@ contract vsVault is ERC4626Fees  {
         require(shares <= maxRedeem(owner), "ERC4626: redeem more than max");
 
         uint256 assets = previewRedeem(shares);
+        nodeShares -= calculateXPercent(shares);
         beforeWithdraw(assets, shares);
         _withdraw(_msgSender(), receiver, owner, assets, shares);
 
@@ -69,6 +88,31 @@ contract vsVault is ERC4626Fees  {
         return vaultOwner;
     }
 
+
+    /*//////////////////////////////////////////////////////////////
+                          NODE FEE CLAIM LOGIC
+    //////////////////////////////////////////////////////////////*/
+
+    function payOperators() public onlyNOperator{
+        require(nodeShares > 0, "No shares to pay operators");
+
+        uint256 assets = previewRedeem(nodeShares);
+        beforeWithdraw(assets, nodeShares);
+        _withdraw(_msgSender(), vaultOwner, vaultOwner, assets, nodeShares);
+        emit NodeShares(nodeShares);
+        nodeShares = 0;
+        require(nodeShares != 0, "NodeShares not paid");
+    }
+
+    function getNodeShares() public view returns (uint256) {
+        return nodeShares;
+    }
+
+
+    function calculateXPercent(uint256 value) public pure returns (uint256) {
+        uint256 result = value * 10 / 100;
+        return result;
+    }
     /*//////////////////////////////////////////////////////////////
                           INTERNAL HOOKS LOGIC
     //////////////////////////////////////////////////////////////*/

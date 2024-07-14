@@ -11,13 +11,13 @@ dependencies: {}
 description: The Oracle Verification Abci verifies data published by other oracles.
 fingerprint:
   __init__.py: bafybeihc5korowuftadjm73ng5srrpfmambjdecd6k7sjvbsnhjk7rpoxq
-  behaviours.py: bafybeid3q6lhxvtmi7bdkvid2emdpmhwlariendrfskpi3zpnkcu6ilese
+  behaviours.py: bafybeierknc3uvf5tnpl6a6hbxw5esz55wzij4lc6jtxp2nuryjfk4efzi
   dialogues.py: bafybeicmr3wtszu4dn7twj4vncjz3niqckf47edbcubfvntzb2edox5jpy
   fsm_specification.yaml: bafybeidsewpuketlmf2zic6ktujjg6i7lz5zw5weshk6d3wgbmtu7m4wua
   handlers.py: bafybeihyp4dmt34itm7iigcwxvcj4us6lfi3memezc552rajbig6c5pmqm
   models.py: bafybeidx3nth42t25tecbqffn4pvgadynxm67c5lbyz27fummgzewjqm3m
-  payloads.py: bafybeicjwcf5u6zijkxfuse5kxxx6l2rfuid4ln7oqk4c2jkaieaitbh7m
-  rounds.py: bafybeigzphkaazrf6tmbyfdt5z3cv5ahpfqegybqtao3daxia2vvrn7al4
+  payloads.py: bafybeihqc3blphxve5vv4b57b3se66rp24j42az6iex2g4l3wgnmeivlji
+  rounds.py: bafybeicddwyrw5j2s26dldq4cq5u74avkbaboyumurqcccqxhcqmkagvhq
   tests/__init__.py: bafybeifigp64li3j3yidpan5arc27etm3jytadjsckjaidrem57hst73ry
   tests/test_behaviours.py: bafybeigb7dlczctrn2a2clvjwuittob5kx2jgrnxv6ogydiyjbobju2bvq
   tests/test_dialogues.py: bafybeic5yqwcgsqengyvhbv7jyiopxiomsrpidc4es3cwgbcwi6e3keupu
@@ -126,6 +126,7 @@ models:
         all_participants:
         - '0x0000000000000000000000000000000000000000'
         consensus_threshold: null
+        target_contract_address: '0x0000000000000000000000000000000000000000'
         safe_contract_address: '0x0000000000000000000000000000000000000000'
       share_tm_config_on_startup: false
       slash_cooldown_hours: 3
@@ -156,6 +157,7 @@ models:
 name: oracle_verification_abci
 protocols: []
 skills:
+- valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
 type: skill
 version: 0.1.0

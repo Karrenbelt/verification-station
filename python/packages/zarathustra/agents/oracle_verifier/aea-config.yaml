@@ -13,7 +13,7 @@ contracts:
 - valory/gnosis_safe_proxy_factory:0.1.0:bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm
 - valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
 customs:
-- eightballer/oracle_verifier_chronicle:0.1.0:bafybeicj2eb7cw34cd2m4rgbtug262qyycou52pyoe7taw74iul3g4lliu
+- eightballer/oracle_verifier_chronicle:0.1.0:bafybeidy3ap5if7j6wm3t2ouz5lvzefyy5dvk3lepk3dswzyahw43lopby
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
 - eightballer/verification_station_frontend:0.1.0:bafybeif57yc5r23cktzoxkhnbbceb6kjqyre5g3u6cqqdtu5mlzux4e3qe
 default_ledger: ethereum
@@ -68,8 +68,8 @@ skills:
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
-- zarathustra/oracle_verification_abci:0.1.0:bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u
-- zarathustra/oracle_verification:0.1.0:bafybeifbrpw47enebf7uxvlv6xxxdinfp6bwpl6u6nrxbkemqrptotvjh4
+- zarathustra/oracle_verification_abci:0.1.0:bafybeie5pk2lbgbghxvx66ihreodppbs5kra3e5djwzeyfqnliqdwnji6i
+- zarathustra/oracle_verification:0.1.0:bafybeihzmrfujcgf34jzuzcbmp6xssw7djzkizcnxou3jhu6uf3qehqs5a
 version: 0.1.0
 default_connection: null
 ---

@@ -97,6 +97,7 @@ models:
         ws_enabled: true
       oracle_config:
       - eightballer/oracle_verifier_chronicle
+      - eightballer/oracle_verifier_pyth
       cleanup_history_depth: 1
       cleanup_history_depth_current: null
       drand_public_key: 868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31
@@ -176,6 +177,6 @@ skills:
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - eightballer/ui_loader_abci:0.1.0:bafybeifl46sj2djvvlrd2rve2xabmq43coxdvzsxy4iv3xfntq7c5y2p6e
 - zarathustra/subgraph_query_abci:0.1.0:bafybeiemogzk7r2gbi4xitqxf5jbldw5dxvft6mnmhmgdj3lefbsqhbqn4
-- zarathustra/oracle_verification_abci:0.1.0:bafybeidqjlupvut66xqkdpab7bpubsiqshtcsk2fe5uelfcsze5h3bgk7q
+- zarathustra/oracle_verification_abci:0.1.0:bafybeifoh7see6wtxlelkqrudedlikdy5mhz4ojt6a5sthitbdxar5utnu
 type: skill
 version: 0.1.0

@@ -61,7 +61,7 @@ paths:
                           type: string
                         current_value:
                           type: string
-  api/txs:
+  api/prices:
     get:
       summary: Returns the list of completed verification txns.
       responses:

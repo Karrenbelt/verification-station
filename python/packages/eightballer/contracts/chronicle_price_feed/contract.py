@@ -19,7 +19,7 @@
 
 """This module contains the scaffold contract definition."""
 
-from typing import Any
+from typing import Any, List, Tuple
 
 from aea.common import JSONLike
 from packages.eightballer.contracts.chronicle_price_feed import PUBLIC_ID
@@ -630,8 +630,8 @@ class ChroniclePriceFeed(Contract):
         cls,
         ledger_api: LedgerApi,
         contract_address: str,
-        pubKeys: Tuple[...],
-        ecdsaDatas: Tuple[...]
+        pubKeys: Tuple,
+        ecdsaDatas: Tuple
         ) -> JSONLike:
         """Handler method for the 'lift' requests."""
         instance = cls.get_instance(ledger_api, contract_address)

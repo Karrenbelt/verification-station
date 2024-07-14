@@ -8,7 +8,7 @@ aea_version: '>=1.0.0, <2.0.0'
 fingerprint:
   __init__.py: bafybeigw247etm64tucycw6ne5wucnb6nhh2kox2uuxibesuykqofvjefa
   build/chronicle_price_feed.json: bafybeigewhfwkpgskp6jcgwmljrvrcofisrz25t47a5obypcllbfzmytpm
-  contract.py: bafybeib6l4su6j6qbacglzrhpsjg57qshnl6nocgu7ccyfolsitl75gh2m
+  contract.py: bafybeih5em4upcpxugi2e3vskpzctplco7ytnt3kkbjacjhodr7evr2s4u
 fingerprint_ignore_patterns: []
 class_name: ChroniclePriceFeed
 contract_interface_paths:

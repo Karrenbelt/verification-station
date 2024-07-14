@@ -15,7 +15,7 @@ contracts:
 - valory/gnosis_safe:0.1.0:bafybeidy56dpfmbpevn6c46yluhw7sxqvucmzgceoiuuegm7d6slh2svae
 - valory/gnosis_safe_proxy_factory:0.1.0:bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm
 - valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
-- eightballer/chronicle_price_feed:0.1.0:bafybeie3gxisdb6jpzlahmetkd5sc5wqt2i4tg5xzm7doojcy2wh3wq5xq
+- eightballer/chronicle_price_feed:0.1.0:bafybeifilaz3nz74eld7gstyywr6ojmldcvb3v43gnzdg3pqnee64glq3u
 customs:
 - eightballer/oracle_verifier_chronicle:0.1.0:bafybeidgkzw6dr7ixx7ni5eu46trr4v3uqiq64bwmd6mbtsutvegx43y5y
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu

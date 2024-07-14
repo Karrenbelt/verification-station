@@ -155,8 +155,12 @@ class CollectOracleDataBehaviour(OracleVerificationBaseBehaviour):
             self.context.logger.info(f"Collecting data from {oracle}")
             author, component_name, directory, config = custom_ui_component(oracle)
             module = dynamic_import(component_name, "main")
-            breakpoint()
+            data = module.collect_data('latest')
+            if 'prices' not in self.context.shared_state:
+                self.context.shared_state['prices'] = {}
+            self.context.shared_state['prices'][oracle] = data
             self.context.logger.info(f"Collected data from {oracle}")
+        yield
 
 class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
     """LoadOracleComponentsBehaviour"""

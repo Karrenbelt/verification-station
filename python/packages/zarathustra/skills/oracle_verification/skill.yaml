@@ -15,7 +15,7 @@ fingerprint:
   composition.py: bafybeibzu7kmsive7tgzqrtrlqkkkl45mt22w776t6war5uthi7xsalywa
   dialogues.py: bafybeifwmmpebhrc63hrcgokfuu3tazlxxnov3x7pmkxafcnley4pd47ou
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
-  handlers.py: bafybeigqin67ztmcpj62sbtnehipgaoo4naduhkk52gqkyk4wfe3yfh4na
+  handlers.py: bafybeigsdqu2dsrnif5hqpin4u4bvauvfl6g2mlgibo6n5fukjrgokay64
   models.py: bafybeic5yevtou6h4xnxg6lmf4e246lkvg42en3mbpj2gclkx4qmmzrvhy
 fingerprint_ignore_patterns: []
 handlers:
@@ -40,6 +40,12 @@ handlers:
   tendermint:
     args: {}
     class_name: TendermintHandler
+  user_interface_http:
+    args: {}
+    class_name: UserInterfaceHttpHandler
+  user_interface_ws:
+    args: {}
+    class_name: UserInterfaceWsHandler
 is_abstract: false
 license: Apache-2.0
 models:

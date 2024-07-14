@@ -3,6 +3,9 @@ agent_name: oracle_verifier
 author: zarathustra
 connection_private_key_paths: {}
 connections:
+- eightballer/http_client:0.1.0:bafybeid4cwamevng2ufyflcrerm6xyp5rjby2lbo2ulybqlik44g3aslni
+- eightballer/http_server:0.1.0:bafybeib27byea6hwpt2fh2tt4t7jbn34r56hc654r365vipbktecfh4qsy
+- eightballer/websocket_server:0.1.0:bafybeigucvvivngrruzgmwn4cvepvgb7pxuh7alycfppgb7a6bmjxyf23q
 - valory/abci:0.1.0:bafybeig3x4xypkuhcdcd7d4z5tixhowtrsp2ktdm47z75ul4r36ojcqb64
 - valory/http_client:0.23.0:bafybeihi772xgzpqeipp3fhmvpct4y6e6tpjp4sogwqrnf3wqspgeilg4u
 - valory/ipfs:0.1.0:bafybeihf2sojt6yod2oyr4w7zokn42cobgdpxg2egoshlflwpzxkowaeem
@@ -13,7 +16,7 @@ contracts:
 - valory/gnosis_safe_proxy_factory:0.1.0:bafybeibiwmbwvgn45hqwzfc6gq5fcccwdyk4rnanyvj3xrqsfq2zk3xjwm
 - valory/service_registry:0.1.0:bafybeia3s4p7b2la7ijrej657fqq3x2lkf3b7dwehl5mbljqzbzzp5jnta
 customs:
-- eightballer/oracle_verifier_chronicle:0.1.0:bafybeigq56voviugn3rhyhxoqzxoyvpfaoyglotdruhypwh6gzk6nfdumi
+- eightballer/oracle_verifier_chronicle:0.1.0:bafybeic47gz43icmpl3t6tfe5xnptba7cmkz5gtljjm7pelxfed46iqrh4
 - eightballer/subgraph_verification_station:0.1.0:bafybeia7fbwt74t324zpl2we2wkczcogabvlrsxky5foiipxgxcf4xjjsu
 - eightballer/verification_station_frontend:0.1.0:bafybeiar5jxtec4v57fa4m44cvb4arr5ijamlpcbjp7fhya5zhmojk3wva
 default_ledger: ethereum
@@ -69,7 +72,7 @@ skills:
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
 - zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
 - zarathustra/oracle_verification_abci:0.1.0:bafybeifwh2vskxhb6b52dctfb4fkslpe3jwugqvvt36pj7qnzjei3ep43u
-- zarathustra/oracle_verification:0.1.0:bafybeifbrpw47enebf7uxvlv6xxxdinfp6bwpl6u6nrxbkemqrptotvjh4
+- zarathustra/oracle_verification:0.1.0:bafybeig2pqdyzc5tuhn477xxhkiosakdlc5bpdanguy6cd6egrecxwlg5m
 version: 0.1.0
 default_connection: null
 ---
@@ -111,3 +114,17 @@ models:
         custom_component: eightballer/verification_station_frontend
         http_enabled: true
         ws_enabled: true
+---
+public_id: eightballer/http_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
+type: connection
+config:
+  host: 0.0.0.0
+  port: 5555
+  target_skill_id: zarathustra/oracle_verification:0.1.0
+---
+public_id: eightballer/websocket_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
+type: connection
+config:
+  host: 0.0.0.0
+  port: 5556
+  target_skill_id: zarathustra/oracle_verification:0.1.0

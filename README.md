@@ -114,10 +114,10 @@ Clone the repository:
 
 ```shell
 git clone git@github.com:Karrenbelt/verification-station.git
-cd verification-station/python
+cd verification-station && make
 ```
 
-initialize the `autonomy` cli tool and set the remote IPFS node
+Initialize the `autonomy` cli tool and set the remote IPFS node
 
 ```shell
 autonomy init --reset --author $(whoami) --remote --ipfs --ipfs-node "/dns/registry.autonolas.tech/tcp/443/https"
@@ -154,15 +154,14 @@ sudo chown -R $(whoami):$GROUP /home/$(whoami)/tendermint_data
 
 Run the Tendermint node:
 ```shell
-./scripts/run_tendermint.sh
+../scripts/run_tendermint.sh
 ```
 
 ## 2. Run the agent
 
 ```shell
-bash scripts/start_single_agent.sh zarathustra/oracle_verifier
+../scripts/start_single_agent.sh zarathustra/oracle_verifier
 ```
-
 
 ## Contributing
 Learn how to contribute to the project by following the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -11,7 +11,7 @@ dependencies: {}
 description: The scaffold skill is a scaffold for your own skill implementation.
 fingerprint:
   __init__.py: bafybeihcsqats2sgqxzcxxuudz5npct42zdeph6guqizpexsmklrs2n254
-  behaviours.py: bafybeigjdlxgm7erxibo4gihd5qctvdzlzndjqvbb2xothtbltcikke4sy
+  behaviours.py: bafybeifipgce4gxmlfn3byob36dawubyeastq3nzaeq6nfcft4ycv32ehm
   dialogues.py: bafybeidebnb7oiwhp3jt7cebrzcbpbd2vx2c5wmfo44bsw2ph6tzajvbvq
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
   handlers.py: bafybeif7o7vpidh3jotztevjuirl6eleknldz3e3kyhvtonxubvn7jmyvy

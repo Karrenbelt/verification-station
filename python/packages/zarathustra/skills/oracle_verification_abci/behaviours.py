@@ -22,6 +22,7 @@
 from abc import ABC
 import json
 from decimal import Decimal
+from time import sleep
 from typing import Generator, Set, Type, cast
 
 from packages.valory.contracts.gnosis_safe.contract import GnosisSafeContract
@@ -138,6 +139,7 @@ class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
+            yield from self._load_oracle_components()
             payload = LoadOracleComponentsPayload(sender=sender, content="dummy_content")
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
@@ -145,6 +147,13 @@ class LoadOracleComponentsBehaviour(OracleVerificationBaseBehaviour):
             yield from self.wait_until_round_end()
 
         self.set_done()
+
+
+    def _load_oracle_components(self) -> None:
+        """Load oracle components."""
+        self.context.logger.info("Loading oracle components...")
+        self.context.shared_state['oracles'] = self.params.oracle_config
+        yield 
 
 
 class OracleAttestationBehaviour(OracleVerificationBaseBehaviour):

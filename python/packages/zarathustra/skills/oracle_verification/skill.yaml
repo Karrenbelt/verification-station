@@ -16,7 +16,7 @@ fingerprint:
   dialogues.py: bafybeifwmmpebhrc63hrcgokfuu3tazlxxnov3x7pmkxafcnley4pd47ou
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
   handlers.py: bafybeigsdqu2dsrnif5hqpin4u4bvauvfl6g2mlgibo6n5fukjrgokay64
-  models.py: bafybeic5yevtou6h4xnxg6lmf4e246lkvg42en3mbpj2gclkx4qmmzrvhy
+  models.py: bafybeidywezc3fx7f3lfdd37z3h3mquoxn6sc4u6rbnansdkxhe4p2tzae
 fingerprint_ignore_patterns: []
 handlers:
   abci:
@@ -95,6 +95,8 @@ models:
         custom_component: null
         http_enabled: true
         ws_enabled: true
+      oracle_config:
+      - eightballer/oracle_verifier_chronicle:0.1.0
       cleanup_history_depth: 1
       cleanup_history_depth_current: null
       drand_public_key: 868f005eb8e6e4ca0a47c8a77ceaa5309a47978a7c71bc5cce96366b5d7a569937c529eeda66c7293784a9402801af31
@@ -172,8 +174,8 @@ skills:
 - valory/registration_abci:0.1.0:bafybeibqbggb642wxntkivyamjpkaevcv54v6tvttlhbe2mq4oqmqtfbiu
 - valory/reset_pause_abci:0.1.0:bafybeidqwxtyjc3p3zkw77vchtemojdybucuk7arxo3vniw4karfxp4zmq
 - valory/transaction_settlement_abci:0.1.0:bafybeib6tvxn6ko5mzzikrwjulancgivy6cpgnhcdw6f3bbm6vnzcwnnne
-- eightballer/ui_loader_abci:0.1.0:bafybeichhwh7ih4qz7z6jmv6arqf6hcycf4rhq4rrdrq7jcgevfyox7xry
-- zarathustra/subgraph_query_abci:0.1.0:bafybeibxiiuxto453stdmvbfodfsh4ap353vm3rjqa5i7r64jtqqdlb25a
-- zarathustra/oracle_verification_abci:0.1.0:bafybeie5pk2lbgbghxvx66ihreodppbs5kra3e5djwzeyfqnliqdwnji6i
+- eightballer/ui_loader_abci:0.1.0:bafybeifl46sj2djvvlrd2rve2xabmq43coxdvzsxy4iv3xfntq7c5y2p6e
+- zarathustra/subgraph_query_abci:0.1.0:bafybeiemogzk7r2gbi4xitqxf5jbldw5dxvft6mnmhmgdj3lefbsqhbqn4
+- zarathustra/oracle_verification_abci:0.1.0:bafybeiftpo6w733egbw6yogk7khsoqt4petc2pnp3lzmjczciq2lwplmgu
 type: skill
 version: 0.1.0

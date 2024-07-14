@@ -127,7 +127,6 @@ class CheckServiceDepositsRound(CollectSameUntilThresholdRound):
         )
         return state, Event.NO_NEW_DEPOSIT
 
-
 class CollectOracleDataRound(CollectSameUntilThresholdRound):
     """CollectOracleDataRound"""
 
@@ -137,7 +136,7 @@ class CollectOracleDataRound(CollectSameUntilThresholdRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        if not self.threshold_reached:
+\        if not self.threshold_reached:
             return None
         state = self.synchronized_data.update(
             synchronized_data_class=self.synchronized_data_class,
@@ -181,7 +180,6 @@ class OracleAttestationRound(CollectSameUntilThresholdRound):
         )
         return state, Event.VALID
 
-
 class PrepareMintTokenRound(CollectSameUntilThresholdRound):
     """PrepareMintTokenRound"""
 
@@ -191,6 +189,7 @@ class PrepareMintTokenRound(CollectSameUntilThresholdRound):
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
+
         if not self.threshold_reached:
             return None
         state = self.synchronized_data.update(
@@ -235,14 +234,12 @@ class PrepareSlashingTransactionRound(CollectSameUntilThresholdRound):
         )
         return state, Event.DONE
 
-
 class PrepareValidTransactionRound(CollectSameUntilThresholdRound):
     """PrepareValidTransactionRound"""
 
     payload_class = PrepareValidTransactionPayload
     payload_attribute = "content"
     synchronized_data_class = SynchronizedData
-
     collection_key = get_name(SynchronizedData.participant_to_signatures)
     selection_key = (
         get_name(SynchronizedData.signature),
@@ -292,6 +289,11 @@ class PrepareValidTransactionRound(CollectSameUntilThresholdRound):
         super().check_majority_possible(
             votes_by_participant, nb_participants, exception_cls
         )
+
+    def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
+        """Process the end of the block."""
+        synchronized_data = self.synchronized_data
+        return synchronized_data, Event.DONE
 
 
 class FinalizedTransactionPreparationRound(DegenerateRound):

@@ -11,7 +11,7 @@ dependencies: {}
 description: The scaffold skill is a scaffold for your own skill implementation.
 fingerprint:
   __init__.py: bafybeihcsqats2sgqxzcxxuudz5npct42zdeph6guqizpexsmklrs2n254
-  behaviours.py: bafybeifipgce4gxmlfn3byob36dawubyeastq3nzaeq6nfcft4ycv32ehm
+  behaviours.py: bafybeiaqfsblf7r534manwcakr35e4rr4wsh45etvoes7q2djujlllf4x4
   dialogues.py: bafybeidebnb7oiwhp3jt7cebrzcbpbd2vx2c5wmfo44bsw2ph6tzajvbvq
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
   handlers.py: bafybeif7o7vpidh3jotztevjuirl6eleknldz3e3kyhvtonxubvn7jmyvy
@@ -120,6 +120,10 @@ models:
       slash_cooldown_hours: 3
       slash_threshold_amount: 10000000000000000
       sleep_time: 1
+      subgraph_query: '{"query": "{ factories(first: 5) { id poolCount txCount totalVolumeUSD
+        } bundles(first: 5) { id ethPriceUSD } }", "operationName": "Subgraphs", "variables":
+        {}}'
+      subgraph_url: https://gateway-arbitrum.network.thegraph.com/api/b902c6e046ff899f012ee69338a3f581/subgraphs/id/HUZDsRpEVP2AvzDCyzDHtdc64dyDxx8FQjzsmqSg4H3B
       tendermint_check_sleep_delay: 3
       tendermint_com_url: http://localhost:8080
       tendermint_max_retries: 5

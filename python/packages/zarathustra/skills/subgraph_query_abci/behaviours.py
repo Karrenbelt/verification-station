@@ -93,8 +93,9 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
             api_key = self.params.config["subgraph_api_key"]
-            subgraph_url = self.params.config["subgraph_url"]
-            query = self.params.config["subgraph_query"]
+            subgraph_config = json.loads(self.synchronized_data.most_voted_subgraph_config)
+            subgraph_url = subgraph_config["subgraph_url"]
+            query = subgraph_config["subgraph_query"]
             url = subgraph_url.format(api_key=api_key)
             headers = {"Content-Type": "application/json"}
             response = requests.post(url, json={"query": query}, headers=headers)
@@ -133,19 +134,20 @@ class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
 
     matching_round: Type[AbstractRound] = LoadSubgraphComponentsRound
 
-    # TODO: implement logic required to set payload content for synchronization
     def async_act(self) -> Generator:
         """Do the act, supporting asynchronous execution."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = LoadSubgraphComponentsPayload(sender=sender, content="dummy_content")
+            subgraph_url = self.params.config["subgraph_url"]
+            subgraph_query = self.params.config["subgraph_query"]
+            content = json.dumps({"subgraph_url": subgraph_url, "subgraph_query": subgraph_query})
+            self.context.logger.info(f"subgraph config: {content}")
+            payload = LoadSubgraphComponentsPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
-
-        # self.set_done()
 
 
 class SubgraphQueryRoundBehaviour(AbstractRoundBehaviour):

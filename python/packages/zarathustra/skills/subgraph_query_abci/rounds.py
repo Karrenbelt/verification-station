@@ -30,6 +30,7 @@ from packages.valory.skills.abstract_round_abci.base import (
     BaseSynchronizedData,
     DegenerateRound,
     EventToTimeout,
+    get_name,
 )
 
 from packages.zarathustra.skills.subgraph_query_abci.payloads import (
@@ -60,6 +61,14 @@ class SynchronizedData(BaseSynchronizedData):
     This data is replicated by the tendermint application.
     """
 
+    @property
+    def most_voted_subgraph_config(self):
+        return self.db.get_strict("most_voted_subgraph_config")
+
+    @property
+    def most_voted_subgraph_data(self):
+        return self.db.get_strict("most_voted_subgraph_data")
+
 
 class CheckSubgraphsHealthRound(CollectionRound):
     """CheckSubgraphsHealthRound"""
@@ -80,8 +89,8 @@ class CollectSubgraphsDataRound(CollectSameUntilThresholdRound):
     payload_class = CollectSubgraphsDataPayload
     synchronized_data_class = SynchronizedData
     done_event = Event.DONE
-    selection_key = "subgraph_data"
-    collection_key = "participant_to_selection"
+    collection_key = "subgraph_data"
+    selection_key = get_name(SynchronizedData.most_voted_subgraph_data)
 
 
 class DataTransformationRound(CollectionRound):
@@ -97,17 +106,14 @@ class DataTransformationRound(CollectionRound):
         return synchronized_data, Event.DONE
 
 
-class LoadSubgraphComponentsRound(CollectionRound):
+class LoadSubgraphComponentsRound(CollectSameUntilThresholdRound):
     """LoadSubgraphComponentsRound"""
 
     payload_class = LoadSubgraphComponentsPayload
-    payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
-
-    def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
-        """Process the end of the block."""
-        synchronized_data = self.synchronized_data
-        return synchronized_data, Event.DONE
+    done_event = Event.DONE
+    collection_key = "subgraph_config"
+    selection_key = get_name(SynchronizedData.most_voted_subgraph_config)
 
 
 class FailedToSynchronizeRound(DegenerateRound):

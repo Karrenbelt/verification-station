@@ -66,22 +66,36 @@ class SynchronizedData(BaseSynchronizedData):
         return self.db.get_strict("most_voted_subgraph_config")
 
     @property
+    def most_voted_subgraph_health_status(self):
+        return self.db.get_strict("most_voted_subgraph_health_status")
+
+    @property
     def most_voted_subgraph_data(self):
         return self.db.get_strict("most_voted_subgraph_data")
 
 
-class CheckSubgraphsHealthRound(CollectionRound):
+class CheckSubgraphsHealthRound(CollectSameUntilThresholdRound):
     """CheckSubgraphsHealthRound"""
 
     payload_class = CheckSubgraphsHealthPayload
-    payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
+    done_event = Event.SYNCHRONIZED
+    collection_key = "subgraph_health_status"
+    selection_key = get_name(SynchronizedData.most_voted_subgraph_health_status)
+
+    retries: int = 0
+    max_retries: int = 3
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        synchronized_data = self.synchronized_data
-        return synchronized_data, Event.SYNCHRONIZED
 
+        if self.threshold_reached and self.most_voted_payload is not None:
+            if self.retries >= self.max_retries:
+                return self.synchronized_data, Event.MAX_RETRIES
+            if not self.most_voted_payload:
+                self.retries += 1
+                return self.synchronized_data, Event.RETRY
+        return super().end_block()
 
 class CollectSubgraphsDataRound(CollectSameUntilThresholdRound):
     """CollectSubgraphsDataRound"""

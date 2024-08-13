@@ -30,6 +30,7 @@ from packages.valory.skills.abstract_round_abci.base import (
     BaseSynchronizedData,
     DegenerateRound,
     EventToTimeout,
+    get_name,
 )
 
 from packages.zarathustra.skills.subgraph_query_abci.payloads import (
@@ -38,7 +39,10 @@ from packages.zarathustra.skills.subgraph_query_abci.payloads import (
     DataTransformationPayload,
     LoadSubgraphComponentsPayload,
 )
-from packages.valory.skills.abstract_round_abci.base import CollectionRound
+from packages.valory.skills.abstract_round_abci.base import (
+    CollectionRound,
+    CollectSameUntilThresholdRound,
+)
 
 
 class Event(Enum):
@@ -57,31 +61,50 @@ class SynchronizedData(BaseSynchronizedData):
     This data is replicated by the tendermint application.
     """
 
+    @property
+    def most_voted_subgraph_config(self):
+        return self.db.get_strict("most_voted_subgraph_config")
 
-class CheckSubgraphsHealthRound(CollectionRound):
+    @property
+    def most_voted_subgraph_health_status(self):
+        return self.db.get_strict("most_voted_subgraph_health_status")
+
+    @property
+    def most_voted_subgraph_data(self):
+        return self.db.get_strict("most_voted_subgraph_data")
+
+
+class CheckSubgraphsHealthRound(CollectSameUntilThresholdRound):
     """CheckSubgraphsHealthRound"""
 
     payload_class = CheckSubgraphsHealthPayload
-    payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
+    done_event = Event.SYNCHRONIZED
+    collection_key = "subgraph_health_status"
+    selection_key = get_name(SynchronizedData.most_voted_subgraph_health_status)
+
+    retries: int = 0
+    max_retries: int = 3
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
-        synchronized_data = self.synchronized_data
-        return synchronized_data, Event.SYNCHRONIZED
 
+        if self.threshold_reached and self.most_voted_payload is not None:
+            if self.retries >= self.max_retries:
+                return self.synchronized_data, Event.MAX_RETRIES
+            if not self.most_voted_payload:
+                self.retries += 1
+                return self.synchronized_data, Event.RETRY
+        return super().end_block()
 
-class CollectSubgraphsDataRound(CollectionRound):
+class CollectSubgraphsDataRound(CollectSameUntilThresholdRound):
     """CollectSubgraphsDataRound"""
 
     payload_class = CollectSubgraphsDataPayload
-    payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
-
-    def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
-        """Process the end of the block."""
-        synchronized_data = self.synchronized_data
-        return synchronized_data, Event.DONE
+    done_event = Event.DONE
+    collection_key = "subgraph_data"
+    selection_key = get_name(SynchronizedData.most_voted_subgraph_data)
 
 
 class DataTransformationRound(CollectionRound):
@@ -97,18 +120,14 @@ class DataTransformationRound(CollectionRound):
         return synchronized_data, Event.DONE
 
 
-
-class LoadSubgraphComponentsRound(CollectionRound):
+class LoadSubgraphComponentsRound(CollectSameUntilThresholdRound):
     """LoadSubgraphComponentsRound"""
 
     payload_class = LoadSubgraphComponentsPayload
-    payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
-
-    def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
-        """Process the end of the block."""
-        synchronized_data = self.synchronized_data
-        return synchronized_data, Event.DONE
+    done_event = Event.DONE
+    collection_key = "subgraph_config"
+    selection_key = get_name(SynchronizedData.most_voted_subgraph_config)
 
 
 class FailedToSynchronizeRound(DegenerateRound):

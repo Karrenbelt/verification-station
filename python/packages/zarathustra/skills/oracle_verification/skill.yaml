@@ -135,6 +135,9 @@ models:
         http_enabled: true
         ws_enabled: true
       validate_timeout: 1205
+      subgraph_api_key: ''
+      subgraph_url: ''
+      subgraph_query: ''
     class_name: Params
   randomness_api:
     args:

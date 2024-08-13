@@ -129,6 +129,9 @@ models:
       use_slashing: false
       use_termination: false
       validate_timeout: 1205
+      subgraph_api_key: ''
+      subgraph_url: ''
+      subgraph_query: ''
     class_name: Params
   randomness_api:
     args:
@@ -154,7 +157,8 @@ models:
     args: {}
     class_name: TendermintDialogues
 name: subgraph_query_abci
-protocols: []
+protocols:
+- valory/ledger_api:1.0.0:bafybeihdk6psr4guxmbcrc26jr2cbgzpd5aljkqvpwo64bvaz7tdti2oni
 skills:
 - valory/abstract_round_abci:0.1.0:bafybeihnb4dd2ey2vjhlbprtxhnpc4q4resnsdrhpavjqnqaq467d6ouey
 type: skill

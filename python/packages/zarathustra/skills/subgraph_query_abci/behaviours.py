@@ -20,8 +20,12 @@
 """This package contains round behaviours of SubgraphQueryAbciApp."""
 
 from abc import ABC
+import os
+import json
 from typing import Generator, Set, Type, cast
+import requests
 
+from packages.valory.protocols.ledger_api.message import LedgerApiMessage
 from packages.valory.skills.abstract_round_abci.base import AbstractRound
 from packages.valory.skills.abstract_round_abci.behaviours import (
     AbstractRoundBehaviour,
@@ -64,19 +68,45 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
 
     matching_round: Type[AbstractRound] = CheckSubgraphsHealthRound
 
-    # TODO: implement logic required to set payload content for synchronization
     def async_act(self) -> Generator:
         """Do the act, supporting asynchronous execution."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = CheckSubgraphsHealthPayload(sender=sender, content="dummy_content")
+            ledger_block_number = 20_000_000  # TODO
+            # ledger_block_number = yield from self.get_latest_block_from_ledger()
+            self.context.logger.info(f"Latest ledger block: {ledger_block_number}")
+            subgraph_block_number = self.get_latest_block_from_subgraph()
+            self.context.logger.info(f"Latest subgraph block: {subgraph_block_number}")
+
+            # as subgraph is often slightly behind, we use a tolerance threshold
+            tolerance = 10
+            subgraph_health = ledger_block_number - subgraph_block_number < tolerance
+            payload = CheckSubgraphsHealthPayload(sender=sender, content=subgraph_health)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-        self.set_done()
+    def get_latest_block_from_subgraph(self) -> int:
+        api_key = self.params.config["subgraph_api_key"]
+        subgraph_config = json.loads(self.synchronized_data.most_voted_subgraph_config)
+        subgraph_url = subgraph_config["subgraph_url"]
+        query = "{_meta {block {number}}}"
+        url = subgraph_url.format(api_key=api_key)
+        headers = {"Content-Type": "application/json"}
+        response = requests.post(url, json={"query": query}, headers=headers)
+        subgraph_block_number = response.json()["data"]["_meta"]["block"]["number"]
+        return subgraph_block_number
+
+    def get_latest_block_from_ledger(self):
+        ledger_api_response = yield from self.get_ledger_api_response(
+            performative=LedgerApiMessage.Performative.GET_STATE,
+            ledger_callable="get_block",
+            block_identifier="latest",
+        )
+        self.context.logger.info(f"Ledger API response: {ledger_api_response}")
+        return ledger_api_response
 
 
 class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
@@ -84,19 +114,26 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
 
     matching_round: Type[AbstractRound] = CollectSubgraphsDataRound
 
-    # TODO: implement logic required to set payload content for synchronization
     def async_act(self) -> Generator:
         """Do the act, supporting asynchronous execution."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = CollectSubgraphsDataPayload(sender=sender, content="dummy_content")
+            api_key = self.params.config["subgraph_api_key"]
+            subgraph_config = json.loads(self.synchronized_data.most_voted_subgraph_config)
+            subgraph_url = subgraph_config["subgraph_url"]
+            query = subgraph_config["subgraph_query"]
+            url = subgraph_url.format(api_key=api_key)
+            headers = {"Content-Type": "application/json"}
+            response = requests.post(url, json={"query": query}, headers=headers)
+            data = response.json()["data"]
+            self.context.logger.info(f"subgraph query response: {data}")
+            content = json.dumps(data)
+            payload = CollectSubgraphsDataPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
-
-        # self.set_done()
 
 
 class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):
@@ -124,19 +161,20 @@ class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
 
     matching_round: Type[AbstractRound] = LoadSubgraphComponentsRound
 
-    # TODO: implement logic required to set payload content for synchronization
     def async_act(self) -> Generator:
         """Do the act, supporting asynchronous execution."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = LoadSubgraphComponentsPayload(sender=sender, content="dummy_content")
+            subgraph_url = self.params.config["subgraph_url"]
+            subgraph_query = self.params.config["subgraph_query"]
+            content = json.dumps({"subgraph_url": subgraph_url, "subgraph_query": subgraph_query})
+            self.context.logger.info(f"subgraph config: {content}")
+            payload = LoadSubgraphComponentsPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
-
-        # self.set_done()
 
 
 class SubgraphQueryRoundBehaviour(AbstractRoundBehaviour):

@@ -38,7 +38,10 @@ from packages.zarathustra.skills.subgraph_query_abci.payloads import (
     DataTransformationPayload,
     LoadSubgraphComponentsPayload,
 )
-from packages.valory.skills.abstract_round_abci.base import CollectionRound
+from packages.valory.skills.abstract_round_abci.base import (
+    CollectionRound,
+    CollectSameUntilThresholdRound,
+)
 
 
 class Event(Enum):
@@ -71,17 +74,14 @@ class CheckSubgraphsHealthRound(CollectionRound):
         return synchronized_data, Event.SYNCHRONIZED
 
 
-class CollectSubgraphsDataRound(CollectionRound):
+class CollectSubgraphsDataRound(CollectSameUntilThresholdRound):
     """CollectSubgraphsDataRound"""
 
     payload_class = CollectSubgraphsDataPayload
-    payload_attribute = ""  # TODO: update
     synchronized_data_class = SynchronizedData
-
-    def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
-        """Process the end of the block."""
-        synchronized_data = self.synchronized_data
-        return synchronized_data, Event.DONE
+    done_event = Event.DONE
+    selection_key = "subgraph_data"
+    collection_key = "participant_to_selection"
 
 
 class DataTransformationRound(CollectionRound):
@@ -95,7 +95,6 @@ class DataTransformationRound(CollectionRound):
         """Process the end of the block."""
         synchronized_data = self.synchronized_data
         return synchronized_data, Event.DONE
-
 
 
 class LoadSubgraphComponentsRound(CollectionRound):

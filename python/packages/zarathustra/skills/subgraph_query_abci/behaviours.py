@@ -20,6 +20,7 @@
 """This package contains round behaviours of SubgraphQueryAbciApp."""
 
 from abc import ABC
+import json
 from typing import Generator, Set, Type, cast
 
 from packages.valory.skills.abstract_round_abci.base import AbstractRound
@@ -84,19 +85,33 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
 
     matching_round: Type[AbstractRound] = CollectSubgraphsDataRound
 
-    # TODO: implement logic required to set payload content for synchronization
     def async_act(self) -> Generator:
         """Do the act, supporting asynchronous execution."""
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            payload = CollectSubgraphsDataPayload(sender=sender, content="dummy_content")
+            content = yield from self._request_subgraph_data()
+            payload = CollectSubgraphsDataPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-        # self.set_done()
+    def _request_subgraph_data(self):
+        """Perform a http request to the subgraph api."""
+        self.context.logger.info("Requesting subgraph data.")
+        url = self.context.params.config["subgraph_url"]
+        query = self.context.params.config["subgraph_query"]
+        data = json.dumps({"query": query})
+        response = yield from self.get_http_response(
+            method="POST",
+            url=url,
+            content=data.encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+        )
+        response_data = json.loads(response.body)["data"]
+        self.context.logger.info(f"Received subgraph data!")
+        return response_data
 
 
 class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):

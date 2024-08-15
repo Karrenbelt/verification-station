@@ -20,7 +20,6 @@
 """This package contains round behaviours of SubgraphQueryAbciApp."""
 
 from abc import ABC
-import os
 import json
 from typing import Generator, Set, Type, cast
 import requests
@@ -119,21 +118,34 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            api_key = self.params.config["subgraph_api_key"]
-            subgraph_config = json.loads(self.synchronized_data.most_voted_subgraph_config)
-            subgraph_url = subgraph_config["subgraph_url"]
-            query = subgraph_config["subgraph_query"]
-            url = subgraph_url.format(api_key=api_key)
-            headers = {"Content-Type": "application/json"}
-            response = requests.post(url, json={"query": query}, headers=headers)
-            data = response.json()["data"]
-            self.context.logger.info(f"subgraph query response: {data}")
-            content = json.dumps(data)
+            content = yield from self._request_subgraph_data()
             payload = CollectSubgraphsDataPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
+
+    def _request_subgraph_data(self):
+        """Perform a http request to the subgraph api."""
+        self.context.logger.info("Requesting subgraph data.")
+        api_key = self.params.config["subgraph_api_key"]
+        subgraph_config = json.loads(self.synchronized_data.most_voted_subgraph_config)
+        subgraph_url = subgraph_config["subgraph_url"]
+        query = subgraph_config["subgraph_query"]
+        headers = {"Content-Type": "application/json"}
+        url = subgraph_url.format(api_key=api_key)
+
+        content = json.dumps({"query": query}).encode("utf-8")
+        response = yield from self.get_http_response(
+            method="POST",
+            url=url,
+            content=content,
+            headers=headers,
+        )
+        response_data = json.loads(response.body)["data"]
+        self.context.logger.info(f"Subgraph query response: {data}")
+        return response_data
+
 
 
 class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):

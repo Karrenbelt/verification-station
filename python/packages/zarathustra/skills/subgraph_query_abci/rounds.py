@@ -83,19 +83,25 @@ class CheckSubgraphsHealthRound(CollectSameUntilThresholdRound):
     collection_key = "subgraph_health_status"
     selection_key = get_name(SynchronizedData.most_voted_subgraph_health_status)
 
-    retries: int = 0
-    max_retries: int = 3
+    _MAX_RETRIES: int = 3
+    retries: int = _MAX_RETRIES
+
+    def reset_retries(self):
+        self.retries = self._MAX_RETRIES
 
     def end_block(self) -> Optional[Tuple[BaseSynchronizedData, Enum]]:
         """Process the end of the block."""
 
         if self.threshold_reached and self.most_voted_payload is not None:
-            if self.retries >= self.max_retries:
+            if self.retries == 0:
+                self.reset_retries()
                 return self.synchronized_data, Event.MAX_RETRIES
             if not self.most_voted_payload:
-                self.retries += 1
+                self.retries -= 1
                 return self.synchronized_data, Event.RETRY
+        self.reset_retries()
         return super().end_block()
+
 
 class CollectSubgraphsDataRound(CollectSameUntilThresholdRound):
     """CollectSubgraphsDataRound"""

@@ -11,13 +11,13 @@ dependencies: {}
 description: The scaffold skill is a scaffold for your own skill implementation.
 fingerprint:
   __init__.py: bafybeihcsqats2sgqxzcxxuudz5npct42zdeph6guqizpexsmklrs2n254
-  behaviours.py: bafybeiaqfsblf7r534manwcakr35e4rr4wsh45etvoes7q2djujlllf4x4
+  behaviours.py: bafybeickut5zfows3qsqpg7ormuhfbv2t433jnbwuoockejhls45cjss4i
   dialogues.py: bafybeidebnb7oiwhp3jt7cebrzcbpbd2vx2c5wmfo44bsw2ph6tzajvbvq
   fsm_specification.yaml: bafybeichhmbxwtgunp5lmnkhbj3c3vhhsfanhcneyy4cu6qqafc5grvgky
   handlers.py: bafybeif7o7vpidh3jotztevjuirl6eleknldz3e3kyhvtonxubvn7jmyvy
   models.py: bafybeihqg2fwm5pggl55ejaqnownlmc3esf2wzeimhp2zaw3367x5hgfoq
   payloads.py: bafybeidhzrdrxnygoknp4wx4ihrluflxos364smo4ozkpehbfmrvtgnqm4
-  rounds.py: bafybeiholgabzibzheao3wsvwvpyxogasnpu363wgmhoaeywc5fvcftdra
+  rounds.py: bafybeifpefa747iwieazhci5noluoqn7rjdhkftvqxiru5tmk6odqfgpoe
   tests/__init__.py: bafybeifigp64li3j3yidpan5arc27etm3jytadjsckjaidrem57hst73ry
   tests/test_behaviours.py: bafybeihy35emz2k52nsvpdvlxcjfrrylcqkzfvxh2naqywrhlnhj55o5uu
   tests/test_dialogues.py: bafybeiewna2j44pd3tgpcicyr5357m5pqocgswut4bqdvtnsievgtc3kiq

@@ -120,10 +120,6 @@ models:
       slash_cooldown_hours: 3
       slash_threshold_amount: 10000000000000000
       sleep_time: 1
-      subgraph_query: '{"query": "{ factories(first: 5) { id poolCount txCount totalVolumeUSD
-        } bundles(first: 5) { id ethPriceUSD } }", "operationName": "Subgraphs", "variables":
-        {}}'
-      subgraph_url: https://gateway-arbitrum.network.thegraph.com/api/b902c6e046ff899f012ee69338a3f581/subgraphs/id/HUZDsRpEVP2AvzDCyzDHtdc64dyDxx8FQjzsmqSg4H3B
       tendermint_check_sleep_delay: 3
       tendermint_com_url: http://localhost:8080
       tendermint_max_retries: 5

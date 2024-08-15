@@ -122,8 +122,11 @@ models:
       - eightballer/oracle_verifier_pyth
       - eightballer/oracle_verifier_flare
       subgraph_api_key: ${GRAPH_API_KEY:str}
-      subgraph_url: 'https://gateway.thegraph.com/api/{api_key}/subgraphs/id/4RTrnxLZ4H8EBdpAQTcVc7LQY9kk85WNLyVzg5iXFQCH'
-      subgraph_query: '{assets {id symbol}}'
+      subgraph_url: 'https://gateway-arbitrum.network.thegraph.com/api/{api_key}/subgraphs/id/EYCKATKGBKLWvSfwvBjzfCBmGwYNdVkduYXVivCsLRFu'
+      subgraph_query: '{
+        uniswapFactories {id pairCount totalVolumeUSD totalVolumeETH }
+        tokens { id symbol name decimals }
+      }'
 ---
 public_id: eightballer/http_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
 type: connection

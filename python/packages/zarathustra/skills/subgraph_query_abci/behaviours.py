@@ -147,7 +147,6 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
         return data
 
 
-
 class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):
     """DataTransformationBehaviour"""
 
@@ -165,8 +164,6 @@ class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-        # self.set_done()
-
 
 class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
     """LoadSubgraphComponentsBehaviour"""
@@ -178,6 +175,7 @@ class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
+            config = self._check_config(self.params.config)
             subgraph_url = self.params.config["subgraph_url"]
             subgraph_query = self.params.config["subgraph_query"]
             content = json.dumps({"subgraph_url": subgraph_url, "subgraph_query": subgraph_query})
@@ -187,6 +185,11 @@ class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
+
+    def _check_config(self, config):
+        required = ("subgraph_api_key", "subgraph_url", "subgraph_query")
+        if not all(map(config.get, required)):
+            raise ValueError(f"Ensure all required parameters are provided: {required}")
 
 
 class SubgraphQueryRoundBehaviour(AbstractRoundBehaviour):

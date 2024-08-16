@@ -149,3 +149,13 @@ config:
   host: 0.0.0.0
   port: 5556
   target_skill_id: zarathustra/oracle_verification:0.1.0
+---
+public_id: valory/ledger:0.19.0
+type: connection
+config:
+  ledger_apis:
+    ethereum:
+      address: ${CHAIN_ADDRESS:str}
+      chain_id: ${CHAIN_ID:int}
+      poa_chain: ${bool:false}
+      default_gas_price_strategy: ${str:eip1559}

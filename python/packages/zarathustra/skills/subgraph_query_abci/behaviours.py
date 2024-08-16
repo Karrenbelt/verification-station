@@ -23,7 +23,6 @@ from abc import ABC
 import json
 from typing import Generator, Set, Type, cast
 import requests
-from pydantic import BaseModel
 
 from packages.valory.protocols.ledger_api.message import LedgerApiMessage
 from packages.valory.skills.abstract_round_abci.base import AbstractRound
@@ -40,6 +39,7 @@ from packages.zarathustra.skills.subgraph_query_abci.rounds import (
     CollectSubgraphsDataRound,
     DataTransformationRound,
     LoadSubgraphComponentsRound,
+    SubgraphQueryConfig,
     serialize,
 )
 from packages.zarathustra.skills.subgraph_query_abci.payloads import (
@@ -48,12 +48,6 @@ from packages.zarathustra.skills.subgraph_query_abci.payloads import (
     DataTransformationPayload,
     LoadSubgraphComponentsPayload,
 )
-
-
-class SubgraphQueryConfig(BaseModel):
-    url: str
-    chain: str
-    queries: list[str]
 
 
 class SubgraphQueryBaseBehaviour(BaseBehaviour, ABC):
@@ -81,15 +75,15 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
             ledger_block_number = 20_000_000  # TODO
-            # ledger_block_number = yield from self.get_latest_block_from_ledger()
-            self.context.logger.info(f"Latest ledger block: {ledger_block_number}")
-            subgraph_block_number = self.get_latest_block_from_subgraphs()
-            self.context.logger.info(f"Latest subgraph block: {subgraph_block_number}")
-
+            # ledger_latest_block_numbers = yield from self.get_latest_block_from_ledger()
+            self.context.logger.info(f"Latest ledger blocks: {ledger_block_number}")
+            subgraph_block_numbers = self.get_latest_block_from_subgraphs()
+            self.context.logger.info(f"Latest subgraph blocks: {subgraph_block_numbers}")
             # as subgraph is often slightly behind, we use a tolerance threshold
-            tolerance = 10
-            subgraph_health = ledger_block_number - subgraph_block_number < tolerance
-            payload = CheckSubgraphsHealthPayload(sender=sender, content=subgraph_health)
+            # tolerance = 10
+            # subgraph_health = ledger_block_number - subgraph_block_number < tolerance
+            content = serialize(subgraph_block_numbers)
+            payload = CheckSubgraphsHealthPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
@@ -97,15 +91,19 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
 
     def get_latest_block_from_subgraphs(self) -> dict[str, int]:
 
+        query = "{_meta {block {number}}}"
         api_key = self.params.config["subgraph_api_key"]
         subgraph_config = self.synchronized_data.most_voted_subgraph_config
         subgraph_queries = subgraph_config["subgraph_queries"]
-        query = "{_meta {block {number}}}"
-        url = subgraph_url.format(api_key=api_key)
         headers = {"Content-Type": "application/json"}
-        response = requests.post(url, json={"query": query}, headers=headers)
-        subgraph_block_number = response.json()["data"]["_meta"]["block"]["number"]
-        return subgraph_block_number
+
+        latest_blocks = dict.fromkeys(subgraph_queries)
+        for name, config in subgraph_queries.items():
+            url = config.url.format(api_key=api_key)
+            response = requests.post(url, json={"query": query}, headers=headers)
+            block_number = response.json()["data"]["_meta"]["block"]["number"]
+            latest_blocks[name] = block_number
+        return latest_blocks
 
     def get_latest_block_from_ledger(self):
         ledger_api_response = yield from self.get_ledger_api_response(

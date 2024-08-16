@@ -23,6 +23,7 @@ from abc import ABC
 import json
 from typing import Generator, Set, Type, cast
 import requests
+from pydantic import BaseModel
 
 from packages.valory.protocols.ledger_api.message import LedgerApiMessage
 from packages.valory.skills.abstract_round_abci.base import AbstractRound
@@ -39,6 +40,7 @@ from packages.zarathustra.skills.subgraph_query_abci.rounds import (
     CollectSubgraphsDataRound,
     DataTransformationRound,
     LoadSubgraphComponentsRound,
+    serialize,
 )
 from packages.zarathustra.skills.subgraph_query_abci.payloads import (
     CheckSubgraphsHealthPayload,
@@ -46,6 +48,12 @@ from packages.zarathustra.skills.subgraph_query_abci.payloads import (
     DataTransformationPayload,
     LoadSubgraphComponentsPayload,
 )
+
+
+class SubgraphQueryConfig(BaseModel):
+    url: str
+    chain: str
+    queries: list[str]
 
 
 class SubgraphQueryBaseBehaviour(BaseBehaviour, ABC):
@@ -75,7 +83,7 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
             ledger_block_number = 20_000_000  # TODO
             # ledger_block_number = yield from self.get_latest_block_from_ledger()
             self.context.logger.info(f"Latest ledger block: {ledger_block_number}")
-            subgraph_block_number = self.get_latest_block_from_subgraph()
+            subgraph_block_number = self.get_latest_block_from_subgraphs()
             self.context.logger.info(f"Latest subgraph block: {subgraph_block_number}")
 
             # as subgraph is often slightly behind, we use a tolerance threshold
@@ -87,10 +95,11 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-    def get_latest_block_from_subgraph(self) -> int:
+    def get_latest_block_from_subgraphs(self) -> dict[str, int]:
+
         api_key = self.params.config["subgraph_api_key"]
-        subgraph_config = json.loads(self.synchronized_data.most_voted_subgraph_config)
-        subgraph_url = subgraph_config["subgraph_url"]
+        subgraph_config = self.synchronized_data.most_voted_subgraph_config
+        subgraph_queries = subgraph_config["subgraph_queries"]
         query = "{_meta {block {number}}}"
         url = subgraph_url.format(api_key=api_key)
         headers = {"Content-Type": "application/json"}
@@ -119,7 +128,7 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
             data = yield from self._request_subgraph_data()
-            content = json.dumps(data)
+            content = serialize(data)
             payload = CollectSubgraphsDataPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
@@ -135,7 +144,7 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
         query = subgraph_config["subgraph_query"]
         headers = {"Content-Type": "application/json"}
         url = subgraph_url.format(api_key=api_key)
-        content = json.dumps({"query": query}).encode("utf-8")
+        content = serialize({"query": query}).encode("utf-8")
         response = yield from self.get_http_response(
             method="POST",
             url=url,
@@ -175,21 +184,28 @@ class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            config = self._check_config(self.params.config)
-            subgraph_url = self.params.config["subgraph_url"]
-            subgraph_query = self.params.config["subgraph_query"]
-            content = json.dumps({"subgraph_url": subgraph_url, "subgraph_query": subgraph_query})
-            self.context.logger.info(f"subgraph config: {content}")
+            subgraph_queries = self._verify_subgraph_config(self.params.config)
+            self.context.logger.info(f"subgraph queries: {subgraph_queries}")
+            content = serialize({"subgraph_queries": subgraph_queries})
             payload = LoadSubgraphComponentsPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-    def _check_config(self, config):
-        required = ("subgraph_api_key", "subgraph_url", "subgraph_query")
-        if not all(map(config.get, required)):
-            raise ValueError(f"Ensure all required parameters are provided: {required}")
+    def _verify_subgraph_config(self, config: dict) -> dict[str, SubgraphQueryConfig]:
+        if not config.get("subgraph_api_key"):
+            self.context.logger.warning("No subgraph_api_key provided!")
+
+        if not (subgraph_queries := config.get("subgraph_queries")):
+            raise ValueError("No subgraph queries provided in aea-config.yaml")
+
+        required = ("url", "chain", "queries")
+        for subgraph_name, config in subgraph_queries.items():
+            if not all(map(config.get, required)):
+                raise ValueError(f"Ensure all required fields are provided for {subgraph_name}: {required}")
+
+        return {name: SubgraphQueryConfig(**data) for name, data in subgraph_queries.items()}
 
 
 class SubgraphQueryRoundBehaviour(AbstractRoundBehaviour):

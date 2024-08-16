@@ -75,7 +75,6 @@ class JSONDecoder(json.JSONDecoder):
         super().__init__(*args, object_hook=self.object_hook, **kwargs)
 
     def object_hook(self, obj: Dict[str, Any]) -> Any:
-        # breakpoint()
         if (cls := model_registry.get(obj.get("__type"))):
             return cls(**{k: v for k, v in obj.items() if k != "__type"})
         return obj

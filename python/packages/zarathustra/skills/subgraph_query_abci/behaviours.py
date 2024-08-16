@@ -155,7 +155,6 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
             try:
                 return json.loads(response.body)["data"]
             except Exception as e:
-                breakpoint()
                 self.context.logger.error(f"Failed to obtain subgraph query response {response}: {e}")
                 return None
 

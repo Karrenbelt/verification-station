@@ -74,8 +74,7 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            ledger_block_number = 20_000_000  # TODO
-            # ledger_latest_block_numbers = yield from self.get_latest_block_from_ledger()
+            ledger_latest_block_numbers = yield from self.get_latest_block_from_ledger()
             self.context.logger.info(f"Latest ledger blocks: {ledger_block_number}")
 
             subgraph_block_numbers = yield from self.get_latest_block_from_subgraphs()
@@ -130,7 +129,7 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
             block_identifier="latest",
         )
         self.context.logger.info(f"Ledger API response: {ledger_api_response}")
-        return ledger_api_response
+        return ledger_api_response.state.body["number"]
 
 
 class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):

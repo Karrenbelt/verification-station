@@ -74,15 +74,14 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            ledger_latest_block_numbers = yield from self.get_latest_block_from_ledger()
+            ledger_block_number = yield from self.get_latest_block_from_ledger()
             self.context.logger.info(f"Latest ledger blocks: {ledger_block_number}")
-
             subgraph_block_numbers = yield from self.get_latest_block_from_subgraphs()
             self.context.logger.info(f"Latest subgraph blocks: {subgraph_block_numbers}")
-            # as subgraph is often slightly behind, we use a tolerance threshold
-            # tolerance = 10
-            # subgraph_health = ledger_block_number - subgraph_block_number < tolerance
-            content = serialize(subgraph_block_numbers)
+            tolerance = self.params.config["subgraph_sync_tolerance"]
+            health = {k: ledger_block_number - n <= tolerance for k, n in subgraph_block_numbers.items()}
+            self.context.logger.info(f"Subgraph health (tolerance {tolerance} blocks): {health}")
+            content = serialize(health)
             payload = CheckSubgraphsHealthPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():

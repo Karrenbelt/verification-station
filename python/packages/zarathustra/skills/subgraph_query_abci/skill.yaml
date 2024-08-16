@@ -129,6 +129,7 @@ models:
       use_slashing: false
       use_termination: false
       validate_timeout: 1205
+      subgraph_sync_tolerance: 1
       subgraph_api_key: ''
       subgraph_queries: {}
     class_name: Params

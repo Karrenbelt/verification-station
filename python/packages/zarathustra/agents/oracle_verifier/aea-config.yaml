@@ -121,6 +121,7 @@ models:
       - eightballer/oracle_verifier_chronicle
       - eightballer/oracle_verifier_pyth
       - eightballer/oracle_verifier_flare
+      subgraph_sync_tolerance: 3
       subgraph_api_key: ${GRAPH_API_KEY:str}
       subgraph_queries:
         uniswap_v2_arbitrum:

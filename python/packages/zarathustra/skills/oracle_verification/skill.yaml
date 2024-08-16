@@ -135,6 +135,7 @@ models:
         http_enabled: true
         ws_enabled: true
       validate_timeout: 1205
+      subgraph_sync_tolerance: 1
       subgraph_api_key: ''
       subgraph_queries: {}
     class_name: Params

@@ -128,14 +128,18 @@ models:
           url: https://gateway-arbitrum.network.thegraph.com/api/{api_key}/subgraphs/id/EYCKATKGBKLWvSfwvBjzfCBmGwYNdVkduYXVivCsLRFu
           chain: Arbitrum
           queries:
-            - ' tokens { id symbol name decimals } }'
-            - ' tokens { id symbol name decimals } }'
+            - '{
+                _meta { block { number } }
+                tokens { id symbol name decimals }
+              }'
         uniswap_v3_ethereum:
           url: https://gateway.thegraph.com/api/{api_key}/subgraphs/id/4cKy6QQMc5tpfdx8yxfYeb9TLZmgLQe44ddW1G7NwkA6
           chain: Ethereum
           queries:
-            - '{ tokens { id name symbol decimals } }'
-            - '{ tokens { id name symbol decimals } }'
+            - '{
+                _meta { block { number } }
+                tokens { id symbol name decimals }
+              }'
 ---
 public_id: eightballer/http_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
 type: connection

@@ -21,7 +21,7 @@
 
 from abc import ABC
 import json
-from typing import Generator, Set, Type, cast
+from typing import Generator, Set, Type, Any, cast
 import requests
 
 from packages.valory.protocols.ledger_api.message import LedgerApiMessage
@@ -77,7 +77,8 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
             ledger_block_number = 20_000_000  # TODO
             # ledger_latest_block_numbers = yield from self.get_latest_block_from_ledger()
             self.context.logger.info(f"Latest ledger blocks: {ledger_block_number}")
-            subgraph_block_numbers = self.get_latest_block_from_subgraphs()
+
+            subgraph_block_numbers = yield from self.get_latest_block_from_subgraphs()
             self.context.logger.info(f"Latest subgraph blocks: {subgraph_block_numbers}")
             # as subgraph is often slightly behind, we use a tolerance threshold
             # tolerance = 10
@@ -91,18 +92,35 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
 
     def get_latest_block_from_subgraphs(self) -> dict[str, int]:
 
+        def try_get_block_number(reponse):
+            try:
+                data = json.loads(response.body)["data"]
+                block_number = data["_meta"]["block"]["number"]
+            except Exception as e:
+                block_number = -1  # Failed to retrieve block number
+                self.logger.error(f"Failed to obtain block number from subgraph response {response}: {e}")
+            return block_number
+
         query = "{_meta {block {number}}}"
         api_key = self.params.config["subgraph_api_key"]
+        headers = {"Content-Type": "application/json"}
         subgraph_config = self.synchronized_data.most_voted_subgraph_config
         subgraph_queries = subgraph_config["subgraph_queries"]
-        headers = {"Content-Type": "application/json"}
 
-        latest_blocks = dict.fromkeys(subgraph_queries)
+        responses = dict.fromkeys(subgraph_queries)
         for name, config in subgraph_queries.items():
             url = config.url.format(api_key=api_key)
-            response = requests.post(url, json={"query": query}, headers=headers)
-            block_number = response.json()["data"]["_meta"]["block"]["number"]
-            latest_blocks[name] = block_number
+            query = query or config.query
+            content = serialize({"query": query}).encode()
+            response = yield from self.get_http_response(
+                method="POST",
+                url=url,
+                content=content,
+                headers=headers,
+            )
+            responses[name] = response
+
+        latest_blocks = dict(zip(responses, map(try_get_block_number, responses.values())))
         return latest_blocks
 
     def get_latest_block_from_ledger(self):

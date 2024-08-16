@@ -21,7 +21,7 @@
 
 from abc import ABC
 import json
-from typing import Generator, Set, Type, Any, cast
+from typing import Generator, Set, Type, Any, Optional, cast
 import requests
 
 from packages.valory.protocols.ledger_api.message import LedgerApiMessage
@@ -96,7 +96,7 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
                 block_number = data["_meta"]["block"]["number"]
             except Exception as e:
                 block_number = -1  # Failed to retrieve block number
-                self.logger.error(f"Failed to obtain block number from subgraph response {response}: {e}")
+                self.context.logger.error(f"Failed to obtain block number from subgraph response {response}: {e}")
             return block_number
 
         query = "{_meta {block {number}}}"
@@ -108,7 +108,6 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
         responses = dict.fromkeys(subgraph_queries)
         for name, config in subgraph_queries.items():
             url = config.url.format(api_key=api_key)
-            query = query or config.query
             content = serialize({"query": query}).encode()
             response = yield from self.get_http_response(
                 method="POST",
@@ -141,8 +140,8 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            data = yield from self._request_subgraph_data()
-            content = serialize(data)
+            subgraph_data = yield from self._request_subgraph_data()
+            content = serialize(subgraph_data)
             payload = CollectSubgraphsDataPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
@@ -151,23 +150,43 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
 
     def _request_subgraph_data(self):
         """Perform a http request to the subgraph api."""
-        self.context.logger.info("Requesting subgraph data.")
+
+        def try_obtaining_data(response) -> Optional[dict]:
+            try:
+                return json.loads(response.body)["data"]
+            except Exception as e:
+                breakpoint()
+                self.context.logger.error(f"Failed to obtain subgraph query response {response}: {e}")
+                return None
+
+        def parse_responses(responses) -> dict[str, list[dict | None]]:
+            return {
+                name: list(map(try_obtaining_data, query_responses))
+                for name, query_responses in responses.items()
+            }
+
+        self.context.logger.info("Requesting subgraphs data.")
         api_key = self.params.config["subgraph_api_key"]
-        subgraph_config = json.loads(self.synchronized_data.most_voted_subgraph_config)
-        subgraph_url = subgraph_config["subgraph_url"]
-        query = subgraph_config["subgraph_query"]
+        subgraph_config = self.synchronized_data.most_voted_subgraph_config
+        subgraph_queries = subgraph_config["subgraph_queries"]
         headers = {"Content-Type": "application/json"}
-        url = subgraph_url.format(api_key=api_key)
-        content = serialize({"query": query}).encode("utf-8")
-        response = yield from self.get_http_response(
-            method="POST",
-            url=url,
-            content=content,
-            headers=headers,
-        )
-        data = json.loads(response.body)["data"]
-        self.context.logger.info(f"Subgraph query response: {data}")
-        return data
+
+        responses = {}
+        for name, config in subgraph_queries.items():
+            url = config.url.format(api_key=api_key)
+            for query in config.queries:
+                content = serialize({"query": query}).encode("utf-8")
+                response = yield from self.get_http_response(
+                    method="POST",
+                    url=url,
+                    content=content,
+                    headers=headers,
+                )
+                responses.setdefault(name, []).append(response)
+
+        response_data = parse_responses(responses)
+        self.context.logger.info(f"Subgraph response data: {response_data}")
+        return response_data
 
 
 class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):

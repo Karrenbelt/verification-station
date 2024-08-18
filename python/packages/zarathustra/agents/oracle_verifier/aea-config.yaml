@@ -121,10 +121,25 @@ models:
       - eightballer/oracle_verifier_chronicle
       - eightballer/oracle_verifier_pyth
       - eightballer/oracle_verifier_flare
+      subgraph_sync_tolerance: 3
       subgraph_api_key: ${GRAPH_API_KEY:str}
-      subgraph_url: https://gateway-arbitrum.network.thegraph.com/api/{api_key}/subgraphs/id/EYCKATKGBKLWvSfwvBjzfCBmGwYNdVkduYXVivCsLRFu
-      subgraph_query: '{ uniswapFactories {id pairCount totalVolumeUSD totalVolumeETH
-        } tokens { id symbol name decimals } }'
+      subgraph_queries:
+        uniswap_v2_arbitrum:
+          url: https://gateway-arbitrum.network.thegraph.com/api/{api_key}/subgraphs/id/EYCKATKGBKLWvSfwvBjzfCBmGwYNdVkduYXVivCsLRFu
+          chain: Arbitrum
+          queries:
+            - '{
+                _meta { block { number } }
+                tokens { id symbol name decimals }
+              }'
+        uniswap_v3_ethereum:
+          url: https://gateway.thegraph.com/api/{api_key}/subgraphs/id/4cKy6QQMc5tpfdx8yxfYeb9TLZmgLQe44ddW1G7NwkA6
+          chain: Ethereum
+          queries:
+            - '{
+                _meta { block { number } }
+                tokens { id symbol name decimals }
+              }'
 ---
 public_id: eightballer/http_server:0.1.0:bafybeib4t4ay6kfjokq3cydparpzs4zllyl2yujvfsbc24xogwyxsswaqy
 type: connection
@@ -139,3 +154,13 @@ config:
   host: 0.0.0.0
   port: 5556
   target_skill_id: zarathustra/oracle_verification:0.1.0
+---
+public_id: valory/ledger:0.19.0
+type: connection
+config:
+  ledger_apis:
+    ethereum:
+      address: ${CHAIN_ADDRESS:str}
+      chain_id: ${CHAIN_ID:int}
+      poa_chain: ${bool:false}
+      default_gas_price_strategy: ${str:eip1559}

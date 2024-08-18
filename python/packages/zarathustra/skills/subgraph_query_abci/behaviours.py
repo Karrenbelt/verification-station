@@ -21,7 +21,7 @@
 
 from abc import ABC
 import json
-from typing import Generator, Set, Type, cast
+from typing import Generator, Set, Type, Any, Optional, cast
 import requests
 
 from packages.valory.protocols.ledger_api.message import LedgerApiMessage
@@ -39,6 +39,8 @@ from packages.zarathustra.skills.subgraph_query_abci.rounds import (
     CollectSubgraphsDataRound,
     DataTransformationRound,
     LoadSubgraphComponentsRound,
+    SubgraphQueryConfig,
+    serialize,
 )
 from packages.zarathustra.skills.subgraph_query_abci.payloads import (
     CheckSubgraphsHealthPayload,
@@ -72,31 +74,51 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            ledger_block_number = 20_000_000  # TODO
-            # ledger_block_number = yield from self.get_latest_block_from_ledger()
-            self.context.logger.info(f"Latest ledger block: {ledger_block_number}")
-            subgraph_block_number = self.get_latest_block_from_subgraph()
-            self.context.logger.info(f"Latest subgraph block: {subgraph_block_number}")
-
-            # as subgraph is often slightly behind, we use a tolerance threshold
-            tolerance = 10
-            subgraph_health = ledger_block_number - subgraph_block_number < tolerance
-            payload = CheckSubgraphsHealthPayload(sender=sender, content=subgraph_health)
+            ledger_block_number = yield from self.get_latest_block_from_ledger()
+            self.context.logger.info(f"Latest ledger blocks: {ledger_block_number}")
+            subgraph_block_numbers = yield from self.get_latest_block_from_subgraphs()
+            self.context.logger.info(f"Latest subgraph blocks: {subgraph_block_numbers}")
+            tolerance = self.params.config["subgraph_sync_tolerance"]
+            health = {k: ledger_block_number - n <= tolerance for k, n in subgraph_block_numbers.items()}
+            self.context.logger.info(f"Subgraph health (tolerance {tolerance} blocks): {health}")
+            content = serialize(health)
+            payload = CheckSubgraphsHealthPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-    def get_latest_block_from_subgraph(self) -> int:
-        api_key = self.params.config["subgraph_api_key"]
-        subgraph_config = json.loads(self.synchronized_data.most_voted_subgraph_config)
-        subgraph_url = subgraph_config["subgraph_url"]
+    def get_latest_block_from_subgraphs(self) -> dict[str, int]:
+
+        def try_get_block_number(reponse):
+            try:
+                data = json.loads(response.body)["data"]
+                block_number = data["_meta"]["block"]["number"]
+            except Exception as e:
+                block_number = -1  # Failed to retrieve block number
+                self.context.logger.error(f"Failed to obtain block number from subgraph response {response}: {e}")
+            return block_number
+
         query = "{_meta {block {number}}}"
-        url = subgraph_url.format(api_key=api_key)
+        api_key = self.params.config["subgraph_api_key"]
         headers = {"Content-Type": "application/json"}
-        response = requests.post(url, json={"query": query}, headers=headers)
-        subgraph_block_number = response.json()["data"]["_meta"]["block"]["number"]
-        return subgraph_block_number
+        subgraph_config = self.synchronized_data.most_voted_subgraph_config
+        subgraph_queries = subgraph_config["subgraph_queries"]
+
+        responses = dict.fromkeys(subgraph_queries)
+        for name, config in subgraph_queries.items():
+            url = config.url.format(api_key=api_key)
+            content = serialize({"query": query}).encode()
+            response = yield from self.get_http_response(
+                method="POST",
+                url=url,
+                content=content,
+                headers=headers,
+            )
+            responses[name] = response
+
+        latest_blocks = dict(zip(responses, map(try_get_block_number, responses.values())))
+        return latest_blocks
 
     def get_latest_block_from_ledger(self):
         ledger_api_response = yield from self.get_ledger_api_response(
@@ -105,7 +127,7 @@ class CheckSubgraphsHealthBehaviour(SubgraphQueryBaseBehaviour):
             block_identifier="latest",
         )
         self.context.logger.info(f"Ledger API response: {ledger_api_response}")
-        return ledger_api_response
+        return ledger_api_response.state.body["number"]
 
 
 class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
@@ -118,8 +140,8 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            data = yield from self._request_subgraph_data()
-            content = json.dumps(data)
+            subgraph_data = yield from self._request_subgraph_data()
+            content = serialize(subgraph_data)
             payload = CollectSubgraphsDataPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
@@ -128,23 +150,42 @@ class CollectSubgraphsDataBehaviour(SubgraphQueryBaseBehaviour):
 
     def _request_subgraph_data(self):
         """Perform a http request to the subgraph api."""
-        self.context.logger.info("Requesting subgraph data.")
+
+        def try_obtaining_data(response) -> Optional[dict]:
+            try:
+                return json.loads(response.body)["data"]
+            except Exception as e:
+                self.context.logger.error(f"Failed to obtain subgraph query response {response}: {e}")
+                return None
+
+        def parse_responses(responses) -> dict[str, list[dict | None]]:
+            return {
+                name: list(map(try_obtaining_data, query_responses))
+                for name, query_responses in responses.items()
+            }
+
+        self.context.logger.info("Requesting subgraphs data.")
         api_key = self.params.config["subgraph_api_key"]
-        subgraph_config = json.loads(self.synchronized_data.most_voted_subgraph_config)
-        subgraph_url = subgraph_config["subgraph_url"]
-        query = subgraph_config["subgraph_query"]
+        subgraph_config = self.synchronized_data.most_voted_subgraph_config
+        subgraph_queries = subgraph_config["subgraph_queries"]
         headers = {"Content-Type": "application/json"}
-        url = subgraph_url.format(api_key=api_key)
-        content = json.dumps({"query": query}).encode("utf-8")
-        response = yield from self.get_http_response(
-            method="POST",
-            url=url,
-            content=content,
-            headers=headers,
-        )
-        data = json.loads(response.body)["data"]
-        self.context.logger.info(f"Subgraph query response: {data}")
-        return data
+
+        responses = {}
+        for name, config in subgraph_queries.items():
+            url = config.url.format(api_key=api_key)
+            for query in config.queries:
+                content = serialize({"query": query}).encode("utf-8")
+                response = yield from self.get_http_response(
+                    method="POST",
+                    url=url,
+                    content=content,
+                    headers=headers,
+                )
+                responses.setdefault(name, []).append(response)
+
+        response_data = parse_responses(responses)
+        self.context.logger.info(f"Subgraph response data: {response_data}")
+        return response_data
 
 
 class DataTransformationBehaviour(SubgraphQueryBaseBehaviour):
@@ -175,21 +216,28 @@ class LoadSubgraphComponentsBehaviour(SubgraphQueryBaseBehaviour):
 
         with self.context.benchmark_tool.measure(self.behaviour_id).local():
             sender = self.context.agent_address
-            config = self._check_config(self.params.config)
-            subgraph_url = self.params.config["subgraph_url"]
-            subgraph_query = self.params.config["subgraph_query"]
-            content = json.dumps({"subgraph_url": subgraph_url, "subgraph_query": subgraph_query})
-            self.context.logger.info(f"subgraph config: {content}")
+            subgraph_queries = self._verify_subgraph_config(self.params.config)
+            self.context.logger.info(f"subgraph queries: {subgraph_queries}")
+            content = serialize({"subgraph_queries": subgraph_queries})
             payload = LoadSubgraphComponentsPayload(sender=sender, content=content)
 
         with self.context.benchmark_tool.measure(self.behaviour_id).consensus():
             yield from self.send_a2a_transaction(payload)
             yield from self.wait_until_round_end()
 
-    def _check_config(self, config):
-        required = ("subgraph_api_key", "subgraph_url", "subgraph_query")
-        if not all(map(config.get, required)):
-            raise ValueError(f"Ensure all required parameters are provided: {required}")
+    def _verify_subgraph_config(self, config: dict) -> dict[str, SubgraphQueryConfig]:
+        if not config.get("subgraph_api_key"):
+            self.context.logger.warning("No subgraph_api_key provided!")
+
+        if not (subgraph_queries := config.get("subgraph_queries")):
+            raise ValueError("No subgraph queries provided in aea-config.yaml")
+
+        required = ("url", "chain", "queries")
+        for subgraph_name, config in subgraph_queries.items():
+            if not all(map(config.get, required)):
+                raise ValueError(f"Ensure all required fields are provided for {subgraph_name}: {required}")
+
+        return {name: SubgraphQueryConfig(**data) for name, data in subgraph_queries.items()}
 
 
 class SubgraphQueryRoundBehaviour(AbstractRoundBehaviour):

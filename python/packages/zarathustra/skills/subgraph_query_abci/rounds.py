@@ -20,7 +20,11 @@
 """This package contains the rounds of SubgraphQueryAbciApp."""
 
 from enum import Enum
-from typing import Dict, FrozenSet, List, Optional, Set, Tuple
+from typing import Dict, FrozenSet, List, Optional, Set, Tuple, Any
+from typing_extensions import TypeAlias
+
+import json
+from pydantic import BaseModel
 
 from packages.valory.skills.abstract_round_abci.base import (
     AbciApp,
@@ -45,6 +49,45 @@ from packages.valory.skills.abstract_round_abci.base import (
 )
 
 
+Json: TypeAlias = dict[str, "Json"] | list["Json"] | str | int | float | bool | None
+
+
+class SubgraphQueryConfig(BaseModel):
+    url: str
+    chain: str
+    queries: list[str]
+
+
+model_registry = {cls.__name__: cls for cls in BaseModel.__subclasses__()}
+
+
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, BaseModel):
+            data = o.model_dump()
+            data["__type"] = o.__class__.__name__
+            return data
+        return super().default(o)
+
+
+class JSONDecoder(json.JSONDecoder):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, object_hook=self.object_hook, **kwargs)
+
+    def object_hook(self, obj: Dict[str, Any]) -> Any:
+        if (cls := model_registry.get(obj.get("__type"))):
+            return cls(**{k: v for k, v in obj.items() if k != "__type"})
+        return obj
+
+
+def serialize(data: Json) -> str:
+    return json.dumps(data, cls=JSONEncoder)
+
+
+def deserialize(data: str) -> Json:
+    return json.loads(data, cls=JSONDecoder)
+
+
 class Event(Enum):
     """SubgraphQueryAbciApp Events"""
 
@@ -63,15 +106,15 @@ class SynchronizedData(BaseSynchronizedData):
 
     @property
     def most_voted_subgraph_config(self):
-        return self.db.get_strict("most_voted_subgraph_config")
+        return deserialize(self.db.get_strict("most_voted_subgraph_config"))
 
     @property
     def most_voted_subgraph_health_status(self):
-        return self.db.get_strict("most_voted_subgraph_health_status")
+        return deserialize(self.db.get_strict("most_voted_subgraph_health_status"))
 
     @property
     def most_voted_subgraph_data(self):
-        return self.db.get_strict("most_voted_subgraph_data")
+        return deserialize(self.db.get_strict("most_voted_subgraph_data"))
 
 
 class CheckSubgraphsHealthRound(CollectSameUntilThresholdRound):
